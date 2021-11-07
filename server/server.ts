@@ -2,6 +2,7 @@ import express from 'express';
 import socketIo from 'socket.io';
 import http from "http";
 
+import { common } from './common';
 import { hanabi } from './hanabi';
 
 const
@@ -22,5 +23,6 @@ server.listen(PORT, () => {
 
 serverSocket.on('connection', connect => {
   socket = connect
-  hanabi.init()
+  common.init();
+  hanabi.init();
 })

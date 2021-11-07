@@ -7,8 +7,5 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "./server.ts",
-    "./hanabi.ts",
-  ],
+  "include": ["**.ts"]
 }

@@ -1,8 +1,5 @@
-import socketClient from 'socket.io-client';
 import { BrowserRouter } from 'react-router-dom';
-import { Router } from './Router/Router';
-
-export const socket = socketClient();
+import { Router } from './router/Router';
 
 export const App = () => {
   return (

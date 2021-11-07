@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { Route, Switch } from 'react-router';
-import { Enter } from '../pages/Enter';
+import { Entrance } from '../pages/Entrance';
 import { Lobby } from '../pages/Lobby';
 
 export const Router = memo(() => {
   return (
     <Switch>
       <Route exact path="/">
-        <Enter />
+        <Entrance />
       </Route>
       <Route path="/lobby">
         <Lobby />
