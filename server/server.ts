@@ -8,7 +8,7 @@ import { hanabi } from './hanabi';
 const
   app: express.Express = express(),
   server: http.Server = http.createServer(app),
-  PORT = process.env.PORT || 8000;
+  PORT = process.env.PORT || 8080;
 
 export const serverSocket = new socketIo.Server(server);
 export let socket: socketIo.Socket;

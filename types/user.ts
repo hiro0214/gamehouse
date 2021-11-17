@@ -1,3 +1,5 @@
-export interface user {
-  name: string
+export interface User {
+  id: string;
+  name: string;
+  icon: string;
 }
