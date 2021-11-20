@@ -3,21 +3,17 @@ import styled from 'styled-components';
 import { User } from '../../types/user';
 import { UserList } from '../components/organisms/UserList';
 import { CommonBackground } from '../components/style/CommonBackground';
-import { useUserInfo } from '../hooks/useUserInfo';
 import { socket } from '../socket';
 
 export const Lobby = memo(() => {
   const [userList, setUserList] = useState([] as User[]);
-  const { userInfo } = useUserInfo();
 
   useEffect(() => {
     socket.emit('common:getUser');
-    console.log('global', userInfo);
+    socket.on('common:getUser', (userList: User[]) => {
+      setUserList(userList);
+    });
   }, []);
-
-  socket.on('common:getUser', (userList: User[]) => {
-    setUserList(userList);
-  });
 
   return (
     <CommonBackground>

@@ -1,20 +1,20 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react';
 import { User } from '../../types/user';
 
 export type UserInfoContextType = {
-  userInfo: User;
-  setUserInfo: Dispatch<SetStateAction<User>>;
+  myInfo: User;
+  setMyInfo: Dispatch<SetStateAction<User>>;
 };
 
 export const UserInfoContext = createContext({} as UserInfoContextType);
 
 export const UserInfoProvider = (props: { children: ReactNode }) => {
   const { children } = props;
-  const [userInfo, setUserInfo] = useState({} as User);
+  const [myInfo, setMyInfo] = useState({} as User);
 
   return (
-    <UserInfoContext.Provider value={{ userInfo, setUserInfo }}>
-      {children}
-    </UserInfoContext.Provider>
+    <UserInfoContext.Provider value={{ myInfo, setMyInfo }}>{children}</UserInfoContext.Provider>
   );
 };
+
+export const useMyInfo = (): UserInfoContextType => useContext(UserInfoContext);

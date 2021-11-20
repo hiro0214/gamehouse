@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { User } from '../../types/user';
+import { useMyInfo } from '../providers/UserInfoProvider';
 import { socket } from '../socket';
-import { useUserInfo } from './useUserInfo';
 
 export const useSetUserInfo = () => {
-  const { setUserInfo } = useUserInfo();
+  const { setMyInfo } = useMyInfo();
 
   const randomId = () => {
     const length = 8;
@@ -39,9 +39,9 @@ export const useSetUserInfo = () => {
       icon: randomIcon(),
     };
 
-    setUserInfo(newUser);
+    setMyInfo(newUser);
     socket.emit('common:enter', newUser);
   }, []);
 
-  return { setInfo };
+  return { setInfo, randomIcon };
 };

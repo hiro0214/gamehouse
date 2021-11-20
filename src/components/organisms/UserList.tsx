@@ -3,6 +3,8 @@ import { User } from '../../../types/user';
 import styled from 'styled-components';
 import { Heading } from '../atoms/Heading';
 import { variable } from '../../variable';
+import { Profile } from '../molucules/Profile';
+import { useMyInfo } from '../../providers/UserInfoProvider';
 
 type props = {
   userList: User[];
@@ -10,15 +12,20 @@ type props = {
 
 export const UserList: VFC<props> = memo((props) => {
   const { userList } = props;
+  const { myInfo } = useMyInfo();
+
   return (
     <_Container>
       <Heading text={'Player'} size={'2'} />
       <_List>
         {userList.map((user) => (
-          <_User key={user.name}>
-            <_Icon src={`/assets/images/pokemon/${user.icon}.png`} />
-            <_Name>{user.name}</_Name>
-          </_User>
+          <Profile
+            key={user.id}
+            name={user.name}
+            icon={user.icon}
+            editIcon={user.id === myInfo.id && true}
+            editName={user.id === myInfo.id && true}
+          />
         ))}
       </_List>
     </_Container>
@@ -46,32 +53,4 @@ const _List = styled.ul`
     border: 1px solid ${variable.blue};
     border-radius: 10px;
   }
-`;
-
-const _User = styled.li`
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  background: ${variable.gray[0]};
-  border: 2px solid ${variable.gray[1]};
-  border-radius: 30px 6px 6px 30px;
-  + li {
-    margin-top: 10px;
-  }
-`;
-
-const _Icon = styled.img`
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  border-radius: 50%;
-  border: 1px solid ${variable.border};
-`;
-
-const _Name = styled.div`
-  width: calc(100% - 50px - 10px);
-  margin-left: 10px;
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
 `;

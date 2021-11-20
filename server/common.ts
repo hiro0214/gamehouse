@@ -11,5 +11,12 @@ export const common = {
     socket.on('common:getUser', () => {
       serverSocket.emit('common:getUser', userList)
     })
+
+    socket.on('common:updateInfo', (data: User) => {
+      const target = userList.filter(user => user.id === data.id)[0];
+      target.icon = data.icon
+      target.name = data.name
+      serverSocket.emit('common:getUser', userList)
+    })
   }
 }
