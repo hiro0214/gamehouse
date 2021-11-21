@@ -34,7 +34,6 @@ export const UserList: VFC<props> = memo((props) => {
 
 const _Container = styled.div`
   width: 35%;
-  height: 500px;
   padding: 10px 10px 20px 20px;
   background: rgba(20, 20, 20, 0.2);
   border-radius: 6px;
@@ -49,8 +48,8 @@ const _List = styled.ul`
     background: inherit;
   }
   &::-webkit-scrollbar-thumb {
-    background: #60a8eb;
-    border: 1px solid ${variable.blue};
+    background: ${variable.orange};
+    border: 1px solid #d86405;
     border-radius: 10px;
   }
 `;
