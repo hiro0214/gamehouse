@@ -7,7 +7,7 @@ export const useEnter = () => {
   const { setInfo } = useSetUserInfo();
 
   const enter = useCallback((userName: string) => {
-    setInfo(userName);
+    userName === 'admin' ? setInfo('いわもと', true) : setInfo(userName, false);
     history.push('/lobby');
   }, []);
 

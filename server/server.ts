@@ -3,7 +3,7 @@ import socketIo from 'socket.io';
 import http from "http";
 
 import { common } from './common';
-import { hanabi } from './hanabi';
+import { kowloonTactics } from './kowloonTactics';
 
 const
   app: express.Express = express(),
@@ -24,5 +24,5 @@ server.listen(PORT, () => {
 serverSocket.on('connection', connect => {
   socket = connect
   common.init();
-  hanabi.init();
+  kowloonTactics.init();
 })

@@ -37,15 +37,15 @@ export const Profile: VFC<props> = memo((props) => {
   }, [myInfo]);
 
   return (
-    <_User>
-      <_Icon>
+    <_User className={'profile'}>
+      <_Icon className={'profile__img'}>
         <img src={`/assets/images/pokemon/${icon}.png`} />
         {editIcon && <_EditIcon onClick={onclickChangeIcon}>{editIcon}</_EditIcon>}
       </_Icon>
       {isEditName ? (
         <_Input type="text" value={newName} onChange={onchangeName} />
       ) : (
-        <_Name>{name}</_Name>
+        <_Name className={'profile__name'}>{name}</_Name>
       )}
       {editName && (
         <_EditName onClick={onclickChangeName} className={isEditName ? 'isEdit' : ''}>
@@ -111,6 +111,7 @@ const _Input = styled.input`
   margin-left: 10px;
   margin-right: 10px;
   font-size: 16px;
+  background: #fff;
   border-bottom: 1px solid ${variable.gray[1]};
 `;
 

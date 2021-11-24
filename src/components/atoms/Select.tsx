@@ -6,16 +6,18 @@ type props = {
   options: string[];
   value: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  disabled?: boolean;
   hdg?: string;
   size?: 'half' | 'full';
 };
 
 export const Select: VFC<props> = memo((props) => {
-  const { options, value, onChange, hdg, size } = props;
+  const { options, value, onChange, disabled, hdg, size } = props;
   return (
     <_Container>
       <_Heading>{hdg}</_Heading>
-      <_Select className={size} value={value} onChange={onChange}>
+      <_Select className={size} value={value} onChange={onChange} disabled={!disabled}>
+        <option>-- 選択してください --</option>
         {options.map((option) => (
           <option key={option}>{option}</option>
         ))}

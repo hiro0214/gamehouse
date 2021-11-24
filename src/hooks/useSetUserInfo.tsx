@@ -32,11 +32,12 @@ export const useSetUserInfo = () => {
     return icon;
   };
 
-  const setInfo = useCallback((userName: string) => {
+  const setInfo = useCallback((userName: string, isAdmin: boolean) => {
     const newUser: User = {
       id: randomId(),
       name: userName,
       icon: randomIcon(),
+      isAdmin: isAdmin,
     };
 
     setMyInfo(newUser);

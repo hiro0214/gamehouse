@@ -11,9 +11,7 @@ export const Lobby = memo(() => {
 
   useEffect(() => {
     socket.emit('common:getUser');
-    socket.on('common:getUser', (userList: User[]) => {
-      setUserList(userList);
-    });
+    socket.on('common:getUser', (userList: User[]) => setUserList(userList));
   }, []);
 
   return (

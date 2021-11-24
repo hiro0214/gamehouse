@@ -10,7 +10,7 @@ export const UserInfoContext = createContext({} as UserInfoContextType);
 
 export const UserInfoProvider = (props: { children: ReactNode }) => {
   const { children } = props;
-  const [myInfo, setMyInfo] = useState({} as User);
+  const [myInfo, setMyInfo] = useState<User>({} as User);
 
   return (
     <UserInfoContext.Provider value={{ myInfo, setMyInfo }}>{children}</UserInfoContext.Provider>

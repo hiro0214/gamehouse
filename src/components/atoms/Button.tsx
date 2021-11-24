@@ -12,7 +12,11 @@ type props = {
 export const Button: VFC<props> = memo((props) => {
   const { color, label, isDisabled, onclick } = props;
   return (
-    <_Button className={color && `btn--${color}`} disabled={isDisabled} onClick={onclick}>
+    <_Button
+      className={color ? `btn btn--${color}` : 'btn'}
+      disabled={isDisabled}
+      onClick={onclick}
+    >
       {label}
     </_Button>
   );

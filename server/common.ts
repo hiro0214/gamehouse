@@ -1,21 +1,39 @@
 import { serverSocket, socket } from './server';
-import { userList } from './data'
+import { currentGame, initConfig, setCurrentGame, userList } from './data'
 import { User } from '../types/user';
+
+const eventName = 'common';
 
 export const common = {
   init: () => {
-    socket.on('common:enter', (newUser: User) => {
+    socket.on(`${eventName}:enter`, (newUser: User) => {
       userList.push(newUser)
     })
 
-    socket.on('common:getUser', () => {
-      serverSocket.emit('common:getUser', userList)
+    socket.on(`${eventName}:getUser`, () => {
+      serverSocket.emit(`${eventName}:getUser`, userList)
     })
 
-    socket.on('common:updateInfo', (data: User) => {
+    socket.on(`${eventName}:getCurrentGame`, () => {
+      serverSocket.emit(`${eventName}:getCurrentGame`, currentGame)
+    })
+
+    socket.on(`${eventName}:setCurrentGame`, (game: string | null) => {
+      if (game) {
+        setCurrentGame(game)
+        initConfig(game)
+      }
+      else {
+        setCurrentGame('')
+      }
+
+      serverSocket.emit(`${eventName}:setCurrentGame`, currentGame)
+    })
+
+    socket.on(`${eventName}:updateInfo`, (data: User) => {
       const targetIndex = userList.findIndex((user: User) => user.id === data.id)
       userList[targetIndex] = data
-      serverSocket.emit('common:getUser', userList)
+      serverSocket.emit(`${eventName}:getUser`, userList)
     })
   }
 }
