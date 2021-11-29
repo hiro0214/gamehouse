@@ -1,16 +1,19 @@
+import { gameConfigType } from '../types/config';
+import { gameDataType } from '../types/data';
 import { User } from '../types/user';
-import { kowloonTacticsInit } from './kowloonTactics';
+import { kowloonTacticsConfigInit } from './kowloonTactics';
 
-export const userList: User[] = []
+export const userList: User[] = [];
 
-export let currentGame = '';
-
-export const data = {}
+export let
+  currentGame = '',
+  currentConfig: gameConfigType | null = null,
+  gameData: gameDataType | null = null;
 
 export const initConfig = (game: string) => {
   switch (game) {
     case 'クーロンタクティクス':
-      kowloonTacticsInit()
+      kowloonTacticsConfigInit()
       break;
     // case 'Hanabi':
     //   //
@@ -21,4 +24,8 @@ export const initConfig = (game: string) => {
   }
 }
 
-export const setCurrentGame = (game: string) => currentGame = game
+export const setCurrentGame = (game: string) => currentGame = game;
+
+export const setCurrentConfig = (config: gameConfigType) => currentConfig = config;
+
+export const setGameData = (data: gameDataType) => gameData = data;

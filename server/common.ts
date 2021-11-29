@@ -1,6 +1,7 @@
 import { serverSocket, socket } from './server';
-import { currentGame, initConfig, setCurrentGame, userList } from './data'
+import { currentConfig, currentGame, initConfig, setCurrentGame, userList } from './data'
 import { User } from '../types/user';
+import { kowloonTacticsDataInit } from './kowloonTactics';
 
 const eventName = 'common';
 
@@ -16,6 +17,10 @@ export const common = {
 
     socket.on(`${eventName}:getCurrentGame`, () => {
       serverSocket.emit(`${eventName}:getCurrentGame`, currentGame)
+    })
+
+    socket.on(`${eventName}:getCurrentConfig`, () => {
+      serverSocket.emit(`${eventName}:getCurrentConfig`, currentConfig)
     })
 
     socket.on(`${eventName}:setCurrentGame`, (game: string | null) => {
@@ -34,6 +39,16 @@ export const common = {
       const targetIndex = userList.findIndex((user: User) => user.id === data.id)
       userList[targetIndex] = data
       serverSocket.emit(`${eventName}:getUser`, userList)
+    })
+
+    socket.on(`${eventName}:gameStart`, () => {
+      switch (currentGame) {
+        case 'クーロンタクティクス':
+          kowloonTacticsDataInit()
+          break;
+      }
+
+      serverSocket.emit(`${eventName}:gameStart`, (currentGame))
     })
   }
 }

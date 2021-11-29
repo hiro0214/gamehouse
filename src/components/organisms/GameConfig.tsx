@@ -1,6 +1,7 @@
 import { VFC, memo, useState, ChangeEvent, useEffect } from 'react';
 import styled from 'styled-components';
 import { useCurrentConfig } from '../../hooks/useCurrentConfig';
+import { useGameStart } from '../../hooks/useGameStart';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
 import { variable } from '../../variable';
@@ -13,6 +14,7 @@ const options = ['クーロンタクティクス', 'Hanabi', 'other'];
 export const GameConfig: VFC = memo(() => {
   const [currentGame, setCurrentGame] = useState<string | null>(null);
   const { myInfo } = useMyInfo();
+  const { gameStart } = useGameStart();
   const { currentConfig, setConfig } = useCurrentConfig();
 
   const onChangeValue = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -24,9 +26,7 @@ export const GameConfig: VFC = memo(() => {
     }
   };
 
-  const onclickGameStart = () => {
-    console.log('Game Start!');
-  };
+  const onclickGameStart = () => socket.emit('common:gameStart');
 
   useEffect(() => {
     socket.on('common:getCurrentGame', (currentGame: string) => {
@@ -37,6 +37,7 @@ export const GameConfig: VFC = memo(() => {
       setCurrentGame(currentGame);
       setConfig(currentGame);
     });
+    socket.on('common:gameStart', (game: string) => gameStart(game));
 
     socket.emit('common:getCurrentGame');
   }, []);

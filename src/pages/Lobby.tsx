@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { User } from '../../types/user';
 import { GameConfig } from '../components/organisms/GameConfig';
 import { UserList } from '../components/organisms/UserList';
-import { CommonBackground } from '../components/style/CommonBackground';
 import { socket } from '../socket';
 
 export const Lobby = memo(() => {
@@ -15,12 +14,10 @@ export const Lobby = memo(() => {
   }, []);
 
   return (
-    <CommonBackground>
-      <_Container>
-        <UserList userList={userList} />
-        <GameConfig />
-      </_Container>
-    </CommonBackground>
+    <_Container>
+      <UserList userList={userList} />
+      <GameConfig />
+    </_Container>
   );
 });
 
