@@ -12,10 +12,6 @@ export const CommonBackground: VFC<props> = memo((props) => {
 });
 
 const _Background = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-  padding-top: 50px;
-  padding-bottom: 50px;
   background-image: url('/assets/images/bg_common.jpg');
   background-size: 600px auto;
   background-repeat: repeat;

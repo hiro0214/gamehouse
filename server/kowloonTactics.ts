@@ -1,10 +1,20 @@
 import { serverSocket, socket } from './server';
 import { kowloonTacticsConfig } from '../types/config';
 import { User } from '../types/user';
-import { currentConfig, setCurrentConfig, setGameData } from './data';
+import { currentConfig, gameData, setCurrentConfig, setGameData } from './data';
 import { kowloonTacticsData } from '../types/data';
 
-const eventName = 'kowloonTactics';
+type judge = 'red' | 'blue' | 'draw';
+type turn = 'red' | 'blue';
+
+const
+  eventName = 'kowloonTactics',
+  judgeArray: judge[] = [];
+
+let
+  turn: turn = 'red',
+  redHand = 0,
+  blueHand = 0;
 
 export const kowloonTacticsConfigInit = () => {
   const initialConfig: kowloonTacticsConfig = {
@@ -24,6 +34,9 @@ export const kowloonTacticsConfigInit = () => {
     blueSupporter: []
   }
 
+  const random = Math.floor(Math.random() * 2);
+  turn = random === 0 ? 'red': 'blue';
+
   setCurrentConfig(initialConfig)
 }
 
@@ -38,6 +51,16 @@ export const kowloonTacticsDataInit = () => {
       "field": []
     }
   }
+
+  const shuffle = (array: number[]) => {
+    for (let i = array.length - 1 ; i > 0 ;i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  shuffle(initialData.redPlayer.hand)
+  shuffle(initialData.bluePlayer.hand)
 
   setGameData(initialData)
 }
@@ -66,6 +89,10 @@ const includeCheck = (user: User) => {
   }
 }
 
+const reverseTurn = (turn : turn): turn => {
+  return turn === 'red' ? 'blue' : 'red';
+}
+
 export const kowloonTactics = {
   init: () => {
     socket.on(`${eventName}:updateConfig`, () => {
@@ -84,16 +111,66 @@ export const kowloonTactics = {
       serverSocket.emit(`${eventName}:updateConfig`, currentConfig)
     })
 
-    socket.on(`${eventName}:setRedSupporterr`, (user: User) => {
+    socket.on(`${eventName}:setRedSupporter`, (user: User) => {
       includeCheck(user);
       (<kowloonTacticsConfig>currentConfig).redSupporter.push(user)
       serverSocket.emit(`${eventName}:updateConfig`, currentConfig)
     })
 
-    socket.on(`${eventName}:setBlueSupporterr`, (user: User) => {
+    socket.on(`${eventName}:setBlueSupporter`, (user: User) => {
       includeCheck(user);
       (<kowloonTacticsConfig>currentConfig).blueSupporter.push(user)
       serverSocket.emit(`${eventName}:updateConfig`, currentConfig)
+    })
+
+    socket.on(`${eventName}:getData`, () => {
+      serverSocket.emit(`${eventName}:getData`, gameData)
+    })
+
+    socket.on(`${eventName}:getTurn`, () => {
+      serverSocket.emit(`${eventName}:getTurn`, turn)
+    })
+
+    socket.on(`${eventName}:selectHand`, (req) => {
+      const
+        user = req[0],
+        index = req[1];
+
+      if (currentConfig?.redPlayer.id === user.id) {
+        const selectHand = gameData?.redPlayer.hand.splice(index, 1)[0] as number;
+        gameData?.redPlayer.field.push(selectHand)
+        redHand = selectHand
+      }
+      else if (currentConfig?.bluePlayer.id === user.id) {
+        const selectHand = gameData?.bluePlayer.hand.splice(index, 1)[0] as number;
+        gameData?.bluePlayer.field.push(selectHand)
+        blueHand = selectHand
+      }
+
+      if (redHand !== 0 && blueHand !== 0) {
+        const judge: judge =
+          redHand === 1 && blueHand === 9 ? 'red' :
+          redHand === 9 && blueHand === 1 ? 'blue':
+          redHand > blueHand ? 'red':
+          redHand < blueHand ? 'blue':
+          'draw';
+
+        redHand = 0
+        blueHand = 0
+        judgeArray.push(judge)
+        turn =
+          judge === 'red' ? 'red' :
+          judge === 'blue' ? 'blue':
+          reverseTurn(turn);
+
+        serverSocket.emit(`${eventName}:getJudge`, judgeArray)
+      }
+      else {
+        turn = reverseTurn(turn)
+      }
+
+      serverSocket.emit(`${eventName}:getData`, gameData)
+      serverSocket.emit(`${eventName}:getTurn`, turn)
     })
   }
 }

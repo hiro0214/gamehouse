@@ -38,8 +38,8 @@ export const KowloonTactics: VFC = memo(() => {
 
   const onclickJoinRedPlayer = () => socket.emit(`${eventName}:setRedPlayer`, myInfo);
   const onclickJoinBluePlayer = () => socket.emit(`${eventName}:setBluePlayer`, myInfo);
-  const onclickJoinRedSupporter = () => socket.emit(`${eventName}:setRedSupporterr`, myInfo);
-  const onclickJoinBlueSupporter = () => socket.emit(`${eventName}:setBlueSupporterr`, myInfo);
+  const onclickJoinRedSupporter = () => socket.emit(`${eventName}:setRedSupporter`, myInfo);
+  const onclickJoinBlueSupporter = () => socket.emit(`${eventName}:setBlueSupporter`, myInfo);
 
   return (
     <_Container>

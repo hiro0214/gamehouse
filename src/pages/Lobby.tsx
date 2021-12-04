@@ -14,18 +14,24 @@ export const Lobby = memo(() => {
   }, []);
 
   return (
-    <_Container>
-      <UserList userList={userList} />
-      <GameConfig />
-    </_Container>
+    <_Wrapper>
+      <_Container>
+        <UserList userList={userList} />
+        <GameConfig />
+      </_Container>
+    </_Wrapper>
   );
 });
+
+const _Wrapper = styled.div`
+  padding: 50px 0;
+`;
 
 const _Container = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 1000px;
-  height: calc(100vh - 100px);
+  width: 1000px;
+  height: 720px;
   margin-left: auto;
   margin-right: auto;
   padding: 40px;

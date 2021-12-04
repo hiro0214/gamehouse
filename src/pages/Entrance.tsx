@@ -38,6 +38,8 @@ const _Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding-top: 50px;
+  padding-bottom: 50px;
 `;
 
 const _Container = styled.div`
