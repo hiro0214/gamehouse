@@ -1,13 +1,20 @@
 import { serverSocket, socket } from './server';
-import { currentConfig, currentGame, initConfig, setCurrentGame, userList } from './data'
+import { connectList, currentConfig, currentGame, initConfig, setCurrentGame, userList } from './data'
 import { User } from '../types/user';
 import { kowloonTacticsDataInit } from './kowloonTactics';
+import { Connect } from '../types/connect';
 
 const eventName = 'common';
 
 export const common = {
   init: () => {
-    socket.on(`${eventName}:enter`, (newUser: User) => {
+    socket.on(`${eventName}:newUser`, (newUser: User) => {
+      const newConnect: Connect = {
+        socketId: socket.id,
+        userId: newUser.id
+      }
+
+      connectList.push(newConnect)
       userList.push(newUser)
     })
 
@@ -49,6 +56,10 @@ export const common = {
       }
 
       serverSocket.emit(`${eventName}:gameStart`, (currentGame))
+    })
+
+    socket.on(`${eventName}:toLobby`, () => {
+      serverSocket.emit(`${eventName}:toLobby`)
     })
   }
 }

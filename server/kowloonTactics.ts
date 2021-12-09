@@ -61,8 +61,8 @@ export const kowloonTacticsDataInit = () => {
 
   shuffle(initialData.redPlayer.hand)
   shuffle(initialData.bluePlayer.hand)
-
   setGameData(initialData)
+  judgeArray.length = 0;
 }
 
 const includeCheck = (user: User) => {
@@ -163,14 +163,18 @@ export const kowloonTactics = {
           judge === 'blue' ? 'blue':
           reverseTurn(turn);
 
-        serverSocket.emit(`${eventName}:getJudge`, judgeArray)
+        serverSocket.emit(`${eventName}:checkAnimate`)
+        setTimeout(() => {
+          serverSocket.emit(`${eventName}:getJudge`, judgeArray)
+          serverSocket.emit(`${eventName}:getTurn`, turn)
+        }, 4000)
       }
       else {
         turn = reverseTurn(turn)
+        serverSocket.emit(`${eventName}:getTurn`, turn)
       }
 
       serverSocket.emit(`${eventName}:getData`, gameData)
-      serverSocket.emit(`${eventName}:getTurn`, turn)
     })
   }
 }

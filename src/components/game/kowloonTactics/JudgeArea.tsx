@@ -42,20 +42,21 @@ const _JudgeArea = styled.div`
   grid-template-columns: repeat(1, 25px);
   grid-template-rows: repeat(9, 50px);
   gap: 10px;
-  > div {
-    opacity: 0.4;
-  }
   &.red > div {
-    background: ${variable.red};
+    background: rgb(229 62 62 / 40%);
+    border: solid 1px ${variable.red};
+    border-right: none;
     &.red {
-      opacity: 1;
+      background: ${variable.red};
       box-shadow: 0 0 6px 1px rgb(229 62 62 / 70%);
     }
   }
   &.blue > div {
-    background: ${variable.blue};
+    background: rgb(49 130 206 / 40%);
+    border: solid 1px ${variable.blue};
+    border-left: none;
     &.blue {
-      opacity: 1;
+      background: ${variable.blue};
       box-shadow: 0 0 6px 1px rgb(49 130 206 / 70%);
     }
   }

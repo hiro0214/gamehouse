@@ -41,7 +41,7 @@ export const useSetUserInfo = () => {
     };
 
     setMyInfo(newUser);
-    socket.emit('common:enter', newUser);
+    socket.emit('common:newUser', newUser);
   }, []);
 
   return { setInfo, randomIcon };

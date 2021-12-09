@@ -2,7 +2,9 @@ import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { gameConfigType } from '../../../types/config';
 import { kowloonTacticsData } from '../../../types/data';
+import { CheckAnimate } from '../../components/game/kowloonTactics/CheckAnimate';
 import { FieldHand } from '../../components/game/kowloonTactics/FieldHand';
+import { GameResult } from '../../components/game/kowloonTactics/GameResult';
 import { HandArea } from '../../components/game/kowloonTactics/HandArea';
 import { JudgeArea } from '../../components/game/kowloonTactics/JudgeArea';
 import { PlayerArea } from '../../components/game/kowloonTactics/PlayerArea';
@@ -11,6 +13,7 @@ import { socket } from '../../socket';
 
 type judge = 'red' | 'blue' | 'draw';
 type turn = 'red' | 'blue';
+type result = 'WIN' | 'LOSE' | 'DRAW';
 
 export const KowloonTactics: VFC = memo(() => {
   const { myInfo } = useMyInfo();
@@ -44,34 +47,51 @@ export const KowloonTactics: VFC = memo(() => {
     socket.emit('kowloonTactics:getTurn');
   }, []);
 
+  const getResult = (): judge => {
+    const redWin = judgeArray.filter((v) => v === 'red').length;
+    const blueWin = judgeArray.filter((v) => v === 'blue').length;
+    const result = redWin > blueWin ? 'red' : redWin < blueWin ? 'blue' : 'draw';
+    return result;
+  };
+
+  const checkResult = (side: 'red' | 'blue'): result => {
+    const result = getResult();
+    return result === 'draw' ? 'DRAW' : result === side ? 'WIN' : 'LOSE';
+  };
+
   return Object.keys(data).length && Object.keys(config).length ? (
     <_Wrapper>
       <_Container>
         <PlayerArea player={config.redPlayer} supporter={config.redSupporter} area={'red'} />
         <PlayerArea player={config.bluePlayer} supporter={config.blueSupporter} area={'blue'} />
 
-        {judgeArray.length < 9 && (
+        {judgeArray.length < 9 ? (
           <HandArea
             hands={data.redPlayer.hand}
             turn={turn === 'red' && true}
             isPlayer={config.redPlayer.id === myInfo.id && true}
             isHide={side !== 'red' && true}
           />
+        ) : (
+          <GameResult result={checkResult('red')} />
         )}
         <_Field>
           <FieldHand hands={data.redPlayer.field} isHide={side !== 'red' && true} />
           <JudgeArea judgeArray={judgeArray} />
           <FieldHand hands={data.bluePlayer.field} isHide={side !== 'blue' && true} />
         </_Field>
-        {judgeArray.length < 9 && (
+        {judgeArray.length < 9 ? (
           <HandArea
             hands={data.bluePlayer.hand}
             turn={turn === 'blue' && true}
             isPlayer={config.bluePlayer.id === myInfo.id && true}
             isHide={side !== 'blue' && true}
           />
+        ) : (
+          <GameResult result={checkResult('blue')} />
         )}
       </_Container>
+      <CheckAnimate />
     </_Wrapper>
   ) : null;
 });

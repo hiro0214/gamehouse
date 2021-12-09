@@ -1,7 +1,7 @@
 import express from 'express';
 import socketIo from 'socket.io';
 import http from "http";
-
+import { connectList, userList } from './data';
 import { common } from './common';
 import { kowloonTactics } from './kowloonTactics';
 
@@ -25,4 +25,17 @@ serverSocket.on('connection', connect => {
   socket = connect
   common.init();
   kowloonTactics.init();
+
+  socket.on('disconnect', () => {
+    const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
+    if (removeConnectIndex === -1) return;
+
+    const userId = connectList[removeConnectIndex].userId;
+    const removeUserIndex = userList.findIndex(v => v.id === userId);
+
+    connectList.splice(removeConnectIndex, 1);
+    userList.splice(removeUserIndex, 1);
+
+    serverSocket.emit('common:getUser', userList);
+  })
 })

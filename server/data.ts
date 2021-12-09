@@ -1,7 +1,10 @@
 import { gameConfigType } from '../types/config';
 import { gameDataType } from '../types/data';
+import { Connect } from '../types/connect';
 import { User } from '../types/user';
 import { kowloonTacticsConfigInit } from './kowloonTactics';
+
+export const connectList: Connect[] = [];
 
 export const userList: User[] = [];
 
