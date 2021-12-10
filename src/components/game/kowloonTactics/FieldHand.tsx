@@ -1,20 +1,16 @@
-import { VFC, memo, useState, useEffect } from 'react';
+import { VFC, memo } from 'react';
 import styled from 'styled-components';
 import { Hand } from './Hand';
 
 type props = {
   hands: number[];
   isHide: boolean;
+  isFinish: boolean;
 };
 
 export const FieldHand: VFC<props> = memo((props) => {
-  const { hands, isHide } = props;
+  const { hands, isHide, isFinish } = props;
   const copyHands = [...hands];
-  const [isFinish, setIsFinish] = useState(false);
-
-  useEffect(() => {
-    if (hands.length === 9) setTimeout(() => setIsFinish(true), 4000);
-  }, [hands]);
 
   while (copyHands.length < 9) copyHands.push(0);
 

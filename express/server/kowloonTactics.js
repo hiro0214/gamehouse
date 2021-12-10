@@ -138,9 +138,10 @@ exports.kowloonTactics = {
                     judge === 'red' ? 'red' :
                         judge === 'blue' ? 'blue' :
                             reverseTurn(turn);
+                var isFinish_1 = judgeArray.length === 9 && true;
                 server_1.serverSocket.emit("".concat(eventName, ":checkAnimate"));
                 setTimeout(function () {
-                    server_1.serverSocket.emit("".concat(eventName, ":getJudge"), judgeArray);
+                    server_1.serverSocket.emit("".concat(eventName, ":getJudge"), [judgeArray, isFinish_1]);
                     server_1.serverSocket.emit("".concat(eventName, ":getTurn"), turn);
                 }, 4000);
             }
