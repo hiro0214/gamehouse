@@ -8,19 +8,20 @@ import { GameResult } from '../../components/game/kowloonTactics/GameResult';
 import { HandArea } from '../../components/game/kowloonTactics/HandArea';
 import { JudgeArea } from '../../components/game/kowloonTactics/JudgeArea';
 import { PlayerArea } from '../../components/game/kowloonTactics/PlayerArea';
+import { Toast } from '../../components/molucules/Toast';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
 
-type judge = 'red' | 'blue' | 'draw';
 type turn = 'red' | 'blue';
+type judge = 'red' | 'blue' | 'draw';
 type result = 'WIN' | 'LOSE' | 'DRAW';
 
 export const KowloonTactics: VFC = memo(() => {
   const { myInfo } = useMyInfo();
   const [data, setData] = useState<kowloonTacticsData>({} as kowloonTacticsData);
   const [config, setConfig] = useState<gameConfigType>({} as gameConfigType);
-  const [turn, setTurn] = useState<turn>('red');
   const [judgeArray, setJudgeArray] = useState<judge[]>([] as judge[]);
+  const [turn, setTurn] = useState<turn>('' as turn);
   const [side, setSide] = useState<'red' | 'blue' | 'none'>('none');
 
   useEffect(() => {
@@ -60,7 +61,10 @@ export const KowloonTactics: VFC = memo(() => {
   };
 
   return Object.keys(data).length && Object.keys(config).length ? (
-    <_Wrapper>
+    <>
+      {judgeArray.length < 9 && (
+        <Toast turn={turn === 'red' ? config.redPlayer.name : config.bluePlayer.name} />
+      )}
       <_Container>
         <PlayerArea player={config.redPlayer} supporter={config.redSupporter} area={'red'} />
         <PlayerArea player={config.bluePlayer} supporter={config.blueSupporter} area={'blue'} />
@@ -92,15 +96,9 @@ export const KowloonTactics: VFC = memo(() => {
         )}
       </_Container>
       <CheckAnimate />
-    </_Wrapper>
+    </>
   ) : null;
 });
-
-const _Wrapper = styled.div`
-  position: relative;
-  padding-top: 50px;
-  padding-bottom: 50px;
-`;
 
 const _Container = styled.div`
   display: flex;

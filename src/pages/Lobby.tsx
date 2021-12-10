@@ -14,18 +14,12 @@ export const Lobby = memo(() => {
   }, []);
 
   return (
-    <_Wrapper>
-      <_Container>
-        <UserList userList={userList} />
-        <GameConfig />
-      </_Container>
-    </_Wrapper>
+    <_Container>
+      <UserList userList={userList} />
+      <GameConfig />
+    </_Container>
   );
 });
-
-const _Wrapper = styled.div`
-  padding: 50px 0;
-`;
 
 const _Container = styled.div`
   display: flex;

@@ -1,21 +1,24 @@
 import { memo } from 'react';
 import { Route, Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import { CommonBackground } from '../components/style/CommonBackground';
+import { Contents } from '../components/style/Contents';
 import { Entrance } from '../pages/Entrance';
 import { Lobby } from '../pages/Lobby';
-import { UserInfoProvider } from '../providers/UserInfoProvider';
 import { gameRoutes } from './GameRoutes';
 
 export const Router = memo(() => {
   return (
-    <Switch>
-      <UserInfoProvider>
+    <BrowserRouter>
+      <Switch>
         <Route exact path="/">
           <Entrance />
         </Route>
         <Route path="/lobby">
           <CommonBackground>
-            <Lobby />
+            <Contents>
+              <Lobby />
+            </Contents>
           </CommonBackground>
         </Route>
         <Route
@@ -24,13 +27,15 @@ export const Router = memo(() => {
             <Switch>
               {gameRoutes.map((route) => (
                 <Route key={route.path} exact={route.exact} path={`${url}${route.path}`}>
-                  <CommonBackground>{route.children}</CommonBackground>
+                  <CommonBackground>
+                    <Contents>{route.children}</Contents>
+                  </CommonBackground>
                 </Route>
               ))}
             </Switch>
           )}
         />
-      </UserInfoProvider>
-    </Switch>
+      </Switch>
+    </BrowserRouter>
   );
 });

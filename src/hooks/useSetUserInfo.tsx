@@ -18,7 +18,7 @@ export const useSetUserInfo = () => {
   };
 
   const randomIcon = () => {
-    const pokemonLength = 3;
+    const pokemonLength = 151;
     const random = `${Math.floor(Math.random() * pokemonLength) + 1}`;
     let icon: string;
 

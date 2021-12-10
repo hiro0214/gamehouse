@@ -1,10 +1,10 @@
-import { BrowserRouter } from 'react-router-dom';
+import { UserInfoProvider } from './providers/UserInfoProvider';
 import { Router } from './router/Router';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <UserInfoProvider>
       <Router />
-    </BrowserRouter>
+    </UserInfoProvider>
   );
 };
