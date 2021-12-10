@@ -1,3 +1,10 @@
+import { UserInfoProvider } from './providers/UserInfoProvider';
+import { Router } from './router/Router';
+
 export const App = () => {
-  return <h1>Hello React!!</h1>;
+  return (
+    <UserInfoProvider>
+      <Router />
+    </UserInfoProvider>
+  );
 };
