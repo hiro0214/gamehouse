@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "npm run format && tsc && vite build && npm run server && npm run img",
     "start": "node express/server/server.js",
-    "heroku-postbuild": "vite build & npm run server"
+    "heroku-postbuild": ""
   },
   "dependencies": {
     "express": "^4.17.1",
