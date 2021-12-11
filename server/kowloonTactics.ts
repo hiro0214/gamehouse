@@ -163,9 +163,11 @@ export const kowloonTactics = {
           judge === 'blue' ? 'blue':
           reverseTurn(turn);
 
+        const isFinish = judgeArray.length === 9 && true;
+
         serverSocket.emit(`${eventName}:checkAnimate`)
         setTimeout(() => {
-          serverSocket.emit(`${eventName}:getJudge`, judgeArray)
+          serverSocket.emit(`${eventName}:getJudge`, [judgeArray, isFinish])
           serverSocket.emit(`${eventName}:getTurn`, turn)
         }, 4000)
       }

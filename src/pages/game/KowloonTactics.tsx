@@ -23,6 +23,7 @@ export const KowloonTactics: VFC = memo(() => {
   const [judgeArray, setJudgeArray] = useState<judge[]>([] as judge[]);
   const [turn, setTurn] = useState<turn>('' as turn);
   const [side, setSide] = useState<'red' | 'blue' | 'none'>('none');
+  const [isFinish, setIsFinish] = useState(false);
 
   useEffect(() => {
     socket.on('common:getCurrentConfig', (gameConfig: gameConfigType) => {
@@ -41,7 +42,12 @@ export const KowloonTactics: VFC = memo(() => {
     });
     socket.on('kowloonTactics:getData', (data: kowloonTacticsData) => setData(data));
     socket.on('kowloonTactics:getTurn', (turn: turn) => setTurn(turn));
-    socket.on('kowloonTactics:getJudge', (array: judge[]) => setJudgeArray(array));
+    socket.on('kowloonTactics:getJudge', (data) => {
+      const judges: judge[] = data[0];
+      const isFinish: boolean = data[1];
+      setJudgeArray(judges);
+      if (isFinish) setIsFinish(true);
+    });
 
     socket.emit('common:getCurrentConfig');
     socket.emit('kowloonTactics:getData');
@@ -80,9 +86,17 @@ export const KowloonTactics: VFC = memo(() => {
           <GameResult result={checkResult('red')} />
         )}
         <_Field>
-          <FieldHand hands={data.redPlayer.field} isHide={side !== 'red' && true} />
+          <FieldHand
+            hands={data.redPlayer.field}
+            isHide={side !== 'red' && true}
+            isFinish={isFinish}
+          />
           <JudgeArea judgeArray={judgeArray} />
-          <FieldHand hands={data.bluePlayer.field} isHide={side !== 'blue' && true} />
+          <FieldHand
+            hands={data.bluePlayer.field}
+            isHide={side !== 'blue' && true}
+            isFinish={isFinish}
+          />
         </_Field>
         {judgeArray.length < 9 ? (
           <HandArea

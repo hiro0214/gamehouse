@@ -5,16 +5,19 @@ import { Hand } from './Hand';
 type props = {
   hands: number[];
   isHide: boolean;
+  isFinish: boolean;
 };
 
 export const FieldHand: VFC<props> = memo((props) => {
-  const { hands, isHide } = props;
-  while (hands.length < 9) hands.push(0);
+  const { hands, isHide, isFinish } = props;
+  const copyHands = [...hands];
+
+  while (copyHands.length < 9) copyHands.push(0);
 
   return (
     <_Container>
-      {hands.map((hand, i) => (
-        <Hand key={i} num={hand} isHide={isHide} />
+      {copyHands.map((hand, i) => (
+        <Hand key={i} num={hand} isHide={isFinish ? false : isHide} />
       ))}
     </_Container>
   );
