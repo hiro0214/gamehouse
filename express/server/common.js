@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.common = void 0;
 var server_1 = require("./server");
 var data_1 = require("./data");
-var kowloonTactics_1 = require("./kowloonTactics");
+var kowloonTactics_1 = require("./game/kowloonTactics");
+var hanabi_1 = require("./game/hanabi");
 var eventName = 'common';
 exports.common = {
     init: function () {
@@ -30,7 +31,7 @@ exports.common = {
                 (0, data_1.initConfig)(game);
             }
             else {
-                (0, data_1.setCurrentGame)('');
+                (0, data_1.setCurrentGame)(null);
             }
             server_1.serverSocket.emit("".concat(eventName, ":setCurrentGame"), data_1.currentGame);
         });
@@ -43,6 +44,9 @@ exports.common = {
             switch (data_1.currentGame) {
                 case 'クーロンタクティクス':
                     (0, kowloonTactics_1.kowloonTacticsDataInit)();
+                    break;
+                case 'Hanabi':
+                    (0, hanabi_1.hanabiDataInit)();
                     break;
             }
             server_1.serverSocket.emit("".concat(eventName, ":gameStart"), (data_1.currentGame));

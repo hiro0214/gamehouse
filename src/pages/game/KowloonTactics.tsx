@@ -1,6 +1,6 @@
 import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { gameConfigType } from '../../../types/config';
+import { kowloonTacticsConfig } from '../../../types/config';
 import { kowloonTacticsData } from '../../../types/data';
 import { CheckAnimate } from '../../components/game/kowloonTactics/CheckAnimate';
 import { FieldHand } from '../../components/game/kowloonTactics/FieldHand';
@@ -19,14 +19,14 @@ type result = 'WIN' | 'LOSE' | 'DRAW';
 export const KowloonTactics: VFC = memo(() => {
   const { myInfo } = useMyInfo();
   const [data, setData] = useState<kowloonTacticsData>({} as kowloonTacticsData);
-  const [config, setConfig] = useState<gameConfigType>({} as gameConfigType);
+  const [config, setConfig] = useState<kowloonTacticsConfig>({} as kowloonTacticsConfig);
   const [judgeArray, setJudgeArray] = useState<judge[]>([] as judge[]);
   const [turn, setTurn] = useState<turn>('' as turn);
   const [side, setSide] = useState<'red' | 'blue' | 'none'>('none');
   const [isFinish, setIsFinish] = useState(false);
 
   useEffect(() => {
-    socket.on('common:getCurrentConfig', (gameConfig: gameConfigType) => {
+    socket.on('common:getCurrentConfig', (gameConfig: kowloonTacticsConfig) => {
       setConfig(gameConfig);
       if (
         gameConfig.redPlayer.id === myInfo.id ||

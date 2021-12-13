@@ -1,8 +1,10 @@
 import { serverSocket, socket } from './server';
 import { connectList, currentConfig, currentGame, initConfig, setCurrentGame, userList } from './data'
 import { User } from '../types/user';
-import { kowloonTacticsDataInit } from './kowloonTactics';
+import { kowloonTacticsDataInit } from './game/kowloonTactics';
+import { hanabiDataInit } from './game/hanabi';
 import { Connect } from '../types/connect';
+import { GameType } from '../types/gameList';
 
 const eventName = 'common';
 
@@ -30,13 +32,13 @@ export const common = {
       serverSocket.emit(`${eventName}:getCurrentConfig`, currentConfig)
     })
 
-    socket.on(`${eventName}:setCurrentGame`, (game: string | null) => {
+    socket.on(`${eventName}:setCurrentGame`, (game: GameType | null) => {
       if (game) {
         setCurrentGame(game)
         initConfig(game)
       }
       else {
-        setCurrentGame('')
+        setCurrentGame(null)
       }
 
       serverSocket.emit(`${eventName}:setCurrentGame`, currentGame)
@@ -52,6 +54,9 @@ export const common = {
       switch (currentGame) {
         case 'クーロンタクティクス':
           kowloonTacticsDataInit()
+          break;
+        case 'Hanabi':
+          hanabiDataInit()
           break;
       }
 

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.kowloonTactics = exports.kowloonTacticsDataInit = exports.kowloonTacticsConfigInit = void 0;
-var server_1 = require("./server");
-var data_1 = require("./data");
+var server_1 = require("../server");
+var data_1 = require("../data");
 var eventName = 'kowloonTactics', judgeArray = [];
 var turn = 'red', redHand = 0, blueHand = 0;
 var kowloonTacticsConfigInit = function () {
@@ -115,14 +115,14 @@ exports.kowloonTactics = {
         });
         server_1.socket.on("".concat(eventName, ":selectHand"), function (req) {
             var user = req[0], index = req[1];
-            if ((data_1.currentConfig === null || data_1.currentConfig === void 0 ? void 0 : data_1.currentConfig.redPlayer.id) === user.id) {
-                var selectHand = data_1.gameData === null || data_1.gameData === void 0 ? void 0 : data_1.gameData.redPlayer.hand.splice(index, 1)[0];
-                data_1.gameData === null || data_1.gameData === void 0 ? void 0 : data_1.gameData.redPlayer.field.push(selectHand);
+            if (data_1.currentConfig.redPlayer.id === user.id) {
+                var selectHand = data_1.gameData.redPlayer.hand.splice(index, 1)[0];
+                data_1.gameData.redPlayer.field.push(selectHand);
                 redHand = selectHand;
             }
-            else if ((data_1.currentConfig === null || data_1.currentConfig === void 0 ? void 0 : data_1.currentConfig.bluePlayer.id) === user.id) {
-                var selectHand = data_1.gameData === null || data_1.gameData === void 0 ? void 0 : data_1.gameData.bluePlayer.hand.splice(index, 1)[0];
-                data_1.gameData === null || data_1.gameData === void 0 ? void 0 : data_1.gameData.bluePlayer.field.push(selectHand);
+            else if (data_1.currentConfig.bluePlayer.id === user.id) {
+                var selectHand = data_1.gameData.bluePlayer.hand.splice(index, 1)[0];
+                data_1.gameData.bluePlayer.field.push(selectHand);
                 blueHand = selectHand;
             }
             if (redHand !== 0 && blueHand !== 0) {

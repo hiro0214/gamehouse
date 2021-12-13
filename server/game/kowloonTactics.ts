@@ -1,8 +1,8 @@
-import { serverSocket, socket } from './server';
-import { kowloonTacticsConfig } from '../types/config';
-import { User } from '../types/user';
-import { currentConfig, gameData, setCurrentConfig, setGameData } from './data';
-import { kowloonTacticsData } from '../types/data';
+import { serverSocket, socket } from '../server';
+import { kowloonTacticsConfig } from '../../types/config';
+import { User } from '../../types/user';
+import { currentConfig, gameData, setCurrentConfig, setGameData } from '../data';
+import { kowloonTacticsData } from '../../types/data';
 
 type judge = 'red' | 'blue' | 'draw';
 type turn = 'red' | 'blue';
@@ -136,14 +136,14 @@ export const kowloonTactics = {
         user = req[0],
         index = req[1];
 
-      if (currentConfig?.redPlayer.id === user.id) {
-        const selectHand = gameData?.redPlayer.hand.splice(index, 1)[0] as number;
-        gameData?.redPlayer.field.push(selectHand)
+      if ((<kowloonTacticsConfig>currentConfig).redPlayer.id === user.id) {
+        const selectHand = (<kowloonTacticsData>gameData).redPlayer.hand.splice(index, 1)[0] as number;
+        (<kowloonTacticsData>gameData).redPlayer.field.push(selectHand)
         redHand = selectHand
       }
-      else if (currentConfig?.bluePlayer.id === user.id) {
-        const selectHand = gameData?.bluePlayer.hand.splice(index, 1)[0] as number;
-        gameData?.bluePlayer.field.push(selectHand)
+      else if ((<kowloonTacticsConfig>currentConfig).bluePlayer.id === user.id) {
+        const selectHand = (<kowloonTacticsData>gameData).bluePlayer.hand.splice(index, 1)[0] as number;
+        (<kowloonTacticsData>gameData).bluePlayer.field.push(selectHand)
         blueHand = selectHand
       }
 

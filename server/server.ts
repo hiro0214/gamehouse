@@ -3,7 +3,8 @@ import socketIo from 'socket.io';
 import http from "http";
 import { connectList, userList } from './data';
 import { common } from './common';
-import { kowloonTactics } from './kowloonTactics';
+import { kowloonTactics } from './game/kowloonTactics';
+import { hanabi } from './game/hanabi';
 
 const
   app: express.Express = express(),
@@ -25,6 +26,7 @@ serverSocket.on('connection', connect => {
   socket = connect
   common.init();
   kowloonTactics.init();
+  hanabi.init();
 
   socket.on('disconnect', () => {
     const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
