@@ -10,5 +10,6 @@ export interface kowloonTacticsConfig {
 }
 
 export interface hanabiConfig {
-  key: string;
+  colorNum: number;
+  handNum: number;
 }

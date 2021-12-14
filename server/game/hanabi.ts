@@ -8,12 +8,12 @@ const
 
 export const hanabiConfigInit = () => {
   const initialConfig: hanabiConfig = {
-    key: 'init'
+    colorNum: 4,
+    handNum: 4
   }
 
   setCurrentConfig(initialConfig)
 }
-
 
 export const hanabiDataInit = () => {
   const initialData: hanabiData = {
@@ -25,6 +25,22 @@ export const hanabiDataInit = () => {
 
 export const hanabi = {
   init: () => {
-    console.log('ok')
+    socket.on(`${eventName}:getColorNum`, () => {
+      serverSocket.emit(`${eventName}:getColorNum`, (<hanabiConfig>currentConfig).colorNum)
+    })
+
+    socket.on(`${eventName}:getHandNum`, () => {
+      serverSocket.emit(`${eventName}:getHandNum`, (<hanabiConfig>currentConfig).handNum)
+    })
+
+    socket.on(`${eventName}:setColorNum`, (colorNum: string) => {
+      (<hanabiConfig>currentConfig).colorNum = Number(colorNum)
+      serverSocket.emit(`${eventName}:getColorNum`, (<hanabiConfig>currentConfig).colorNum)
+    })
+
+    socket.on(`${eventName}:setHandNum`, (handNum: string) => {
+      (<hanabiConfig>currentConfig).handNum = Number(handNum)
+      serverSocket.emit(`${eventName}:getHandNum`, (<hanabiConfig>currentConfig).handNum)
+    })
   }
 }

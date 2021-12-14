@@ -10,6 +10,9 @@ import { Button } from '../atoms/Button';
 import { Heading } from '../atoms/Heading';
 import { Select } from '../atoms/Select';
 
+const gameListOption: { key: string; value: string }[] = [];
+gameList.map((game) => gameListOption.push({ key: game, value: game }));
+
 export const GameConfig: VFC = memo(() => {
   const [currentGame, setCurrentGame] = useState<GameType | null>(null);
   const { myInfo } = useMyInfo();
@@ -46,12 +49,14 @@ export const GameConfig: VFC = memo(() => {
       <Heading text={'Setting'} size={'2'}></Heading>
       <_Center>
         <Select
-          options={gameList}
+          options={gameListOption}
           hdg={'ゲーム'}
           value={currentGame ? currentGame : ''}
           onChange={onChangeValue}
           disabled={myInfo.isAdmin}
-        ></Select>
+        >
+          <option>-- 選択してください --</option>
+        </Select>
       </_Center>
       <_Contents>
         {currentGame && (

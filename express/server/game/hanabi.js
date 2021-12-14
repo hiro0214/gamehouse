@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hanabi = exports.hanabiDataInit = exports.hanabiConfigInit = void 0;
+var server_1 = require("../server");
 var data_1 = require("../data");
 var eventName = 'hanabi';
 var hanabiConfigInit = function () {
     var initialConfig = {
-        key: 'init'
+        colorNum: 4,
+        handNum: 4
     };
     (0, data_1.setCurrentConfig)(initialConfig);
 };
@@ -19,6 +21,19 @@ var hanabiDataInit = function () {
 exports.hanabiDataInit = hanabiDataInit;
 exports.hanabi = {
     init: function () {
-        console.log('ok');
+        server_1.socket.on("".concat(eventName, ":getColorNum"), function () {
+            server_1.serverSocket.emit("".concat(eventName, ":getColorNum"), data_1.currentConfig.colorNum);
+        });
+        server_1.socket.on("".concat(eventName, ":getHandNum"), function () {
+            server_1.serverSocket.emit("".concat(eventName, ":getHandNum"), data_1.currentConfig.handNum);
+        });
+        server_1.socket.on("".concat(eventName, ":setColorNum"), function (colorNum) {
+            data_1.currentConfig.colorNum = Number(colorNum);
+            server_1.serverSocket.emit("".concat(eventName, ":getColorNum"), data_1.currentConfig.colorNum);
+        });
+        server_1.socket.on("".concat(eventName, ":setHandNum"), function (handNum) {
+            data_1.currentConfig.handNum = Number(handNum);
+            server_1.serverSocket.emit("".concat(eventName, ":getHandNum"), data_1.currentConfig.handNum);
+        });
     }
 };
