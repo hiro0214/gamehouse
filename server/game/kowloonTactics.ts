@@ -1,8 +1,9 @@
 import { serverSocket, socket } from '../server';
 import { kowloonTacticsConfig } from '../../types/config';
 import { User } from '../../types/user';
-import { currentConfig, gameData, setCurrentConfig, setGameData } from '../data';
-import { kowloonTacticsData } from '../../types/data';
+import { currentConfig, setCurrentConfig } from '../data';
+import { kowloonTacticsData } from '../../types/game/kowloonTactics';
+import { shuffle } from '../utility';
 
 type judge = 'red' | 'blue' | 'draw';
 type turn = 'red' | 'blue';
@@ -12,6 +13,7 @@ const
   judgeArray: judge[] = [];
 
 let
+  gameData: kowloonTacticsData = {} as kowloonTacticsData,
   turn: turn = 'red',
   redHand = 0,
   blueHand = 0;
@@ -52,16 +54,9 @@ export const kowloonTacticsDataInit = () => {
     }
   }
 
-  const shuffle = (array: number[]) => {
-    for (let i = array.length - 1 ; i > 0 ;i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
   shuffle(initialData.redPlayer.hand)
   shuffle(initialData.bluePlayer.hand)
-  setGameData(initialData)
+  gameData = initialData
   judgeArray.length = 0;
 }
 
@@ -137,13 +132,13 @@ export const kowloonTactics = {
         index = req[1];
 
       if ((<kowloonTacticsConfig>currentConfig).redPlayer.id === user.id) {
-        const selectHand = (<kowloonTacticsData>gameData).redPlayer.hand.splice(index, 1)[0] as number;
-        (<kowloonTacticsData>gameData).redPlayer.field.push(selectHand)
+        const selectHand = gameData.redPlayer.hand.splice(index, 1)[0] as number;
+        gameData.redPlayer.field.push(selectHand)
         redHand = selectHand
       }
       else if ((<kowloonTacticsConfig>currentConfig).bluePlayer.id === user.id) {
-        const selectHand = (<kowloonTacticsData>gameData).bluePlayer.hand.splice(index, 1)[0] as number;
-        (<kowloonTacticsData>gameData).bluePlayer.field.push(selectHand)
+        const selectHand = gameData.bluePlayer.hand.splice(index, 1)[0] as number;
+        gameData.bluePlayer.field.push(selectHand)
         blueHand = selectHand
       }
 

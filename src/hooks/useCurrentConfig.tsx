@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { GameType } from '../../types/gameList';
+import { Hanabi } from '../components/organisms/gameConfig/Hanabi';
 import { KowloonTactics } from '../components/organisms/gameConfig/KowloonTactics';
-import { Hanabi } from '../pages/game/Hanabi';
 
 export const useCurrentConfig = () => {
   const [currentConfig, setCurrentConfig] = useState<React.ReactElement | null>(null);

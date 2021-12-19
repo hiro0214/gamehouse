@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.kowloonTactics = exports.kowloonTacticsDataInit = exports.kowloonTacticsConfigInit = void 0;
 var server_1 = require("../server");
 var data_1 = require("../data");
+var utility_1 = require("../utility");
 var eventName = 'kowloonTactics', judgeArray = [];
-var turn = 'red', redHand = 0, blueHand = 0;
+var gameData = {}, turn = 'red', redHand = 0, blueHand = 0;
 var kowloonTacticsConfigInit = function () {
     var initialConfig = {
         redPlayer: {
@@ -38,16 +39,9 @@ var kowloonTacticsDataInit = function () {
             "field": []
         }
     };
-    var shuffle = function (array) {
-        var _a;
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            _a = [array[j], array[i]], array[i] = _a[0], array[j] = _a[1];
-        }
-    };
-    shuffle(initialData.redPlayer.hand);
-    shuffle(initialData.bluePlayer.hand);
-    (0, data_1.setGameData)(initialData);
+    (0, utility_1.shuffle)(initialData.redPlayer.hand);
+    (0, utility_1.shuffle)(initialData.bluePlayer.hand);
+    gameData = initialData;
     judgeArray.length = 0;
 };
 exports.kowloonTacticsDataInit = kowloonTacticsDataInit;
@@ -108,7 +102,7 @@ exports.kowloonTactics = {
             server_1.serverSocket.emit("".concat(eventName, ":updateConfig"), data_1.currentConfig);
         });
         server_1.socket.on("".concat(eventName, ":getData"), function () {
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), data_1.gameData);
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
         server_1.socket.on("".concat(eventName, ":getTurn"), function () {
             server_1.serverSocket.emit("".concat(eventName, ":getTurn"), turn);
@@ -116,13 +110,13 @@ exports.kowloonTactics = {
         server_1.socket.on("".concat(eventName, ":selectHand"), function (req) {
             var user = req[0], index = req[1];
             if (data_1.currentConfig.redPlayer.id === user.id) {
-                var selectHand = data_1.gameData.redPlayer.hand.splice(index, 1)[0];
-                data_1.gameData.redPlayer.field.push(selectHand);
+                var selectHand = gameData.redPlayer.hand.splice(index, 1)[0];
+                gameData.redPlayer.field.push(selectHand);
                 redHand = selectHand;
             }
             else if (data_1.currentConfig.bluePlayer.id === user.id) {
-                var selectHand = data_1.gameData.bluePlayer.hand.splice(index, 1)[0];
-                data_1.gameData.bluePlayer.field.push(selectHand);
+                var selectHand = gameData.bluePlayer.hand.splice(index, 1)[0];
+                gameData.bluePlayer.field.push(selectHand);
                 blueHand = selectHand;
             }
             if (redHand !== 0 && blueHand !== 0) {
@@ -149,7 +143,7 @@ exports.kowloonTactics = {
                 turn = reverseTurn(turn);
                 server_1.serverSocket.emit("".concat(eventName, ":getTurn"), turn);
             }
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), data_1.gameData);
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
     }
 };

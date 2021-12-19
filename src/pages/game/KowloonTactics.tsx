@@ -1,7 +1,7 @@
 import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { kowloonTacticsConfig } from '../../../types/config';
-import { kowloonTacticsData } from '../../../types/data';
+import { kowloonTacticsData } from '../../../types/game/kowloonTactics';
 import { CheckAnimate } from '../../components/game/kowloonTactics/CheckAnimate';
 import { FieldHand } from '../../components/game/kowloonTactics/FieldHand';
 import { GameResult } from '../../components/game/kowloonTactics/GameResult';

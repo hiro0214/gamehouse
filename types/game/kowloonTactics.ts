@@ -1,5 +1,3 @@
-export type gameDataType = kowloonTacticsData | hanabiData;
-
 export interface kowloonTacticsData {
   redPlayer: {
     "hand": number[],
@@ -9,8 +7,4 @@ export interface kowloonTacticsData {
     "hand": number[],
     "field": number[]
   }
-}
-
-export interface hanabiData {
-  key: string;
 }
