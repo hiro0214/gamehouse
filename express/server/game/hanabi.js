@@ -12,7 +12,7 @@ var eventName = 'hanabi', colorVal = ['red', 'blue', 'yellow', 'green', 'white',
  * Data
 */
 var deck = [], players = [], fields = [], cemetery = [];
-var turn = 0, hint = 8, penalty = 0;
+var turn = 0, hint = 8, miss = 0;
 /**
  * Function
 */
@@ -32,7 +32,7 @@ var hanabiDataInit = function () {
     cemetery.length = 0;
     turn = 0;
     hint = 8;
-    penalty = 0;
+    miss = 0;
     var _loop_1 = function (i) {
         var color = colorVal[i];
         numVal.forEach(function (num) {

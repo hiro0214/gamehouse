@@ -1,5 +1,6 @@
 import { memo, ReactNode, VFC } from 'react';
 import styled from 'styled-components';
+// import bg from '../../images/bg_common.jpg';
 
 type props = {
   children: ReactNode;
@@ -16,3 +17,5 @@ const _Background = styled.div`
   background-size: 600px auto;
   background-repeat: repeat;
 `;
+
+/* background-image: url(${bg}); */

@@ -28,7 +28,7 @@ const
 let
   turn = 0,
   hint = 8,
-  penalty = 0;
+  miss = 0;
 
 
 /**
@@ -51,7 +51,7 @@ export const hanabiDataInit = () => {
   cemetery.length = 0;
   turn = 0;
   hint = 8;
-  penalty = 0;
+  miss = 0;
 
   for (let i = 0; i < (<hanabiConfig>currentConfig).colorNum; i ++) {
     const color: color = colorVal[i];
