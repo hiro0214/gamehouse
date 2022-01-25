@@ -1,10 +1,10 @@
 import { VFC, memo } from 'react';
 import styled from 'styled-components';
-import { color } from '../../../../types/game/hanabi';
+import { cemeteryType } from '../../../../types/game/hanabi';
 import { variable } from '../../../variable';
 
 type props = {
-  cemetery: { color: color; num: number[] }[];
+  cemetery: cemeteryType[];
 };
 
 export const Cemetery: VFC<props> = memo((props) => {
@@ -33,6 +33,7 @@ const _Container = styled.div`
 
 const _List = styled.div`
   display: flex;
+  min-height: 30px;
   font-size: 20px;
   font-weight: bold;
   &.red {

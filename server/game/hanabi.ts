@@ -1,7 +1,7 @@
 import { serverSocket, socket } from '../server';
 import { currentConfig, setCurrentConfig, userList } from '../data';
 import { hanabiConfig } from '../../types/config';
-import { color, hand, playerHandType } from '../../types/game/hanabi';
+import { cemeteryType, color, hand, playerHandType } from '../../types/game/hanabi';
 import { shuffle } from '../utility';
 
 /**
@@ -20,15 +20,13 @@ const
   deck: hand[] = [],
   players: playerHandType[] = [],
   fields: hand[] = [],
-  cemetery: {
-    color: color;
-    num: number[]
-  }[] = [];
+  cemetery: cemeteryType[] = [];
 
 let
-  turn = 0,
-  hint = 8,
-  miss = 0;
+  score: number,
+  turn: number,
+  hint: number,
+  miss: number;
 
 
 /**
@@ -49,6 +47,7 @@ export const hanabiDataInit = () => {
   players.length = 0;
   fields.length = 0;
   cemetery.length = 0;
+  score = 0;
   turn = 0;
   hint = 8;
   miss = 0;
@@ -93,6 +92,21 @@ export const hanabi = {
     socket.on(`${eventName}:setHandNum`, (handNum: string) => {
       (<hanabiConfig>currentConfig).handNum = Number(handNum)
       serverSocket.emit(`${eventName}:updateConfig`, currentConfig)
+    })
+
+    socket.on(`${eventName}:getData`, () => {
+      const data = {
+        deck,
+        players,
+        fields,
+        cemetery,
+        score,
+        turn,
+        hint,
+        miss
+      };
+
+      serverSocket.emit(`${eventName}:getData`, data)
     })
   }
 }

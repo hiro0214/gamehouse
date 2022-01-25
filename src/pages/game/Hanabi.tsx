@@ -1,198 +1,46 @@
-import { VFC, memo } from 'react';
+import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { color, hand } from '../../../types/game/hanabi';
+import { gameData } from '../../../types/game/hanabi';
 import { Cemetery } from '../../components/game/hanabi/Cemetery';
 import { Field } from '../../components/game/hanabi/Field';
 import { Hint } from '../../components/game/hanabi/Hint';
 import { Player } from '../../components/game/hanabi/Player';
 import { Toast } from '../../components/molucules/Toast';
-
-const players = [
-  {
-    player: {
-      name: 'いわもと',
-    },
-    hands: [
-      {
-        color: 'red',
-        num: 1,
-      },
-      {
-        color: 'yellow',
-        num: 4,
-      },
-      {
-        color: 'green',
-        num: 2,
-      },
-      {
-        color: 'blue',
-        num: 5,
-      },
-    ],
-  },
-  {
-    player: {
-      name: 'やまだ',
-    },
-    hands: [
-      {
-        color: 'blue',
-        num: 5,
-      },
-      {
-        color: 'blue',
-        num: 1,
-      },
-      {
-        color: 'green',
-        num: 4,
-      },
-      {
-        color: 'green',
-        num: 1,
-      },
-    ],
-  },
-  {
-    player: {
-      name: 'たなか',
-    },
-    hands: [
-      {
-        color: 'yellow',
-        num: 3,
-      },
-      {
-        color: 'blue',
-        num: 1,
-      },
-      {
-        color: 'green',
-        num: 3,
-      },
-      {
-        color: 'red',
-        num: 4,
-      },
-    ],
-  },
-  // {
-  //   player: {
-  //     name: 'たなか'
-  //   },
-  //   hands: [
-  //     {
-  //       color: 'yellow',
-  //       num: 3
-  //     },
-  //     {
-  //       color: 'blue',
-  //       num: 1
-  //     },
-  //     {
-  //       color: 'green',
-  //       num: 3
-  //     },
-  //     {
-  //       color: 'red',
-  //       num: 4
-  //     }
-  //   ]
-  // },
-  // {
-  //   player: {
-  //     name: 'たなか'
-  //   },
-  //   hands: [
-  //     {
-  //       color: 'yellow',
-  //       num: 3
-  //     },
-  //     {
-  //       color: 'blue',
-  //       num: 1
-  //     },
-  //     {
-  //       color: 'green',
-  //       num: 3
-  //     },
-  //     {
-  //       color: 'red',
-  //       num: 4
-  //     }
-  //   ]
-  // },
-];
-
-const fields: hand[] = [
-  {
-    color: 'red',
-    num: 0,
-  },
-  {
-    color: 'blue',
-    num: 0,
-  },
-  {
-    color: 'yellow',
-    num: 0,
-  },
-  {
-    color: 'green',
-    num: 0,
-  },
-  {
-    color: 'white',
-    num: 0,
-  },
-];
-
-const cemetery: { color: color; num: number[] }[] = [
-  {
-    color: 'red',
-    num: [1, 1, 1, 2, 2, 3, 3, 4, 4, 5],
-  },
-  {
-    color: 'blue',
-    num: [1, 1, 1, 2, 2, 3, 3, 4, 4, 5],
-  },
-  {
-    color: 'yellow',
-    num: [1, 1, 1, 2, 2, 3, 3, 4, 4, 5],
-  },
-  {
-    color: 'green',
-    num: [1, 1, 1, 2, 2, 3, 3, 4, 4, 5],
-  },
-  {
-    color: 'white',
-    num: [1, 1, 1, 2, 2, 3, 3, 4, 4, 5],
-  },
-];
+import { useMyInfo } from '../../providers/UserInfoProvider';
+import { socket } from '../../socket';
 
 export const Hanabi: VFC = memo(() => {
-  return (
-    <_Container>
-      <Toast turn={'いわもと'} />
+  const { myInfo } = useMyInfo();
+  const [gameData, setGameData] = useState<gameData>({} as gameData);
+
+  useEffect(() => {
+    socket.on('hanabi:getData', (data: gameData) => setGameData(data));
+    socket.emit('hanabi:getData');
+  }, []);
+
+  return Object.keys(gameData).length ? (
+    <_Container
+      className={gameData.players[gameData.turn].player.name !== myInfo.name ? 'is-disabled' : ''}
+    >
+      <Toast turn={gameData.players[gameData.turn].player.name} />
       <_InfoArea>
-        <Field deck={30} fields={fields} />
+        <Field deck={gameData.deck.length} fields={gameData.fields} />
         <_Flex>
           <_Point>
-            <p>SCORE : {0}</p>
-            <p>MISS : {0}/3</p>
+            <p>SCORE : {gameData.score}</p>
+            <p>MISS : {gameData.miss}/3</p>
           </_Point>
-          <Hint hint={8} />
+          <Hint hint={gameData.hint} />
         </_Flex>
-        <Cemetery cemetery={cemetery} />
+        <Cemetery cemetery={gameData.cemetery} />
       </_InfoArea>
       <_PlayerArea>
-        {players.map((p) => (
+        {gameData.players.map((p) => (
           <Player key={p.player.name} name={p.player.name} hands={p.hands} />
         ))}
       </_PlayerArea>
     </_Container>
-  );
+  ) : null;
 });
 
 const _Container = styled.div`
@@ -204,6 +52,9 @@ const _Container = styled.div`
   min-height: 500px;
   margin-top: 100px;
   margin-bottom: 100px;
+  &.is-disabed {
+    pointer-events: none;
+  }
 `;
 
 const _InfoArea = styled.div``;

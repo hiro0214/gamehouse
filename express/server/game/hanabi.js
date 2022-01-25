@@ -12,7 +12,7 @@ var eventName = 'hanabi', colorVal = ['red', 'blue', 'yellow', 'green', 'white',
  * Data
 */
 var deck = [], players = [], fields = [], cemetery = [];
-var turn = 0, hint = 8, miss = 0;
+var score, turn, hint, miss;
 /**
  * Function
 */
@@ -30,6 +30,7 @@ var hanabiDataInit = function () {
     players.length = 0;
     fields.length = 0;
     cemetery.length = 0;
+    score = 0;
     turn = 0;
     hint = 8;
     miss = 0;
@@ -70,6 +71,19 @@ exports.hanabi = {
         server_1.socket.on("".concat(eventName, ":setHandNum"), function (handNum) {
             data_1.currentConfig.handNum = Number(handNum);
             server_1.serverSocket.emit("".concat(eventName, ":updateConfig"), data_1.currentConfig);
+        });
+        server_1.socket.on("".concat(eventName, ":getData"), function () {
+            var data = {
+                deck: deck,
+                players: players,
+                fields: fields,
+                cemetery: cemetery,
+                score: score,
+                turn: turn,
+                hint: hint,
+                miss: miss
+            };
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), data);
         });
     }
 };

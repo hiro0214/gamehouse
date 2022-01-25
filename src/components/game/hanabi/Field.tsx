@@ -39,7 +39,7 @@ const _Deck = styled.div`
   padding-top: 5px;
   font-size: 30px;
   font-weight: bold;
-  background: #98b8e2;
+  background: #becef1;
   border: 3px solid ${variable.gray[1]};
   border-radius: 8px;
   text-align: center;

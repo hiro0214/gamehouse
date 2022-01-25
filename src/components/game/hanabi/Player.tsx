@@ -2,6 +2,7 @@ import { VFC, memo } from 'react';
 import styled from 'styled-components';
 import { Hand } from './Hand';
 import { hand } from '../../../../types/game/hanabi';
+import { useMyInfo } from '../../../providers/UserInfoProvider';
 
 type props = {
   name: string;
@@ -10,11 +11,13 @@ type props = {
 
 export const Player: VFC<props> = memo((props) => {
   const { name, hands } = props;
+  const { myInfo } = useMyInfo();
+
   return (
     <_Container className={'player'}>
       <_Hands>
         {hands.map((hand, i) => (
-          <Hand key={i} color={hand.color} num={hand.num} />
+          <Hand key={i} color={hand.color} num={hand.num} isReverse={name === myInfo.name} />
         ))}
       </_Hands>
       <_Band>➡︎ {name}</_Band>

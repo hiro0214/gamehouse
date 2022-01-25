@@ -27,7 +27,7 @@ const _Hand = styled.div`
   padding-top: 5px;
   font-size: 36px;
   font-weight: bold;
-  background: #98b8e2;
+  background: #becef1;
   border: 2px solid ${variable.gray[1]};
   border-radius: 8px;
   text-align: center;
@@ -54,5 +54,10 @@ const _Hand = styled.div`
   &.purple {
     color: ${variable.purple};
     text-shadow: 1px 1px 0px #5826bd;
+  }
+  &.reverse {
+    background-image: url('/assets/images/bg_hanabi_hand.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
   }
 `;
