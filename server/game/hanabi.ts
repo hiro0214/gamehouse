@@ -14,6 +14,15 @@ const
 
 
 /**
+ * Type
+*/
+type selectHandType = {
+  player: number;
+  index: number;
+}
+
+
+/**
  * Data
 */
 const
@@ -108,5 +117,23 @@ export const hanabi = {
 
       serverSocket.emit(`${eventName}:getData`, data)
     })
+
+    socket.on(`${eventName}:playHand`, (select: selectHandType) => {
+      console.log('playHand', select)
+    })
+
+    socket.on(`${eventName}:discardHand`, (select: selectHandType) => {
+      console.log('discardHand', select)
+    })
+
+    socket.on(`${eventName}:colorHint`, (select: selectHandType) => {
+      console.log('colorHint', select)
+    })
+
+    socket.on(`${eventName}:numHint`, (select: selectHandType) => {
+      console.log('numHint', select)
+    })
   }
 }
+
+// players[select.player].hands[select.index]

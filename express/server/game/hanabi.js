@@ -85,5 +85,18 @@ exports.hanabi = {
             };
             server_1.serverSocket.emit("".concat(eventName, ":getData"), data);
         });
+        server_1.socket.on("".concat(eventName, ":playHand"), function (select) {
+            console.log('playHand', select);
+        });
+        server_1.socket.on("".concat(eventName, ":discardHand"), function (select) {
+            console.log('discardHand', select);
+        });
+        server_1.socket.on("".concat(eventName, ":colorHint"), function (select) {
+            console.log('colorHint', select);
+        });
+        server_1.socket.on("".concat(eventName, ":numHint"), function (select) {
+            console.log('numHint', select);
+        });
     }
 };
+// players[select.player].hands[select.index]

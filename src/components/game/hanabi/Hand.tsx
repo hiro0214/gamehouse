@@ -6,16 +6,20 @@ type props = {
   color: string;
   num: number;
   isReverse?: boolean;
+  onclick?: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 export const Hand: VFC<props> = memo((props) => {
-  const { color, num, isReverse } = props;
+  const { color, num, isReverse, onclick } = props;
+
   return (
     <>
       {isReverse ? (
-        <_Hand className={'reverse hand'} />
+        <_Hand className={'reverse hand'} onClick={onclick} />
       ) : (
-        <_Hand className={`${color} hand`}>{num !== 0 && num}</_Hand>
+        <_Hand className={`${color} hand`} onClick={onclick}>
+          {num !== 0 && num}
+        </_Hand>
       )}
     </>
   );
@@ -31,6 +35,8 @@ const _Hand = styled.div`
   border: 2px solid ${variable.gray[1]};
   border-radius: 8px;
   text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
   &.red {
     color: ${variable.red};
     text-shadow: 1px 1px 0px #8d0000;
@@ -59,5 +65,8 @@ const _Hand = styled.div`
     background-image: url('/assets/images/bg_hanabi_hand.png');
     background-size: 100% auto;
     background-repeat: no-repeat;
+  }
+  &.selected {
+    border-color: #fff;
   }
 `;

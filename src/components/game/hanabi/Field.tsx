@@ -30,6 +30,7 @@ const _Container = styled.div`
   padding: 20px;
   background: #202f55;
   border-radius: 8px;
+  pointer-events: none;
 `;
 
 const _Deck = styled.div`

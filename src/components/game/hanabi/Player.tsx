@@ -7,17 +7,24 @@ import { useMyInfo } from '../../../providers/UserInfoProvider';
 type props = {
   name: string;
   hands: hand[];
+  onclick: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 export const Player: VFC<props> = memo((props) => {
-  const { name, hands } = props;
+  const { name, hands, onclick } = props;
   const { myInfo } = useMyInfo();
 
   return (
     <_Container className={'player'}>
       <_Hands>
         {hands.map((hand, i) => (
-          <Hand key={i} color={hand.color} num={hand.num} isReverse={name === myInfo.name} />
+          <Hand
+            key={i}
+            color={hand.color}
+            num={hand.num}
+            isReverse={name === myInfo.name}
+            onclick={onclick}
+          />
         ))}
       </_Hands>
       <_Band>➡︎ {name}</_Band>
@@ -30,9 +37,10 @@ const _Container = styled.div``;
 const _Hands = styled.div`
   display: flex;
   justify-content: flex-end;
+  flex-direction: row-reverse;
   padding: 0 20px;
   .hand:not(:first-child) {
-    margin-left: 10px;
+    margin-right: 10px;
   }
 `;
 
