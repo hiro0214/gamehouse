@@ -1,6 +1,6 @@
 import React, { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { gameData } from '../../../types/game/hanabi';
+import { gameDataType } from '../../../types/game/hanabi';
 import { Cemetery } from '../../components/game/hanabi/Cemetery';
 import { Field } from '../../components/game/hanabi/Field';
 import { Hint } from '../../components/game/hanabi/Hint';
@@ -12,11 +12,11 @@ import { variable } from '../../variable';
 
 export const Hanabi: VFC = memo(() => {
   const { myInfo } = useMyInfo();
-  const [gameData, setGameData] = useState<gameData>({} as gameData);
+  const [gameData, setGameData] = useState<gameDataType>({} as gameDataType);
   const [element, setElement] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    socket.on('hanabi:getData', (data: gameData) => setGameData(data));
+    socket.on('hanabi:getData', (data: gameDataType) => setGameData(data));
     socket.emit('hanabi:getData');
   }, []);
 
@@ -104,9 +104,13 @@ export const Hanabi: VFC = memo(() => {
         )}
         {element && element.className.indexOf('reverse') === -1 && (
           <_Modal style={{ top: getModalOffset() }}>
-            <p>カードにヒントを出す?</p>
-            <button onClick={colorHint}>色のヒントを出す</button>
-            <button onClick={numHint}>数字のヒントを出す</button>
+            {gameData.hint === 0 ? <p>ヒントは使えません。</p> : <p>カードにヒントを出す?</p>}
+            <button onClick={colorHint} disabled={gameData.hint === 0}>
+              色のヒントを出す
+            </button>
+            <button onClick={numHint} disabled={gameData.hint === 0}>
+              数字のヒントを出す
+            </button>
           </_Modal>
         )}
       </_PlayerArea>
@@ -149,7 +153,7 @@ const _PlayerArea = styled.div`
 const _Modal = styled.div`
   position: absolute;
   right: calc(100% + 10px);
-  z-index: 10;
+  z-index: 5;
   width: 200px;
   padding: 16px 20px;
   background: #fff;
@@ -169,5 +173,9 @@ const _Modal = styled.div`
     color: #fff;
     background: ${variable.blue};
     border-radius: 10px;
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 `;

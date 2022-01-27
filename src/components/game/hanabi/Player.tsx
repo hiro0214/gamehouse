@@ -22,6 +22,8 @@ export const Player: VFC<props> = memo((props) => {
             key={i}
             color={hand.color}
             num={hand.num}
+            colorHint={hand.colorHint}
+            numHint={hand.numHint}
             isReverse={name === myInfo.name}
             onclick={onclick}
           />

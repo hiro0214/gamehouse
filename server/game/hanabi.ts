@@ -1,7 +1,7 @@
 import { serverSocket, socket } from '../server';
 import { currentConfig, setCurrentConfig, userList } from '../data';
 import { hanabiConfig } from '../../types/config';
-import { cemeteryType, color, hand, playerHandType } from '../../types/game/hanabi';
+import { cemeteryType, color, gameDataType,  hand } from '../../types/game/hanabi';
 import { shuffle } from '../utility';
 
 /**
@@ -25,17 +25,16 @@ type selectHandType = {
 /**
  * Data
 */
-const
-  deck: hand[] = [],
-  players: playerHandType[] = [],
-  fields: hand[] = [],
-  cemetery: cemeteryType[] = [];
-
-let
-  score: number,
-  turn: number,
-  hint: number,
-  miss: number;
+const gameData: gameDataType = {
+  deck: [],
+  players: [],
+  fields: [],
+  cemetery: [],
+  score: 0,
+  turn: 0,
+  hint: 8,
+  miss: 0
+};
 
 
 /**
@@ -52,39 +51,46 @@ export const hanabiConfigInit = () => {
 
 export const hanabiDataInit = () => {
   // 初期化
-  deck.length = 0;
-  players.length = 0;
-  fields.length = 0;
-  cemetery.length = 0;
-  score = 0;
-  turn = 0;
-  hint = 8;
-  miss = 0;
+  gameData.deck.length = 0;
+  gameData.players.length = 0;
+  gameData.fields.length = 0;
+  gameData.cemetery.length = 0;
+  gameData.score = 0;
+  gameData.turn = 0;
+  gameData.hint = 8;
+  gameData.miss = 0;
 
   for (let i = 0; i < (<hanabiConfig>currentConfig).colorNum; i ++) {
     const color: color = colorVal[i];
     numVal.forEach((num: number) => {
       const hand: hand = { color, num };
-      deck.push(hand);
+      gameData.deck.push(hand);
     })
 
-    fields[i] = { color, num: 0 };
-    cemetery[i] = { color, num: [] };
+    gameData.fields[i] = { color, num: 0 };
+    gameData.cemetery[i] = { color, num: [] };
   };
 
-  shuffle(deck);
+  shuffle(gameData.deck);
 
   for (let i = 0; i < userList.length; i ++) {
     const user = userList[i];
-    players[i] = { player: user, hands: [] };
+    gameData.players[i] = { player: user, hands: [] };
 
     for (let j = 0; j < (<hanabiConfig>currentConfig).handNum; j ++) {
-      const hand = deck.shift() as hand
-      players[i].hands.push(hand);
+      const hand = gameData.deck.shift() as hand;
+      hand.colorHint = false;
+      hand.numHint = false;
+      gameData.players[i].hands.push(hand);
     }
   }
 
-  shuffle(players)
+  shuffle(gameData.players)
+}
+
+const changeTurn = () => {
+  const playerLength = gameData.players.length;
+  gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
 }
 
 export const hanabi = {
@@ -104,36 +110,92 @@ export const hanabi = {
     })
 
     socket.on(`${eventName}:getData`, () => {
-      const data = {
-        deck,
-        players,
-        fields,
-        cemetery,
-        score,
-        turn,
-        hint,
-        miss
-      };
-
-      serverSocket.emit(`${eventName}:getData`, data)
+      serverSocket.emit(`${eventName}:getData`, gameData)
     })
 
     socket.on(`${eventName}:playHand`, (select: selectHandType) => {
-      console.log('playHand', select)
+      const player = gameData.players[select.player];
+      const hand = player.hands[select.index];
+      const targetColor = gameData.fields.find(v => v.color === hand.color) as hand;
+
+      // 数字チェック
+      if (targetColor.num === hand.num - 1) {
+        targetColor.num += 1
+        gameData.score += 1
+      }
+      else {
+        gameData.miss += 1
+        const cemeteryColor = gameData.cemetery.find(v => v.color === targetColor.color) as cemeteryType;
+        cemeteryColor.num.push(hand.num)
+        cemeteryColor.num.sort((a, b) => a - b);
+      }
+
+      // 手札使用
+      player.hands.splice(select.index, 1)
+
+      // 手札補充
+      const newHand = gameData.deck.shift();
+      if (newHand) {
+        newHand.colorHint = false;
+        newHand.numHint = false;
+        player.hands.push(newHand);
+      }
+
+      changeTurn();
+      serverSocket.emit(`${eventName}:getData`, gameData);
     })
 
     socket.on(`${eventName}:discardHand`, (select: selectHandType) => {
-      console.log('discardHand', select)
+      const player = gameData.players[select.player];
+      const hand = player.hands[select.index];
+      const cemeteryColor = gameData.cemetery.find(v => v.color === hand.color) as cemeteryType;
+      cemeteryColor.num.push(hand.num)
+      cemeteryColor.num.sort((a, b) => a - b);
+
+      // ヒントの回復
+      gameData.hint += 1
+
+      // 手札使用
+      player.hands.splice(select.index, 1)
+
+      // 手札補充
+      const newHand = gameData.deck.shift();
+      if (newHand) {
+        newHand.colorHint = false;
+        newHand.numHint = false;
+        player.hands.push(newHand);
+      }
+
+      changeTurn();
+      serverSocket.emit(`${eventName}:getData`, gameData);
     })
 
     socket.on(`${eventName}:colorHint`, (select: selectHandType) => {
-      console.log('colorHint', select)
+      const player = gameData.players[select.player];
+      const color = player.hands[select.index].color;
+      player.hands.forEach(hand => {
+        if (hand.color === color) hand.colorHint = true
+      })
+
+      // ヒントの消費
+      gameData.hint -= 1
+
+      changeTurn();
+      serverSocket.emit(`${eventName}:getData`, gameData);
     })
 
     socket.on(`${eventName}:numHint`, (select: selectHandType) => {
-      console.log('numHint', select)
+      const player = gameData.players[select.player];
+      const num = player.hands[select.index].num;
+      player.hands.forEach(hand => {
+        if (hand.num === num) hand.numHint = true
+      })
+
+      // ヒントの消費
+      gameData.hint -= 1
+
+      changeTurn();
+      serverSocket.emit(`${eventName}:getData`, gameData);
     })
   }
 }
-
-// players[select.player].hands[select.index]
