@@ -20,6 +20,11 @@ export const common = {
       userList.push(newUser)
     })
 
+    socket.on(`${eventName}:clearUser`, () => {
+      connectList.length = 0;
+      userList.length = 0;
+    })
+
     socket.on(`${eventName}:getUser`, () => {
       serverSocket.emit(`${eventName}:getUser`, userList)
     })

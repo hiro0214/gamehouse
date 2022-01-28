@@ -16,6 +16,10 @@ exports.common = {
             data_1.connectList.push(newConnect);
             data_1.userList.push(newUser);
         });
+        server_1.socket.on("".concat(eventName, ":clearUser"), function () {
+            data_1.connectList.length = 0;
+            data_1.userList.length = 0;
+        });
         server_1.socket.on("".concat(eventName, ":getUser"), function () {
             server_1.serverSocket.emit("".concat(eventName, ":getUser"), data_1.userList);
         });
