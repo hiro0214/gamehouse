@@ -2,6 +2,8 @@ import { User } from "../user";
 
 export type color = 'red' | 'blue' | 'yellow' | 'green' | 'white' | 'purple';
 
+export type actionType = 'miss' | 'gameover' | 'finish' | null;
+
 export type gameDataType = {
   deck: hand[];
   players: playerHandType[];
@@ -9,6 +11,7 @@ export type gameDataType = {
   cemetery: cemeteryType[];
   score: number;
   turn: number;
+  extra: number;
   hint: number;
   miss: number;
 }

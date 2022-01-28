@@ -18,6 +18,7 @@ var gameData = {
     cemetery: [],
     score: 0,
     turn: 0,
+    extra: 6,
     hint: 8,
     miss: 0
 };
@@ -40,6 +41,7 @@ var hanabiDataInit = function () {
     gameData.cemetery.length = 0;
     gameData.score = 0;
     gameData.turn = 0;
+    gameData.extra = 6;
     gameData.hint = 8;
     gameData.miss = 0;
     var _loop_1 = function (i) {
@@ -69,9 +71,26 @@ var hanabiDataInit = function () {
     (0, utility_1.shuffle)(gameData.players);
 };
 exports.hanabiDataInit = hanabiDataInit;
+var useHand = function (player, selectIndex) {
+    player.hands.splice(selectIndex, 1);
+    var newHand = gameData.deck.shift();
+    if (newHand) {
+        newHand.colorHint = false;
+        newHand.numHint = false;
+        player.hands.push(newHand);
+    }
+};
+var moveCemetery = function (targetColor, hand) {
+    var cemeteryColor = gameData.cemetery.find(function (v) { return v.color === targetColor.color; });
+    cemeteryColor.num.push(hand.num);
+    cemeteryColor.num.sort(function (a, b) { return a - b; });
+};
 var changeTurn = function () {
     var playerLength = gameData.players.length;
     gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
+    if (gameData.deck.length === 0) {
+        gameData.extra -= 1;
+    }
 };
 exports.hanabi = {
     init: function () {
@@ -93,52 +112,55 @@ exports.hanabi = {
             var player = gameData.players[select.player];
             var hand = player.hands[select.index];
             var targetColor = gameData.fields.find(function (v) { return v.color === hand.color; });
+            var action = null;
             // 数字チェック
             if (targetColor.num === hand.num - 1) {
                 targetColor.num += 1;
                 gameData.score += 1;
+                if (hand.num === 5 && gameData.hint !== 8)
+                    gameData.hint += 1;
             }
             else {
                 gameData.miss += 1;
-                var cemeteryColor = gameData.cemetery.find(function (v) { return v.color === targetColor.color; });
-                cemeteryColor.num.push(hand.num);
-                cemeteryColor.num.sort(function (a, b) { return a - b; });
+                moveCemetery(targetColor, hand);
+                // ゲームオーバー
+                if (gameData.miss === 3) {
+                    gameData.turn = 999;
+                    action = 'gameover';
+                }
+                else {
+                    action = 'miss';
+                }
             }
-            // 手札使用
-            player.hands.splice(select.index, 1);
-            // 手札補充
-            var newHand = gameData.deck.shift();
-            if (newHand) {
-                newHand.colorHint = false;
-                newHand.numHint = false;
-                player.hands.push(newHand);
-            }
+            useHand(player, select.index);
             changeTurn();
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            if (gameData.extra === 0) {
+                gameData.turn = 999;
+                action = 'finish';
+            }
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData, action);
         });
         server_1.socket.on("".concat(eventName, ":discardHand"), function (select) {
             var player = gameData.players[select.player];
             var hand = player.hands[select.index];
-            var cemeteryColor = gameData.cemetery.find(function (v) { return v.color === hand.color; });
-            cemeteryColor.num.push(hand.num);
-            cemeteryColor.num.sort(function (a, b) { return a - b; });
+            var targetColor = gameData.fields.find(function (v) { return v.color === hand.color; });
+            var action = null;
+            moveCemetery(targetColor, hand);
             // ヒントの回復
-            gameData.hint += 1;
-            // 手札使用
-            player.hands.splice(select.index, 1);
-            // 手札補充
-            var newHand = gameData.deck.shift();
-            if (newHand) {
-                newHand.colorHint = false;
-                newHand.numHint = false;
-                player.hands.push(newHand);
-            }
+            if (gameData.hint !== 8)
+                gameData.hint += 1;
+            useHand(player, select.index);
             changeTurn();
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            if (gameData.extra === 0) {
+                gameData.turn = 999;
+                action = 'finish';
+            }
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData, action);
         });
         server_1.socket.on("".concat(eventName, ":colorHint"), function (select) {
             var player = gameData.players[select.player];
             var color = player.hands[select.index].color;
+            var action = null;
             player.hands.forEach(function (hand) {
                 if (hand.color === color)
                     hand.colorHint = true;
@@ -146,11 +168,16 @@ exports.hanabi = {
             // ヒントの消費
             gameData.hint -= 1;
             changeTurn();
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            if (gameData.extra === 0) {
+                gameData.turn = 999;
+                action = 'finish';
+            }
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData, action);
         });
         server_1.socket.on("".concat(eventName, ":numHint"), function (select) {
             var player = gameData.players[select.player];
             var num = player.hands[select.index].num;
+            var action = null;
             player.hands.forEach(function (hand) {
                 if (hand.num === num)
                     hand.numHint = true;
@@ -158,7 +185,11 @@ exports.hanabi = {
             // ヒントの消費
             gameData.hint -= 1;
             changeTurn();
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            if (gameData.extra === 0) {
+                gameData.turn = 999;
+                action = 'finish';
+            }
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData, action);
         });
     }
 };

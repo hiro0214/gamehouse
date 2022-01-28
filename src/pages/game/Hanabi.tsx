@@ -1,9 +1,10 @@
-import React, { VFC, memo, useEffect, useState } from 'react';
+import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { gameDataType } from '../../../types/game/hanabi';
+import { actionType, gameDataType } from '../../../types/game/hanabi';
 import { Cemetery } from '../../components/game/hanabi/Cemetery';
 import { Field } from '../../components/game/hanabi/Field';
 import { Hint } from '../../components/game/hanabi/Hint';
+import { MissModal } from '../../components/game/hanabi/MissModal';
 import { Player } from '../../components/game/hanabi/Player';
 import { Toast } from '../../components/molucules/Toast';
 import { useMyInfo } from '../../providers/UserInfoProvider';
@@ -14,9 +15,25 @@ export const Hanabi: VFC = memo(() => {
   const { myInfo } = useMyInfo();
   const [gameData, setGameData] = useState<gameDataType>({} as gameDataType);
   const [element, setElement] = useState<HTMLElement | null>(null);
+  const [missModal, setMissModal] = useState(false);
+  const [fin, setFin] = useState(false);
 
   useEffect(() => {
-    socket.on('hanabi:getData', (data: gameDataType) => setGameData(data));
+    socket.on('hanabi:getData', (data: gameDataType, action?: actionType) => {
+      if (action === 'miss' || action === 'gameover') {
+        setMissModal(true);
+        setTimeout(() => {
+          if (action === 'gameover') setFin(true);
+          setMissModal(false);
+          setGameData(data);
+        }, 2400);
+      } else if (action === 'finish') {
+        setFin(true);
+        setGameData(data);
+      } else {
+        setGameData(data);
+      }
+    });
     socket.emit('hanabi:getData');
   }, []);
 
@@ -76,45 +93,61 @@ export const Hanabi: VFC = memo(() => {
   };
 
   return Object.keys(gameData).length ? (
-    <_Container
-      className={gameData.players[gameData.turn].player.name !== myInfo.name ? 'is-disabled' : ''}
-    >
-      <Toast turn={gameData.players[gameData.turn].player.name} />
-      <_InfoArea>
-        <Field deck={gameData.deck.length} fields={gameData.fields} />
-        <_Flex>
-          <_Point>
-            <p>SCORE : {gameData.score}</p>
-            <p>MISS : {gameData.miss}/3</p>
-          </_Point>
-          <Hint hint={gameData.hint} />
-        </_Flex>
-        <Cemetery cemetery={gameData.cemetery} />
-      </_InfoArea>
-      <_PlayerArea className={'playerarea'}>
-        {gameData.players.map((p) => (
-          <Player key={p.player.name} name={p.player.name} hands={p.hands} onclick={selectedHand} />
-        ))}
-        {element && element.className.indexOf('reverse') !== -1 && (
-          <_Modal style={{ top: getModalOffset() }}>
-            <p>このカードをどうする?</p>
-            <button onClick={playHand}>場に出す</button>
-            <button onClick={discardHand}>捨てる</button>
-          </_Modal>
-        )}
-        {element && element.className.indexOf('reverse') === -1 && (
-          <_Modal style={{ top: getModalOffset() }}>
-            {gameData.hint === 0 ? <p>ヒントは使えません。</p> : <p>カードにヒントを出す?</p>}
-            <button onClick={colorHint} disabled={gameData.hint === 0}>
-              色のヒントを出す
-            </button>
-            <button onClick={numHint} disabled={gameData.hint === 0}>
-              数字のヒントを出す
-            </button>
-          </_Modal>
-        )}
-      </_PlayerArea>
-    </_Container>
+    <>
+      <_Container
+        className={
+          fin || gameData.players[gameData.turn].player.name !== myInfo.name ? 'is-disabled' : ''
+        }
+      >
+        {fin ? (
+          <_Message>ゲームは終了しました</_Message>
+        ) : gameData.deck.length === 0 ? (
+          <_Message>残り{gameData.extra}ターンです</_Message>
+        ) : null}
+        {gameData.turn < 999 && <Toast turn={gameData.players[gameData.turn].player.name} />}
+        <_InfoArea>
+          <Field deck={gameData.deck.length} fields={gameData.fields} />
+          <_Flex>
+            <_Point>
+              <p>SCORE : {gameData.score}</p>
+              <p>MISS : {gameData.miss}/3</p>
+            </_Point>
+            <Hint hint={gameData.hint} />
+          </_Flex>
+          <Cemetery cemetery={gameData.cemetery} />
+        </_InfoArea>
+        <_PlayerArea className={'playerarea'}>
+          {gameData.players.map((p) => (
+            <Player
+              key={p.player.name}
+              name={p.player.name}
+              hands={p.hands}
+              onclick={selectedHand}
+              isFinish={fin}
+            />
+          ))}
+          {!fin && element && element.className.indexOf('reverse') !== -1 && (
+            <_Modal style={{ top: getModalOffset() }}>
+              <p>このカードをどうする?</p>
+              <button onClick={playHand}>場に出す</button>
+              <button onClick={discardHand}>捨てる</button>
+            </_Modal>
+          )}
+          {!fin && element && element.className.indexOf('reverse') === -1 && (
+            <_Modal style={{ top: getModalOffset() }}>
+              {gameData.hint === 0 ? <p>ヒントは使えません。</p> : <p>カードにヒントを出す?</p>}
+              <button onClick={colorHint} disabled={gameData.hint === 0}>
+                色のヒントを出す
+              </button>
+              <button onClick={numHint} disabled={gameData.hint === 0}>
+                数字のヒントを出す
+              </button>
+            </_Modal>
+          )}
+        </_PlayerArea>
+      </_Container>
+      {missModal && <MissModal />}
+    </>
   ) : null;
 });
 
@@ -123,6 +156,7 @@ const _Container = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   align-self: flex-start;
+  position: relative;
   width: 1000px;
   min-height: 500px;
   margin-top: 100px;
@@ -130,6 +164,16 @@ const _Container = styled.div`
   &.is-disabled {
     pointer-events: none;
   }
+`;
+
+const _Message = styled.p`
+  position: absolute;
+  top: -40px;
+  width: 100%;
+  color: ${variable.red};
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 const _InfoArea = styled.div``;

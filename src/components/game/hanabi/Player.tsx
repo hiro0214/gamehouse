@@ -8,10 +8,11 @@ type props = {
   name: string;
   hands: hand[];
   onclick: (e: React.MouseEvent<HTMLElement>) => void;
+  isFinish: boolean;
 };
 
 export const Player: VFC<props> = memo((props) => {
-  const { name, hands, onclick } = props;
+  const { name, hands, onclick, isFinish } = props;
   const { myInfo } = useMyInfo();
 
   return (
@@ -24,7 +25,7 @@ export const Player: VFC<props> = memo((props) => {
             num={hand.num}
             colorHint={hand.colorHint}
             numHint={hand.numHint}
-            isReverse={name === myInfo.name}
+            isReverse={isFinish ? false : name === myInfo.name}
             onclick={onclick}
           />
         ))}
@@ -34,11 +35,12 @@ export const Player: VFC<props> = memo((props) => {
   );
 });
 
-const _Container = styled.div``;
+const _Container = styled.div`
+  min-width: 310px;
+`;
 
 const _Hands = styled.div`
   display: flex;
-  justify-content: flex-end;
   flex-direction: row-reverse;
   padding: 0 20px;
   .hand:not(:first-child) {
