@@ -1,12 +1,14 @@
 import { VFC, memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { actionType, gameDataType } from '../../../types/game/hanabi';
+import { Button } from '../../components/atoms/Button';
 import { Cemetery } from '../../components/game/hanabi/Cemetery';
 import { Field } from '../../components/game/hanabi/Field';
 import { Hint } from '../../components/game/hanabi/Hint';
 import { MissModal } from '../../components/game/hanabi/MissModal';
 import { Player } from '../../components/game/hanabi/Player';
 import { Toast } from '../../components/molucules/Toast';
+import { useToLobby } from '../../hooks/useToLobby';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
 import { variable } from '../../variable';
@@ -17,6 +19,7 @@ export const Hanabi: VFC = memo(() => {
   const [element, setElement] = useState<HTMLElement | null>(null);
   const [missModal, setMissModal] = useState(false);
   const [fin, setFin] = useState(false);
+  const { toLobby } = useToLobby();
 
   useEffect(() => {
     socket.on('hanabi:getData', (data: gameDataType, action?: actionType) => {
@@ -126,6 +129,11 @@ export const Hanabi: VFC = memo(() => {
               isFinish={fin}
             />
           ))}
+          {fin && myInfo.isAdmin && (
+            <div style={{ marginTop: '30px' }}>
+              <Button label={'ロビーに戻る'} onclick={toLobby} color={'teal'} />
+            </div>
+          )}
           {!fin && element && element.className.indexOf('reverse') !== -1 && (
             <_Modal style={{ top: getModalOffset() }}>
               <p>このカードをどうする?</p>
