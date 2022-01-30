@@ -41,6 +41,7 @@ export const useSetUserInfo = () => {
     };
 
     setMyInfo(newUser);
+    if (userName === '$clear') socket.emit('common:clearUser');
     socket.emit('common:newUser', newUser);
   }, []);
 

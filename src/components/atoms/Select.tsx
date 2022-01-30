@@ -1,25 +1,28 @@
-import { VFC, memo, ChangeEvent } from 'react';
+import { VFC, memo, ChangeEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 import { variable } from '../../variable';
 
 type props = {
-  options: string[];
-  value: string;
+  options: { key: number | string; value: string }[];
+  value: number | string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-  disabled?: boolean;
   hdg?: string;
-  size?: 'half' | 'full';
+  children?: ReactNode;
+  disabled?: boolean;
 };
 
 export const Select: VFC<props> = memo((props) => {
-  const { options, value, onChange, disabled, hdg, size } = props;
+  const { children, options, value, onChange, disabled, hdg } = props;
+
   return (
     <_Container>
       <_Heading>{hdg}</_Heading>
-      <_Select className={size} value={value} onChange={onChange} disabled={!disabled}>
-        <option>-- 選択してください --</option>
+      <_Select value={value} onChange={onChange} disabled={!disabled}>
+        {children}
         {options.map((option) => (
-          <option key={option}>{option}</option>
+          <option key={option.value} value={option.key}>
+            {option.value}
+          </option>
         ))}
       </_Select>
     </_Container>
@@ -28,8 +31,8 @@ export const Select: VFC<props> = memo((props) => {
 
 const _Container = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 30px;
+  grid-template-columns: 80px 1fr;
+  grid-gap: 10px;
   align-items: center;
 `;
 
@@ -41,12 +44,6 @@ const _Select = styled.select`
   background: #fff;
   border: 1px solid ${variable.gray[1]};
   border-radius: 4px;
-  &.half {
-    width: 50%;
-  }
-  &.full {
-    width: 100%;
-  }
 `;
 
 const _Heading = styled.div`

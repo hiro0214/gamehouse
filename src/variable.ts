@@ -1,3 +1,7 @@
+import { GameType } from '../types/gameList';
+
+export const gameList: GameType[] = ['クーロンタクティクス', 'Hanabi', 'other'];
+
 export const variable = {
   red: ['#e53e3e'],
   orange: ['#ed8936'],

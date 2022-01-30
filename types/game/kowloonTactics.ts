@@ -1,5 +1,3 @@
-export type gameDataType = kowloonTacticsData;
-
 export interface kowloonTacticsData {
   redPlayer: {
     "hand": number[],

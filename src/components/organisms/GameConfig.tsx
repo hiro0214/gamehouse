@@ -1,18 +1,20 @@
 import { VFC, memo, useState, ChangeEvent, useEffect } from 'react';
 import styled from 'styled-components';
+import { GameType } from '../../../types/gameList';
 import { useCurrentConfig } from '../../hooks/useCurrentConfig';
 import { useGameStart } from '../../hooks/useGameStart';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
-import { variable } from '../../variable';
+import { gameList, variable } from '../../variable';
 import { Button } from '../atoms/Button';
 import { Heading } from '../atoms/Heading';
 import { Select } from '../atoms/Select';
 
-const options = ['クーロンタクティクス', 'Hanabi', 'other'];
+const gameListOption: { key: string; value: string }[] = [];
+gameList.map((game) => gameListOption.push({ key: game, value: game }));
 
 export const GameConfig: VFC = memo(() => {
-  const [currentGame, setCurrentGame] = useState<string | null>(null);
+  const [currentGame, setCurrentGame] = useState<GameType | null>(null);
   const { myInfo } = useMyInfo();
   const { gameStart } = useGameStart();
   const { currentConfig, setConfig } = useCurrentConfig();
@@ -29,15 +31,15 @@ export const GameConfig: VFC = memo(() => {
   const onclickGameStart = () => socket.emit('common:gameStart');
 
   useEffect(() => {
-    socket.on('common:getCurrentGame', (currentGame: string) => {
+    socket.on('common:getCurrentGame', (currentGame: GameType) => {
       setCurrentGame(currentGame);
       setConfig(currentGame);
     });
-    socket.on('common:setCurrentGame', (currentGame: string) => {
+    socket.on('common:setCurrentGame', (currentGame: GameType) => {
       setCurrentGame(currentGame);
       setConfig(currentGame);
     });
-    socket.on('common:gameStart', (game: string) => gameStart(game));
+    socket.on('common:gameStart', (game: GameType) => gameStart(game));
 
     socket.emit('common:getCurrentGame');
   }, []);
@@ -47,12 +49,14 @@ export const GameConfig: VFC = memo(() => {
       <Heading text={'Setting'} size={'2'}></Heading>
       <_Center>
         <Select
-          options={options}
+          options={gameListOption}
           hdg={'ゲーム'}
           value={currentGame ? currentGame : ''}
           onChange={onChangeValue}
           disabled={myInfo.isAdmin}
-        ></Select>
+        >
+          <option>-- 選択してください --</option>
+        </Select>
       </_Center>
       <_Contents>
         {currentGame && (

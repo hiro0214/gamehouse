@@ -9,7 +9,8 @@ var socket_io_1 = __importDefault(require("socket.io"));
 var http_1 = __importDefault(require("http"));
 var data_1 = require("./data");
 var common_1 = require("./common");
-var kowloonTactics_1 = require("./kowloonTactics");
+var kowloonTactics_1 = require("./game/kowloonTactics");
+var hanabi_1 = require("./game/hanabi");
 var app = (0, express_1.default)(), server = http_1.default.createServer(app), PORT = process.env.PORT || 8080;
 exports.serverSocket = new socket_io_1.default.Server(server);
 app
@@ -22,6 +23,7 @@ exports.serverSocket.on('connection', function (connect) {
     exports.socket = connect;
     common_1.common.init();
     kowloonTactics_1.kowloonTactics.init();
+    hanabi_1.hanabi.init();
     exports.socket.on('disconnect', function () {
         var removeConnectIndex = data_1.connectList.findIndex(function (v) { return v.socketId === exports.socket.id; });
         if (removeConnectIndex === -1)
