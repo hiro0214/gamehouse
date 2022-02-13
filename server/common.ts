@@ -5,6 +5,7 @@ import { kowloonTacticsDataInit } from './game/kowloonTactics';
 import { hanabiDataInit } from './game/hanabi';
 import { Connect } from '../types/connect';
 import { GameType } from '../types/gameList';
+import { fakeArtistDataInit } from './game/fakeArtist';
 
 const eventName = 'common';
 
@@ -62,6 +63,9 @@ export const common = {
           break;
         case 'Hanabi':
           hanabiDataInit()
+          break;
+        case 'エセ芸術家 ニューヨークへ行く':
+          fakeArtistDataInit()
           break;
       }
 

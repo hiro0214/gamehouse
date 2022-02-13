@@ -1,6 +1,6 @@
 import { User } from './user'
 
-export type gameConfigType = kowloonTacticsConfig | hanabiConfig;
+export type gameConfigType = kowloonTacticsConfig | hanabiConfig | fakeArtistConfig;
 
 export interface kowloonTacticsConfig {
   redPlayer: User,
@@ -13,3 +13,5 @@ export interface hanabiConfig {
   colorNum: number;
   handNum: number;
 }
+
+export type fakeArtistConfig = null

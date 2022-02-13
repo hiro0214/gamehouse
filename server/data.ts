@@ -4,6 +4,7 @@ import { User } from '../types/user';
 import { GameType } from '../types/gameList';
 import { kowloonTacticsConfigInit } from './game/kowloonTactics';
 import { hanabiConfigInit } from './game/hanabi';
+import { fakeArtistConfigInit } from './game/fakeArtist';
 
 export const connectList: Connect[] = [];
 
@@ -21,9 +22,9 @@ export const initConfig = (game: GameType) => {
     case 'Hanabi':
       hanabiConfigInit()
       break;
-    // case 'other':
-    //   //
-    //   break;
+    case 'エセ芸術家 ニューヨークへ行く':
+      fakeArtistConfigInit()
+      break;
   }
 }
 
