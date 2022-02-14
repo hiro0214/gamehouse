@@ -1,10 +1,11 @@
 import { VFC, memo, useEffect, SetStateAction, Dispatch } from 'react';
 import styled from 'styled-components';
+import { colors } from '../../../../types/game/fakeArtist';
 
 type props = {
   context: string;
   setCanvas: Dispatch<SetStateAction<HTMLCanvasElement | null>>;
-  // user: 線の色を変えるのに必要
+  playerIndex: number;
 };
 
 let isDraw = false,
@@ -12,7 +13,7 @@ let isDraw = false,
   offsetY = 0;
 
 export const Canvas: VFC<props> = memo((props) => {
-  const { context, setCanvas } = props;
+  const { context, setCanvas, playerIndex } = props;
 
   useEffect(() => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -20,7 +21,7 @@ export const Canvas: VFC<props> = memo((props) => {
 
     canvasContext.lineCap = 'round';
     canvasContext.lineWidth = 4;
-    canvasContext.strokeStyle = '#ff0000';
+    canvasContext.strokeStyle = colors[playerIndex];
 
     canvas.addEventListener('mousedown', (e: MouseEvent) => {
       isDraw = true;
@@ -77,6 +78,7 @@ export const Canvas: VFC<props> = memo((props) => {
 });
 
 const _Canvas = styled.canvas`
+  background: #fff;
   border: 3px solid #ccc;
   border-radius: 6px;
 `;

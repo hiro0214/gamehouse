@@ -4,3 +4,7 @@ export const shuffle = (array: any[]) => {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+export const randomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+}
