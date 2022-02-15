@@ -7,18 +7,20 @@ var utility_1 = require("../utility");
 /**
  * Variable
 */
-var eventName = 'fakeArtist';
+var eventName = 'fakeArtist', colors = ['#ff0f0f', '#0f0fff', '#0fff0f', '#ffff05', '#ff840a', '#ff0aff', '#0affff', '#840aff', '#bc611e', '#ff9498', '#00afcc', '#9cbb1c', '#003f8e'];
 /**
  * Data
 */
 var gameData = {
     players: [],
     fakeMan: 0,
+    colors: colors,
     category: '',
     theme: '',
     context: '',
     turn: 0
 };
+var count = 0;
 /**
  * Theme
 */
@@ -53,6 +55,7 @@ var fakeArtistDataInit = function () {
     gameData.theme = targetCategory.theme[(0, utility_1.randomInt)(targetCategory.theme.length)];
     (0, utility_1.shuffle)(gameData.players);
     gameData.fakeMan = (0, utility_1.randomInt)(data_1.userList.length);
+    (0, utility_1.shuffle)(gameData.colors);
 };
 exports.fakeArtistDataInit = fakeArtistDataInit;
 exports.fakeArtist = {
@@ -60,9 +63,21 @@ exports.fakeArtist = {
         server_1.socket.on("".concat(eventName, ":getData"), function () {
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
-        server_1.socket.on("".concat(eventName, ":hoge"), function (imgContext) {
+        server_1.socket.on("".concat(eventName, ":draw"), function (imgContext) {
             gameData.context = imgContext;
-            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            if (gameData.turn === gameData.players.length - 1) {
+                gameData.turn = 0;
+                count += 1;
+            }
+            else {
+                gameData.turn += 1;
+            }
+            if (count === 2) {
+                console.log('Fin');
+            }
+            else {
+                server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            }
         });
     }
 };
