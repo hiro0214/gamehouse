@@ -9,3 +9,5 @@ export type gameDataType = {
   context: string,
   turn: number
 };
+
+export type gameStatusType = 'theme' | 'title' | 'game' | 'vote' |'';

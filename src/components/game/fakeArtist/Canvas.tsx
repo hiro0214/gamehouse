@@ -1,12 +1,15 @@
 import { VFC, memo, useEffect, SetStateAction, Dispatch } from 'react';
 import styled from 'styled-components';
+import { gameStatusType } from '../../../../types/game/fakeArtist';
+import { variable } from '../../../variable';
 
 type props = {
   context: string;
   setCanvas: Dispatch<SetStateAction<HTMLCanvasElement | null>>;
   color: string;
   disable: boolean;
-  ready: boolean;
+  status: gameStatusType;
+  isFake: boolean;
 };
 
 let isDraw = false,
@@ -14,7 +17,7 @@ let isDraw = false,
   offsetY = 0;
 
 export const Canvas: VFC<props> = memo((props) => {
-  const { context, setCanvas, color, disable, ready } = props;
+  const { context, setCanvas, color, disable, status, isFake } = props;
 
   useEffect(() => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -85,15 +88,40 @@ export const Canvas: VFC<props> = memo((props) => {
         id="canvas"
         width={750}
         height={500}
-        className={disable || ready ? 'disable' : ''}
+        className={disable || status !== 'game' ? 'disable' : ''}
       ></_Canvas>
-      <_ReadyModal className={ready ? 'is-active' : ''}>
+      <_ThemeModal className={status === 'theme' ? 'is-active' : ''}>
         <p>
           お題を確認して下さい
           <br />
           10秒後にゲームが開始します
         </p>
-      </_ReadyModal>
+      </_ThemeModal>
+      <_CenterModal className={status === 'title' ? 'is-active' : ''}>
+        {isFake ? (
+          <p>
+            お題を知っているフリをして
+            <br />
+            バレないように絵を描こう
+          </p>
+        ) : (
+          <p>
+            協力して絵を描こう
+            <br />
+            ただしエセ芸術家にお題がバレてはいけない
+          </p>
+        )}
+      </_CenterModal>
+      <_CenterModal
+        style={{ animationDelay: '1s' }}
+        className={status === 'vote' ? 'is-active' : ''}
+      >
+        <p>
+          エセ芸術家だと思う人に
+          <br />
+          投票してください
+        </p>
+      </_CenterModal>
     </_Container>
   );
 });
@@ -115,7 +143,7 @@ const _Canvas = styled.canvas`
   }
 `;
 
-const _ReadyModal = styled.div`
+const _ThemeModal = styled.div`
   position: absolute;
   top: 50%;
   left: 3px;
@@ -131,8 +159,8 @@ const _ReadyModal = styled.div`
     opacity: 1;
   }
   > p {
-    font-weight: bold;
     font-size: 18px;
+    font-weight: bold;
     color: #fff;
     &::after {
       content: '';
@@ -155,6 +183,42 @@ const _ReadyModal = styled.div`
     }
     100% {
       transform: translate(0px, -50%);
+    }
+  }
+`;
+
+const _CenterModal = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  right: 0;
+  transform: translateY(-50%) scale(0.8);
+  width: 80%;
+  padding: 30px 0;
+  margin: auto;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffff00;
+  background: ${variable.teal};
+  border-radius: 60px;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  animation-duration: 4.8s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  &.is-active {
+    animation-name: fadeIn;
+  }
+  @keyframes fadeIn {
+    5%,
+    95% {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.8);
     }
   }
 `;

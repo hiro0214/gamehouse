@@ -33,7 +33,7 @@ const gameData: gameDataType = {
   turn: 0
 };
 
-let count = 0;
+let lap = 0;
 
 
 /**
@@ -87,17 +87,18 @@ export const fakeArtist = {
 
       if (gameData.turn === gameData.players.length - 1) {
         gameData.turn = 0
-        count += 1
+        lap += 1
       }
       else {
         gameData.turn += 1
       }
 
-      if (count === 2) {
-        console.log('Fin')
+      if (lap < 2) {
+        serverSocket.emit(`${eventName}:getData`, gameData)
       }
       else {
-        serverSocket.emit(`${eventName}:getData`, gameData);
+        serverSocket.emit(`${eventName}:getData`, gameData)
+        serverSocket.emit(`${eventName}:vote`);
       }
     })
   }

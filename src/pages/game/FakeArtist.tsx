@@ -1,8 +1,9 @@
 import { VFC, memo, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { gameDataType } from '../../../types/game/fakeArtist';
+import { gameDataType, gameStatusType } from '../../../types/game/fakeArtist';
 import { Canvas } from '../../components/game/fakeArtist/Canvas';
 import { Profile } from '../../components/molucules/Profile';
+import { Toast } from '../../components/molucules/Toast';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
 import { variable } from '../../variable';
@@ -38,14 +39,16 @@ export const FakeArtist: VFC = memo(() => {
   } as gameDataType);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const { myInfo } = useMyInfo();
-  const [ready, setReady] = useState(false);
+  const [status, setStatus] = useState<gameStatusType>('');
 
   useEffect(() => {
     socket.on(`${gameName}:getData`, (data: gameDataType) => setGameData(data));
+    socket.on(`${gameName}:vote`, () => setStatus('vote'));
 
     socket.emit(`${gameName}:getData`);
-    setTimeout(() => setReady(true), 500);
-    setTimeout(() => setReady(false), 11000);
+    setTimeout(() => setStatus('theme'), 500);
+    setTimeout(() => setStatus('title'), 10500);
+    setTimeout(() => setStatus('game'), 16000);
   }, []);
 
   const onclickDraw = () => {
@@ -68,25 +71,40 @@ export const FakeArtist: VFC = memo(() => {
 
   return Object.keys(gameData).length ? (
     <_Container>
-      <p>{gameData.players[gameData.turn].name}のターン</p>
-      {canvas && (
-        <_SubmitArea>
-          <p>これでいい?</p>
-          <button style={{ backgroundColor: variable.green[0] }} onClick={onclickDraw}>
-            書いた！
-          </button>
-          <button style={{ backgroundColor: variable.gray[1] }} onClick={onclickReDraw}>
-            書き直す！
-          </button>
-        </_SubmitArea>
-      )}
+      {status === 'game' && <Toast turn={gameData.players[gameData.turn].name} />}
+      {status === 'game' &&
+        (canvas ? (
+          <_SubmitArea>
+            <p>これでいい?</p>
+            <button style={{ backgroundColor: variable.green[0] }} onClick={onclickDraw}>
+              書いた！
+            </button>
+            <button style={{ backgroundColor: variable.gray[1] }} onClick={onclickReDraw}>
+              書き直す！
+            </button>
+          </_SubmitArea>
+        ) : gameData.players[gameData.fakeMan].id === myInfo.id ? (
+          <_Mission>
+            エセ芸術家だとバレてはいけない
+            <br />
+            バレても何を描いているか当てれば勝ち
+          </_Mission>
+        ) : (
+          <_Mission>
+            この中に一人お題を知らないエセ芸術家がいる
+            <br />
+            エセ芸術家にお題がバレてはいけない
+          </_Mission>
+        ))}
+      {status === 'vote' && <_Mission>エセ芸術家は誰だ？</_Mission>}
       <_Wrapper>
         <Canvas
           context={gameData.context}
           setCanvas={setCanvas}
           color={gameData.colors[gameData.players.findIndex((v) => v.id === myInfo.id)]}
           disable={canvas || gameData.players[gameData.turn].id !== myInfo.id ? true : false}
-          ready={ready}
+          status={status}
+          isFake={gameData.players[gameData.fakeMan].id === myInfo.id ? true : false}
         />
         <_Info>
           <_Card>
@@ -117,6 +135,8 @@ export const FakeArtist: VFC = memo(() => {
 
 const _Container = styled.div`
   position: relative;
+  margin-top: 150px;
+  margin-bottom: 150px;
 `;
 
 const _SubmitArea = styled.div`
@@ -135,6 +155,28 @@ const _SubmitArea = styled.div`
     border-radius: 22px;
     + button {
       margin-left: 40px;
+    }
+  }
+`;
+
+const _Mission = styled.p`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -100px;
+  width: 400px;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-weight: bold;
+  color: #fff;
+  background: #000000b2;
+  border-radius: 34px;
+  text-align: center;
+  transform: scale(0.8);
+  animation: scaleIn 0.2s forwards;
+  @keyframes scaleIn {
+    to {
+      transform: scale(1);
     }
   }
 `;

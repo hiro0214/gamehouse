@@ -20,7 +20,7 @@ var gameData = {
     context: '',
     turn: 0
 };
-var count = 0;
+var lap = 0;
 /**
  * Theme
 */
@@ -67,16 +67,17 @@ exports.fakeArtist = {
             gameData.context = imgContext;
             if (gameData.turn === gameData.players.length - 1) {
                 gameData.turn = 0;
-                count += 1;
+                lap += 1;
             }
             else {
                 gameData.turn += 1;
             }
-            if (count === 2) {
-                console.log('Fin');
+            if (lap < 2) {
+                server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
             }
             else {
                 server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+                server_1.serverSocket.emit("".concat(eventName, ":vote"));
             }
         });
     }
