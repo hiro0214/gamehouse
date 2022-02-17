@@ -8,13 +8,12 @@ import { variable } from '../../variable';
 type props = {
   name: string;
   icon: string;
-  color?: string;
   editIcon?: boolean;
   editName?: boolean;
 };
 
 export const Profile: VFC<props> = memo((props) => {
-  const { name, icon, color, editIcon, editName } = props;
+  const { name, icon, editIcon, editName } = props;
   const { myInfo, setMyInfo } = useMyInfo();
   const [isEditName, setIsEditName] = useState(false);
   const [newName, setNewName] = useState(myInfo.name);
@@ -38,7 +37,7 @@ export const Profile: VFC<props> = memo((props) => {
   }, [myInfo]);
 
   return (
-    <_User className={'profile'} style={{ borderColor: color }}>
+    <_User className={'profile'}>
       <_Icon className={'profile__img'}>
         <img src={`/assets/images/pokemon/${icon}.png`} />
         {editIcon && <_EditIcon onClick={onclickChangeIcon}>{editIcon}</_EditIcon>}

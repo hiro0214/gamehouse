@@ -1,9 +1,10 @@
 import { VFC, memo, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { gameDataType, gameStatusType } from '../../../types/game/fakeArtist';
+import { Button } from '../../components/atoms/Button';
 import { Canvas } from '../../components/game/fakeArtist/Canvas';
-import { Profile } from '../../components/molucules/Profile';
 import { Toast } from '../../components/molucules/Toast';
+import { useToLobby } from '../../hooks/useToLobby';
 import { useMyInfo } from '../../providers/UserInfoProvider';
 import { socket } from '../../socket';
 import { variable } from '../../variable';
@@ -36,14 +37,25 @@ export const FakeArtist: VFC = memo(() => {
     // theme: 'イルカ',
     // context: '',
     // turn: 0,
+    // mostVote: 'やまだ'
   } as gameDataType);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const { myInfo } = useMyInfo();
-  const [status, setStatus] = useState<gameStatusType>('');
+  const [status, setStatus] = useState<gameStatusType>('voted');
+  const [vote, setVote] = useState(false);
+  const { toLobby } = useToLobby();
 
   useEffect(() => {
     socket.on(`${gameName}:getData`, (data: gameDataType) => setGameData(data));
     socket.on(`${gameName}:vote`, () => setStatus('vote'));
+    socket.on(`${gameName}:voted`, (data: gameDataType) => {
+      setStatus('voted');
+      setTimeout(() => {
+        data.mostVote === data.players[data.fakeMan].name
+          ? setStatus('reversal')
+          : setStatus('fin');
+      }, 20500);
+    });
 
     socket.emit(`${gameName}:getData`);
     setTimeout(() => setStatus('theme'), 500);
@@ -67,6 +79,11 @@ export const FakeArtist: VFC = memo(() => {
     }
 
     setCanvas(null);
+  };
+
+  const onclickVote = (index: number) => {
+    setVote(true);
+    socket.emit(`${gameName}:vote`, index);
   };
 
   return Object.keys(gameData).length ? (
@@ -105,6 +122,8 @@ export const FakeArtist: VFC = memo(() => {
           disable={canvas || gameData.players[gameData.turn].id !== myInfo.id ? true : false}
           status={status}
           isFake={gameData.players[gameData.fakeMan].id === myInfo.id ? true : false}
+          mostVote={gameData.mostVote}
+          fakeArtist={gameData.players[gameData.fakeMan]}
         />
         <_Info>
           <_Card>
@@ -118,17 +137,35 @@ export const FakeArtist: VFC = memo(() => {
             </_Name>
           </_Card>
           <_UserList>
-            {gameData.players.map((player, i) => (
-              <Profile
-                key={player.id}
-                name={player.name}
-                icon={player.icon}
-                color={gameData.colors[i]}
-              />
-            ))}
+            {gameData.players.map((player, i) =>
+              status === 'vote' ? (
+                <_Profile key={player.id} style={{ borderColor: gameData.colors[i] }}>
+                  {vote ? (
+                    <_ProfileIcon>
+                      <img src={`/assets/images/pokemon/${player.icon}.png`} />
+                    </_ProfileIcon>
+                  ) : (
+                    <_ProfileVote onClick={() => onclickVote(i)}>投票</_ProfileVote>
+                  )}
+                  <_ProfileName>{player.name}</_ProfileName>
+                </_Profile>
+              ) : (
+                <_Profile key={player.id} style={{ borderColor: gameData.colors[i] }}>
+                  <_ProfileIcon>
+                    <img src={`/assets/images/pokemon/${player.icon}.png`} />
+                  </_ProfileIcon>
+                  <_ProfileName>{player.name}</_ProfileName>
+                </_Profile>
+              )
+            )}
           </_UserList>
         </_Info>
       </_Wrapper>
+      {status === 'fin' && myInfo.isAdmin && (
+        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+          <Button label={'ロビーに戻る'} onclick={toLobby} color={'teal'} />
+        </div>
+      )}
     </_Container>
   ) : null;
 });
@@ -198,7 +235,7 @@ const _Card = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   background: #ffedab;
-  border: 2px solid ${variable.border};
+  border: 2px solid ${variable.yellow};
   border-radius: 4px;
   text-align: center;
   > span {
@@ -224,14 +261,50 @@ const _UserList = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  .profile {
-    border-width: 3px;
+`;
+
+const _Profile = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background: ${variable.gray[0]};
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 40px 6px 6px 40px;
+  + li {
+    margin-top: 10px;
   }
-  .profile__img {
-    width: 40px;
-    height: 40px;
+`;
+
+const _ProfileIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid ${variable.border};
+  border-radius: 50%;
+  > img {
+    width: 100%;
   }
-  .profile__name {
-    font-size: 14px;
-  }
+`;
+
+const _ProfileVote = styled.button`
+  width: 40px;
+  height: 40px;
+  color: #000;
+  background: yellow;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid ${variable.cyan};
+  border-radius: 50%;
+`;
+
+const _ProfileName = styled.div`
+  width: calc(100% - 100px);
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;

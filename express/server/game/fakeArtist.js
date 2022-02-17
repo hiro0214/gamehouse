@@ -18,8 +18,10 @@ var gameData = {
     category: '',
     theme: '',
     context: '',
-    turn: 0
+    turn: 0,
+    mostVote: ''
 };
+var voteArray = [];
 var lap = 0;
 /**
  * Theme
@@ -79,6 +81,20 @@ exports.fakeArtist = {
                 server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
                 server_1.serverSocket.emit("".concat(eventName, ":vote"));
             }
+        });
+        server_1.socket.on("".concat(eventName, ":vote"), function (index) {
+            var votePlayer = gameData.players[index].name;
+            voteArray.push(votePlayer);
+            if (voteArray.length !== gameData.players.length)
+                return;
+            var obj = {};
+            for (var i = 0; i < voteArray.length; i++) {
+                obj[voteArray[i]] = obj[voteArray[i]] ? obj[voteArray[i]] + 1 : 1;
+            }
+            var val = Object.values(obj), key = Object.keys(obj), maxIndex = val.indexOf(Math.max.apply(Math, val));
+            gameData.mostVote = key[maxIndex];
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+            server_1.serverSocket.emit("".concat(eventName, ":voted"), gameData);
         });
     }
 };

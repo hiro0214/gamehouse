@@ -1,6 +1,7 @@
 import { VFC, memo, useEffect, SetStateAction, Dispatch } from 'react';
 import styled from 'styled-components';
 import { gameStatusType } from '../../../../types/game/fakeArtist';
+import { User } from '../../../../types/user';
 import { variable } from '../../../variable';
 
 type props = {
@@ -10,6 +11,8 @@ type props = {
   disable: boolean;
   status: gameStatusType;
   isFake: boolean;
+  mostVote: string;
+  fakeArtist: User;
 };
 
 let isDraw = false,
@@ -17,7 +20,7 @@ let isDraw = false,
   offsetY = 0;
 
 export const Canvas: VFC<props> = memo((props) => {
-  const { context, setCanvas, color, disable, status, isFake } = props;
+  const { context, setCanvas, color, disable, status, isFake, mostVote, fakeArtist } = props;
 
   useEffect(() => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -122,6 +125,33 @@ export const Canvas: VFC<props> = memo((props) => {
           投票してください
         </p>
       </_CenterModal>
+      {status === 'voted' && (
+        <>
+          <_CenterModal className={status === 'voted' ? 'is-active' : ''}>
+            投票結果発表
+          </_CenterModal>
+          <_ResultModal className={status === 'voted' ? 'is-active' : ''}>
+            <p>最多投票者は...</p>
+            <_UserName>{mostVote}</_UserName>
+            <p style={{ marginTop: '50px' }}>エセ芸術家は...</p>
+            <_UserName>{fakeArtist.name}</_UserName>
+          </_ResultModal>
+          <_CenterModal
+            className={status === 'voted' ? 'is-active' : ''}
+            style={{ animationDelay: '15s' }}
+          >
+            {mostVote === fakeArtist.name ? (
+              <p>
+                エセ芸術家が
+                <br />
+                お題を当てることができれば逆転勝利
+              </p>
+            ) : (
+              <p>エセ芸術家の勝利!!</p>
+            )}
+          </_CenterModal>
+        </>
+      )}
     </_Container>
   );
 });
@@ -193,6 +223,7 @@ const _CenterModal = styled.div`
   left: 3px;
   right: 0;
   transform: translateY(-50%) scale(0.8);
+  z-index: 5;
   width: 80%;
   padding: 30px 0;
   margin: auto;
@@ -219,6 +250,69 @@ const _CenterModal = styled.div`
     100% {
       opacity: 0;
       transform: translateY(-50%) scale(0.8);
+    }
+  }
+`;
+
+const _ResultModal = styled.div`
+  position: absolute;
+  top: calc(50% + 3px);
+  left: 3px;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 135px 0;
+  background: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  pointer-events: none;
+  text-align: center;
+  animation: blockHidden 0.1s 20s forwards;
+  > p {
+    &:nth-of-type(1),
+    &:nth-of-type(3) {
+      opacity: 0;
+      transform: translateX(50px);
+      animation: titleFade 0.4s forwards;
+    }
+    &:nth-of-type(1) {
+      animation-delay: 5.5s;
+    }
+    &:nth-of-type(2) {
+      animation-delay: 7.5s;
+    }
+    &:nth-of-type(3) {
+      animation-delay: 9.5s;
+    }
+    &:nth-of-type(4) {
+      animation-delay: 13s;
+    }
+  }
+  @keyframes blockHidden {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes titleFade {
+    to {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+`;
+
+const _UserName = styled.p`
+  display: inline-block;
+  width: 250px;
+  margin-top: 20px;
+  padding: 10px 0;
+  background: #ffedab;
+  border: 1px solid ${variable.yellow};
+  border-radius: 24px;
+  transform: scale(0);
+  animation: scaleIn 0.4s forwards;
+  @keyframes scaleIn {
+    to {
+      transform: scale(1);
     }
   }
 `;

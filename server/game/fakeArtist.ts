@@ -30,9 +30,11 @@ const gameData: gameDataType = {
   category: '',
   theme: '',
   context: '',
-  turn: 0
+  turn: 0,
+  mostVote: ''
 };
 
+const voteArray: string[] = [];
 let lap = 0;
 
 
@@ -100,6 +102,25 @@ export const fakeArtist = {
         serverSocket.emit(`${eventName}:getData`, gameData)
         serverSocket.emit(`${eventName}:vote`);
       }
+    })
+    socket.on(`${eventName}:vote`, (index: number) => {
+      const votePlayer = gameData.players[index].name
+      voteArray.push(votePlayer);
+
+      if (voteArray.length !== gameData.players.length) return;
+
+      const obj: any = {};
+      for (let i = 0; i < voteArray.length; i ++) {
+        obj[voteArray[i]] = obj[voteArray[i]] ? obj[voteArray[i]] + 1 : 1
+      }
+      const
+        val: number[] = Object.values(obj),
+        key = Object.keys(obj),
+        maxIndex = val.indexOf(Math.max(...val));
+
+      gameData.mostVote = key[maxIndex];
+      serverSocket.emit(`${eventName}:getData`, gameData)
+      serverSocket.emit(`${eventName}:voted`, gameData)
     })
   }
 }
