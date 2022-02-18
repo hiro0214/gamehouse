@@ -8,7 +8,9 @@ export type gameDataType = {
   theme: string,
   context: string,
   turn: number,
-  mostVote: string
+  mostVote: string,
+  answerList: string[],
+  answer: string;
 };
 
-export type gameStatusType = 'theme' | 'title' | 'game' | 'vote' | 'voted' | 'reversal' | 'fin' |'';
+export type gameStatusType = 'theme' | 'title' | 'game' | 'vote' | 'voted' | 'reversal' | 'answer' | 'finish' |'';

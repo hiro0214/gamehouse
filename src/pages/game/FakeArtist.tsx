@@ -12,49 +12,28 @@ import { variable } from '../../variable';
 const gameName = 'fakeArtist';
 
 export const FakeArtist: VFC = memo(() => {
-  const [gameData, setGameData] = useState<gameDataType>({
-    // players: [
-    //   { id: 'b4k60miq', name: 'いわもと', icon: '049', isAdmin: true },
-    //   { id: 'zaqu57qt', name: 'たなか', icon: '134', isAdmin: false },
-    // ],
-    // fakeMan: 1,
-    // colors: [
-    //   '#ff0f0f',
-    //   '#0f0fff',
-    //   '#0fff0f',
-    //   '#ffff05',
-    //   '#ff840a',
-    //   '#ff0aff',
-    //   '#0affff',
-    //   '#840aff',
-    //   '#bc611e',
-    //   '#ff9498',
-    //   '#00afcc',
-    //   '#9cbb1c',
-    //   '#003f8e',
-    // ],
-    // category: '海の生き物',
-    // theme: 'イルカ',
-    // context: '',
-    // turn: 0,
-    // mostVote: 'やまだ'
-  } as gameDataType);
+  const [gameData, setGameData] = useState<gameDataType>({} as gameDataType);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const { myInfo } = useMyInfo();
-  const [status, setStatus] = useState<gameStatusType>('voted');
+  const [status, setStatus] = useState<gameStatusType>('');
   const [vote, setVote] = useState(false);
   const { toLobby } = useToLobby();
 
   useEffect(() => {
     socket.on(`${gameName}:getData`, (data: gameDataType) => setGameData(data));
     socket.on(`${gameName}:vote`, () => setStatus('vote'));
-    socket.on(`${gameName}:voted`, (data: gameDataType) => {
-      setStatus('voted');
-      setTimeout(() => {
-        data.mostVote === data.players[data.fakeMan].name
-          ? setStatus('reversal')
-          : setStatus('fin');
-      }, 20500);
+    socket.on(`${gameName}:voted`, () => setStatus('voted'));
+    socket.on(`${gameName}:reversal`, (data: gameDataType) => {
+      setGameData(data);
+      setStatus('reversal');
+    });
+    socket.on(`${gameName}:answer`, (data: gameDataType) => {
+      setGameData(data);
+      setStatus('answer');
+    });
+    socket.on(`${gameName}:finish`, (data: gameDataType) => {
+      setGameData(data);
+      setStatus('finish');
     });
 
     socket.emit(`${gameName}:getData`);
@@ -77,7 +56,6 @@ export const FakeArtist: VFC = memo(() => {
       img.src = gameData.context;
       img.onload = () => context.drawImage(img, 0, 0);
     }
-
     setCanvas(null);
   };
 
@@ -85,6 +63,8 @@ export const FakeArtist: VFC = memo(() => {
     setVote(true);
     socket.emit(`${gameName}:vote`, index);
   };
+
+  const onclickAnswer = (index: number) => socket.emit(`${gameName}:answer`, index);
 
   return Object.keys(gameData).length ? (
     <_Container>
@@ -114,16 +94,26 @@ export const FakeArtist: VFC = memo(() => {
           </_Mission>
         ))}
       {status === 'vote' && <_Mission>エセ芸術家は誰だ？</_Mission>}
+      {status === 'reversal' && <_Mission>エセ芸術家が回答を選択する</_Mission>}
+      {status === 'finish' && (
+        <_Winner>
+          {gameData.answer
+            ? gameData.answer === gameData.theme
+              ? 'エセ芸術家'
+              : '芸術家'
+            : 'エセ芸術家'}
+          の勝利!!
+        </_Winner>
+      )}
       <_Wrapper>
         <Canvas
-          context={gameData.context}
+          gameData={gameData}
           setCanvas={setCanvas}
           color={gameData.colors[gameData.players.findIndex((v) => v.id === myInfo.id)]}
           disable={canvas || gameData.players[gameData.turn].id !== myInfo.id ? true : false}
           status={status}
           isFake={gameData.players[gameData.fakeMan].id === myInfo.id ? true : false}
-          mostVote={gameData.mostVote}
-          fakeArtist={gameData.players[gameData.fakeMan]}
+          onclickAnswer={onclickAnswer}
         />
         <_Info>
           <_Card>
@@ -161,7 +151,7 @@ export const FakeArtist: VFC = memo(() => {
           </_UserList>
         </_Info>
       </_Wrapper>
-      {status === 'fin' && myInfo.isAdmin && (
+      {status === 'finish' && myInfo.isAdmin && (
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
           <Button label={'ロビーに戻る'} onclick={toLobby} color={'teal'} />
         </div>
@@ -214,6 +204,32 @@ const _Mission = styled.p`
   @keyframes scaleIn {
     to {
       transform: scale(1);
+    }
+  }
+`;
+
+const _Winner = styled.p`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -80px;
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background: ${variable.orange};
+  border-radius: 34px;
+  text-align: center;
+  animation: loopScale 1.2s infinite;
+  @keyframes loopScale {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
     }
   }
 `;

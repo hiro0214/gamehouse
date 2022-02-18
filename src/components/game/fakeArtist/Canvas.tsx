@@ -1,18 +1,16 @@
 import { VFC, memo, useEffect, SetStateAction, Dispatch } from 'react';
 import styled from 'styled-components';
-import { gameStatusType } from '../../../../types/game/fakeArtist';
-import { User } from '../../../../types/user';
+import { gameDataType, gameStatusType } from '../../../../types/game/fakeArtist';
 import { variable } from '../../../variable';
 
 type props = {
-  context: string;
+  gameData: gameDataType;
   setCanvas: Dispatch<SetStateAction<HTMLCanvasElement | null>>;
   color: string;
   disable: boolean;
   status: gameStatusType;
   isFake: boolean;
-  mostVote: string;
-  fakeArtist: User;
+  onclickAnswer: (index: number) => void;
 };
 
 let isDraw = false,
@@ -20,7 +18,7 @@ let isDraw = false,
   offsetY = 0;
 
 export const Canvas: VFC<props> = memo((props) => {
-  const { context, setCanvas, color, disable, status, isFake, mostVote, fakeArtist } = props;
+  const { gameData, setCanvas, color, disable, status, isFake, onclickAnswer } = props;
 
   useEffect(() => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
@@ -78,12 +76,12 @@ export const Canvas: VFC<props> = memo((props) => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     const canvasContext = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    if (context.length) {
+    if (gameData.context.length) {
       const img = new Image();
-      img.src = context;
+      img.src = gameData.context;
       img.onload = () => canvasContext.drawImage(img, 0, 0);
     }
-  }, [context]);
+  }, [gameData.context]);
 
   return (
     <_Container>
@@ -130,17 +128,17 @@ export const Canvas: VFC<props> = memo((props) => {
           <_CenterModal className={status === 'voted' ? 'is-active' : ''}>
             投票結果発表
           </_CenterModal>
-          <_ResultModal className={status === 'voted' ? 'is-active' : ''}>
+          <_ResultModal>
             <p>最多投票者は...</p>
-            <_UserName>{mostVote}</_UserName>
+            <_UserName>{gameData.mostVote}</_UserName>
             <p style={{ marginTop: '50px' }}>エセ芸術家は...</p>
-            <_UserName>{fakeArtist.name}</_UserName>
+            <_UserName>{gameData.players[gameData.fakeMan].name}</_UserName>
           </_ResultModal>
           <_CenterModal
             className={status === 'voted' ? 'is-active' : ''}
             style={{ animationDelay: '15s' }}
           >
-            {mostVote === fakeArtist.name ? (
+            {gameData.mostVote === gameData.players[gameData.fakeMan].name ? (
               <p>
                 エセ芸術家が
                 <br />
@@ -149,6 +147,40 @@ export const Canvas: VFC<props> = memo((props) => {
             ) : (
               <p>エセ芸術家の勝利!!</p>
             )}
+          </_CenterModal>
+        </>
+      )}
+      {status === 'reversal' && (
+        <_AnswerListModal className={isFake ? '' : 'disable'}>
+          <ul>
+            {gameData.answerList.map((answer, i) => (
+              <li
+                key={answer}
+                style={{ animationDelay: `${i * 0.1}s` }}
+                onClick={() => onclickAnswer(i)}
+              >
+                {answer}
+              </li>
+            ))}
+          </ul>
+        </_AnswerListModal>
+      )}
+      {status === 'answer' && (
+        <>
+          <_AnswerModal>
+            <div>
+              <p className="hdg">エセ芸術家の回答</p>
+              <p className="card">{gameData.answer}</p>
+            </div>
+            <div>
+              <p className="hdg" style={{ marginTop: '50px' }}>
+                正解
+              </p>
+              <p className="card">{gameData.theme}</p>
+            </div>
+          </_AnswerModal>
+          <_CenterModal className="modal is-active">
+            {gameData.answer === gameData.theme ? <p>エセ芸術家の勝利!!</p> : <p>芸術家の勝利!!</p>}
           </_CenterModal>
         </>
       )}
@@ -266,7 +298,6 @@ const _ResultModal = styled.div`
   font-weight: bold;
   pointer-events: none;
   text-align: center;
-  animation: blockHidden 0.1s 20s forwards;
   > p {
     &:nth-of-type(1),
     &:nth-of-type(3) {
@@ -285,11 +316,6 @@ const _ResultModal = styled.div`
     }
     &:nth-of-type(4) {
       animation-delay: 13s;
-    }
-  }
-  @keyframes blockHidden {
-    to {
-      opacity: 0;
     }
   }
   @keyframes titleFade {
@@ -314,5 +340,97 @@ const _UserName = styled.p`
     to {
       transform: scale(1);
     }
+  }
+`;
+
+const _AnswerListModal = styled.div`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  &.disable {
+    pointer-events: none;
+  }
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px 40px;
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 35px 0;
+    > li {
+      width: calc(50% - 20px);
+      padding: 5px 0;
+      font-weight: bold;
+      background: #ffedab;
+      border: 2px solid ${variable.yellow};
+      border-radius: 18px;
+      text-align: center;
+      cursor: pointer;
+      transform: scale(0);
+      animation: answerScale 0.4s forwards;
+    }
+    @keyframes answerScale {
+      to {
+        transform: scale(1);
+      }
+    }
+  }
+`;
+
+const _AnswerModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: calc(50% + 3px);
+  left: 3px;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 98px 0;
+  background: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  .hdg {
+    width: 200px;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    background: #ffea00;
+    border-radius: 22px;
+  }
+  .card {
+    min-width: 200px;
+    padding: 20px 0;
+    background: #ffedab;
+    border: 2px solid ${variable.yellow};
+    border-radius: 4px;
+    text-align: center;
+  }
+  > div {
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      transform: scale(0);
+      animation: blockScale 0.3s forwards;
+    }
+    &:nth-of-type(1) {
+      animation-delay: 1s;
+    }
+    &:nth-of-type(2) {
+      animation-delay: 4s;
+    }
+  }
+  @keyframes blockScale {
+    to {
+      transform: scale(1);
+    }
+  }
+  + .modal {
+    animation-delay: 7s;
   }
 `;

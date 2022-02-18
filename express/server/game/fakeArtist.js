@@ -19,7 +19,9 @@ var gameData = {
     theme: '',
     context: '',
     turn: 0,
-    mostVote: ''
+    mostVote: '',
+    answerList: [],
+    answer: ''
 };
 var voteArray = [];
 var lap = 0;
@@ -27,13 +29,21 @@ var lap = 0;
  * Theme
 */
 var themeList = [
+    // {
+    //   category: '海の生き物',
+    //   theme: ['イルカ', 'タコ', 'イカ']
+    // },
+    // {
+    //   category: '建物',
+    //   theme: ['スカイツリー', '万里の長城', '凱旋門']
+    // }
     {
-        category: '海の生き物',
-        theme: ['イルカ', 'タコ', 'イカ']
+        category: 'sampleA',
+        theme: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
     },
     {
-        category: '建物',
-        theme: ['スカイツリー', '万里の長城', '凱旋門']
+        category: 'sampleB',
+        theme: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
     }
 ];
 /**
@@ -52,6 +62,11 @@ var fakeArtistDataInit = function () {
     gameData.theme = '';
     gameData.context = '';
     gameData.turn = 0;
+    gameData.mostVote = '';
+    gameData.answerList = [];
+    gameData.answer = '';
+    lap = 0;
+    voteArray.length = 0;
     var targetCategory = themeList[(0, utility_1.randomInt)(themeList.length)];
     gameData.category = targetCategory.category;
     gameData.theme = targetCategory.theme[(0, utility_1.randomInt)(targetCategory.theme.length)];
@@ -94,7 +109,28 @@ exports.fakeArtist = {
             var val = Object.values(obj), key = Object.keys(obj), maxIndex = val.indexOf(Math.max.apply(Math, val));
             gameData.mostVote = key[maxIndex];
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
-            server_1.serverSocket.emit("".concat(eventName, ":voted"), gameData);
+            server_1.serverSocket.emit("".concat(eventName, ":voted"));
+            setTimeout(function () {
+                gameData.mostVote === gameData.players[gameData.fakeMan].name
+                    ? reversalReady()
+                    : server_1.serverSocket.emit("".concat(eventName, ":finish"), gameData);
+            }, 20500);
+        });
+        var reversalReady = function () {
+            var category = themeList.find(function (v) { return v.category === gameData.category; });
+            var answerIndex = category.theme.findIndex(function (v) { return v === gameData.theme; });
+            gameData.answerList.push(category.theme.splice(answerIndex, 1)[0]);
+            while (gameData.answerList.length <= 17) {
+                var random = (0, utility_1.randomInt)(category.theme.length);
+                gameData.answerList.push(category.theme.splice(random, 1)[0]);
+            }
+            (0, utility_1.shuffle)(gameData.answerList);
+            server_1.serverSocket.emit("".concat(eventName, ":reversal"), gameData);
+        };
+        server_1.socket.on("".concat(eventName, ":answer"), function (index) {
+            gameData.answer = gameData.answerList[index];
+            server_1.serverSocket.emit("".concat(eventName, ":answer"), gameData);
+            setTimeout(function () { return server_1.serverSocket.emit("".concat(eventName, ":finish"), gameData); }, 12000);
         });
     }
 };

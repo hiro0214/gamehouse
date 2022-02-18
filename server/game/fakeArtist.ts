@@ -31,7 +31,9 @@ const gameData: gameDataType = {
   theme: '',
   context: '',
   turn: 0,
-  mostVote: ''
+  mostVote: '',
+  answerList: [],
+  answer: ''
 };
 
 const voteArray: string[] = [];
@@ -42,13 +44,21 @@ let lap = 0;
  * Theme
 */
 const themeList: themeType[] = [
+  // {
+  //   category: '海の生き物',
+  //   theme: ['イルカ', 'タコ', 'イカ']
+  // },
+  // {
+  //   category: '建物',
+  //   theme: ['スカイツリー', '万里の長城', '凱旋門']
+  // }
   {
-    category: '海の生き物',
-    theme: ['イルカ', 'タコ', 'イカ']
+    category: 'sampleA',
+    theme: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
   },
   {
-    category: '建物',
-    theme: ['スカイツリー', '万里の長城', '凱旋門']
+    category: 'sampleB',
+    theme: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
   }
 ];
 
@@ -68,6 +78,11 @@ export const fakeArtistDataInit = () => {
   gameData.theme = '';
   gameData.context = '';
   gameData.turn = 0;
+  gameData.mostVote = '';
+  gameData.answerList = [];
+  gameData.answer = '';
+  lap = 0;
+  voteArray.length = 0;
 
   const targetCategory = themeList[randomInt(themeList.length)];
   gameData.category = targetCategory.category;
@@ -84,6 +99,7 @@ export const fakeArtist = {
     socket.on(`${eventName}:getData`, () => {
       serverSocket.emit(`${eventName}:getData`, gameData)
     })
+
     socket.on(`${eventName}:draw`, (imgContext: string) => {
       gameData.context = imgContext;
 
@@ -103,6 +119,7 @@ export const fakeArtist = {
         serverSocket.emit(`${eventName}:vote`);
       }
     })
+
     socket.on(`${eventName}:vote`, (index: number) => {
       const votePlayer = gameData.players[index].name
       voteArray.push(votePlayer);
@@ -120,7 +137,33 @@ export const fakeArtist = {
 
       gameData.mostVote = key[maxIndex];
       serverSocket.emit(`${eventName}:getData`, gameData)
-      serverSocket.emit(`${eventName}:voted`, gameData)
+      serverSocket.emit(`${eventName}:voted`)
+
+      setTimeout(() => {
+        gameData.mostVote === gameData.players[gameData.fakeMan].name
+          ? reversalReady()
+          : serverSocket.emit(`${eventName}:finish`, gameData)
+      }, 20500);
+    })
+
+    const reversalReady = () => {
+      const category = themeList.find(v => v.category === gameData.category)!;
+      const answerIndex = category.theme.findIndex(v => v === gameData.theme);
+      gameData.answerList.push(category.theme.splice(answerIndex, 1)[0])
+
+      while (gameData.answerList.length <= 17) {
+        const random = randomInt(category.theme.length);
+        gameData.answerList.push(category.theme.splice(random, 1)[0])
+      }
+      shuffle(gameData.answerList)
+      serverSocket.emit(`${eventName}:reversal`, gameData)
+    }
+
+    socket.on(`${eventName}:answer`, (index: number) => {
+      gameData.answer = gameData.answerList[index];
+      serverSocket.emit(`${eventName}:answer`, gameData)
+
+      setTimeout(() => serverSocket.emit(`${eventName}:finish`, gameData), 12000);
     })
   }
 }
