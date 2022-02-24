@@ -700,7 +700,7 @@ var ke=Object.defineProperty,ve=Object.defineProperties;var Be=Object.getOwnProp
   border: 2px solid ${d.cyan};
   border-radius: 50%;
 `,pe=i.div`
-  width: calc(100% - 100px);
+  width: calc(100% - 60px);
   margin-left: 10px;
   margin-right: 10px;
   font-size: 14px;

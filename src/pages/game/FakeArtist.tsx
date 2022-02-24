@@ -316,7 +316,7 @@ const _ProfileVote = styled.button`
 `;
 
 const _ProfileName = styled.div`
-  width: calc(100% - 100px);
+  width: calc(100% - 60px);
   margin-left: 10px;
   margin-right: 10px;
   font-size: 14px;
