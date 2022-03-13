@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { User } from '../../types/user';
 import { GameConfig } from '../components/organisms/GameConfig';
@@ -7,10 +8,12 @@ import { socket } from '../socket';
 
 export const Lobby = memo(() => {
   const [userList, setUserList] = useState([] as User[]);
+  const history = useHistory();
 
   useEffect(() => {
     socket.emit('common:getUser');
     socket.on('common:getUser', (userList: User[]) => setUserList(userList));
+    socket.on('common:toTop', () => history.push('/'));
   }, []);
 
   return (

@@ -10,16 +10,17 @@ var eventName = 'common';
 exports.common = {
     init: function () {
         server_1.socket.on("".concat(eventName, ":newUser"), function (newUser) {
-            var newConnect = {
-                socketId: server_1.socket.id,
-                userId: newUser.id
-            };
-            data_1.connectList.push(newConnect);
+            // const newConnect: Connect = {
+            //   socketId: socket.id,
+            //   userId: newUser.id
+            // }
+            // connectList.push(newConnect)
             data_1.userList.push(newUser);
         });
         server_1.socket.on("".concat(eventName, ":clearUser"), function () {
             data_1.connectList.length = 0;
             data_1.userList.length = 0;
+            server_1.serverSocket.emit("".concat(eventName, ":toTop"));
         });
         server_1.socket.on("".concat(eventName, ":getUser"), function () {
             server_1.serverSocket.emit("".concat(eventName, ":getUser"), data_1.userList);

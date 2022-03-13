@@ -95,7 +95,7 @@ export const fakeArtistConfigInit = () => {
 
 export const fakeArtistDataInit = () => {
   // 初期化
-  gameData.players = userList
+  gameData.players = [...userList]
   gameData.fakeMan = 0;
   gameData.category = '';
   gameData.theme = '';

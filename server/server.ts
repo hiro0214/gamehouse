@@ -30,16 +30,16 @@ serverSocket.on('connection', connect => {
   hanabi.init();
   fakeArtist.init();
 
-  socket.on('disconnect', () => {
-    const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
-    if (removeConnectIndex === -1) return;
+  // socket.on('disconnect', () => {
+  //   const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
+  //   if (removeConnectIndex === -1) return;
 
-    const userId = connectList[removeConnectIndex].userId;
-    const removeUserIndex = userList.findIndex(v => v.id === userId);
+  //   const userId = connectList[removeConnectIndex].userId;
+  //   const removeUserIndex = userList.findIndex(v => v.id === userId);
 
-    connectList.splice(removeConnectIndex, 1);
-    userList.splice(removeUserIndex, 1);
+  //   connectList.splice(removeConnectIndex, 1);
+  //   userList.splice(removeUserIndex, 1);
 
-    serverSocket.emit('common:getUser', userList);
-  })
+  //   serverSocket.emit('common:getUser', userList);
+  // })
 })

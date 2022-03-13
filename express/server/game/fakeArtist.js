@@ -89,7 +89,7 @@ var fakeArtistConfigInit = function () {
 exports.fakeArtistConfigInit = fakeArtistConfigInit;
 var fakeArtistDataInit = function () {
     // 初期化
-    gameData.players = data_1.userList;
+    gameData.players = __spreadArray([], data_1.userList, true);
     gameData.fakeMan = 0;
     gameData.category = '';
     gameData.theme = '';

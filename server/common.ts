@@ -12,18 +12,19 @@ const eventName = 'common';
 export const common = {
   init: () => {
     socket.on(`${eventName}:newUser`, (newUser: User) => {
-      const newConnect: Connect = {
-        socketId: socket.id,
-        userId: newUser.id
-      }
+      // const newConnect: Connect = {
+      //   socketId: socket.id,
+      //   userId: newUser.id
+      // }
 
-      connectList.push(newConnect)
+      // connectList.push(newConnect)
       userList.push(newUser)
     })
 
     socket.on(`${eventName}:clearUser`, () => {
       connectList.length = 0;
       userList.length = 0;
+      serverSocket.emit(`${eventName}:toTop`)
     })
 
     socket.on(`${eventName}:getUser`, () => {
