@@ -12,6 +12,9 @@ export const useGameStart = () => {
       case 'Hanabi':
         history.push('/game/hanabi');
         break;
+      case 'エセ芸術家 ニューヨークへ行く':
+        history.push('/game/fakeArtist');
+        break;
     }
   }, []);
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.shuffle = void 0;
+exports.randomInt = exports.shuffle = void 0;
 var shuffle = function (array) {
     var _a;
     for (var i = array.length - 1; i > 0; i--) {
@@ -9,3 +9,7 @@ var shuffle = function (array) {
     }
 };
 exports.shuffle = shuffle;
+var randomInt = function (max) {
+    return Math.floor(Math.random() * max);
+};
+exports.randomInt = randomInt;

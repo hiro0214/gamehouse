@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { GameType } from '../../types/gameList';
+import { FakeArtist } from '../components/organisms/gameConfig/FakeArtist';
 import { Hanabi } from '../components/organisms/gameConfig/Hanabi';
 import { KowloonTactics } from '../components/organisms/gameConfig/KowloonTactics';
 
@@ -14,8 +15,8 @@ export const useCurrentConfig = () => {
       case 'Hanabi':
         setCurrentConfig(<Hanabi />);
         break;
-      case 'other':
-        setCurrentConfig(<p>other</p>);
+      case 'エセ芸術家 ニューヨークへ行く':
+        setCurrentConfig(<FakeArtist />);
         break;
     }
   }, []);

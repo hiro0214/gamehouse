@@ -5,24 +5,26 @@ import { kowloonTacticsDataInit } from './game/kowloonTactics';
 import { hanabiDataInit } from './game/hanabi';
 import { Connect } from '../types/connect';
 import { GameType } from '../types/gameList';
+import { fakeArtistDataInit } from './game/fakeArtist';
 
 const eventName = 'common';
 
 export const common = {
   init: () => {
     socket.on(`${eventName}:newUser`, (newUser: User) => {
-      const newConnect: Connect = {
-        socketId: socket.id,
-        userId: newUser.id
-      }
+      // const newConnect: Connect = {
+      //   socketId: socket.id,
+      //   userId: newUser.id
+      // }
 
-      connectList.push(newConnect)
+      // connectList.push(newConnect)
       userList.push(newUser)
     })
 
     socket.on(`${eventName}:clearUser`, () => {
       connectList.length = 0;
       userList.length = 0;
+      serverSocket.emit(`${eventName}:toTop`)
     })
 
     socket.on(`${eventName}:getUser`, () => {
@@ -62,6 +64,9 @@ export const common = {
           break;
         case 'Hanabi':
           hanabiDataInit()
+          break;
+        case 'エセ芸術家 ニューヨークへ行く':
+          fakeArtistDataInit()
           break;
       }
 
