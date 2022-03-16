@@ -6,6 +6,7 @@ import { hanabiDataInit } from './game/hanabi';
 import { Connect } from '../types/connect';
 import { GameType } from '../types/gameList';
 import { fakeArtistDataInit } from './game/fakeArtist';
+import { theGameDataInit } from './game/theGame';
 
 const eventName = 'common';
 
@@ -67,6 +68,9 @@ export const common = {
           break;
         case 'エセ芸術家 ニューヨークへ行く':
           fakeArtistDataInit()
+          break;
+        case 'ザ・ゲーム':
+          theGameDataInit()
           break;
       }
 

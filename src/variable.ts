@@ -4,6 +4,7 @@ export const gameList: GameType[] = [
   'クーロンタクティクス',
   'Hanabi',
   'エセ芸術家 ニューヨークへ行く',
+  'ザ・ゲーム',
 ];
 
 export const variable = {

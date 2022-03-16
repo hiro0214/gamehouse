@@ -6,6 +6,7 @@ var data_1 = require("./data");
 var kowloonTactics_1 = require("./game/kowloonTactics");
 var hanabi_1 = require("./game/hanabi");
 var fakeArtist_1 = require("./game/fakeArtist");
+var theGame_1 = require("./game/theGame");
 var eventName = 'common';
 exports.common = {
     init: function () {
@@ -56,6 +57,9 @@ exports.common = {
                     break;
                 case 'エセ芸術家 ニューヨークへ行く':
                     (0, fakeArtist_1.fakeArtistDataInit)();
+                    break;
+                case 'ザ・ゲーム':
+                    (0, theGame_1.theGameDataInit)();
                     break;
             }
             server_1.serverSocket.emit("".concat(eventName, ":gameStart"), (data_1.currentGame));

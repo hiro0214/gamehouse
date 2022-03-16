@@ -11,6 +11,7 @@ var common_1 = require("./common");
 var kowloonTactics_1 = require("./game/kowloonTactics");
 var hanabi_1 = require("./game/hanabi");
 var fakeArtist_1 = require("./game/fakeArtist");
+var theGame_1 = require("./game/theGame");
 var app = (0, express_1.default)(), server = http_1.default.createServer(app), PORT = process.env.PORT || 8080;
 exports.serverSocket = new socket_io_1.default.Server(server);
 app
@@ -25,6 +26,7 @@ exports.serverSocket.on('connection', function (connect) {
     kowloonTactics_1.kowloonTactics.init();
     hanabi_1.hanabi.init();
     fakeArtist_1.fakeArtist.init();
+    theGame_1.theGame.init();
     // socket.on('disconnect', () => {
     //   const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
     //   if (removeConnectIndex === -1) return;

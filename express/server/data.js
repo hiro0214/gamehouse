@@ -18,6 +18,9 @@ var initConfig = function (game) {
         case 'エセ芸術家 ニューヨークへ行く':
             (0, fakeArtist_1.fakeArtistConfigInit)();
             break;
+        case 'ザ・ゲーム':
+            (0, fakeArtist_1.fakeArtistConfigInit)();
+            break;
     }
 };
 exports.initConfig = initConfig;

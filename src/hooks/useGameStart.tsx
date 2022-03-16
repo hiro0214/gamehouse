@@ -15,6 +15,9 @@ export const useGameStart = () => {
       case 'エセ芸術家 ニューヨークへ行く':
         history.push('/game/fakeArtist');
         break;
+      case 'ザ・ゲーム':
+        history.push('/game/THE-Game');
+        break;
     }
   }, []);
 

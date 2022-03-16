@@ -6,6 +6,7 @@ import { common } from './common';
 import { kowloonTactics } from './game/kowloonTactics';
 import { hanabi } from './game/hanabi';
 import { fakeArtist } from './game/fakeArtist';
+import { theGame } from './game/theGame';
 
 const
   app: express.Express = express(),
@@ -29,6 +30,7 @@ serverSocket.on('connection', connect => {
   kowloonTactics.init();
   hanabi.init();
   fakeArtist.init();
+  theGame.init();
 
   // socket.on('disconnect', () => {
   //   const removeConnectIndex = connectList.findIndex(v => v.socketId === socket.id)
