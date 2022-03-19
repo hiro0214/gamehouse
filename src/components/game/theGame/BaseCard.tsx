@@ -26,12 +26,13 @@ export const BaseCard: VFC<props> = memo((props) => {
   );
 });
 
-/* background-image: url(${cardImg}); */
+// background-image: url(${cardImg});
 const _Card = styled.div`
   position: relative;
   width: 122px;
-  height: 190px;
+  height: 188px;
   color: #fff;
+  border: 1px solid #ccc;
   background-image: url('/assets/images/img_skull_2.png');
   background-size: 100% auto;
   background-repeat: no-repeat;

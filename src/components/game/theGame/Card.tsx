@@ -24,8 +24,9 @@ export const Card: VFC<props> = memo((props) => {
 const _Card = styled.div`
   position: relative;
   width: calc(100% / 3 - 20px);
-  height: 190px;
+  height: 188px;
   color: #fff;
+  border: 1px solid #ccc;
   background-image: url('/assets/images/img_skull_2.png');
   background-size: 100% auto;
   background-repeat: no-repeat;

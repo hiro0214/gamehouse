@@ -1,41 +1,47 @@
 import { VFC, memo } from 'react';
 import styled from 'styled-components';
 import { BaseCard } from './BaseCard';
+import { FieldCards } from './FieldCards';
 
 type props = {
-  //
+  fieldCards: number[][];
 };
 
 export const Field: VFC<props> = memo((props) => {
-  // const {} = props
+  const { fieldCards } = props;
+
   return (
     <_Field>
-      <_BaseCardTop>
+      <_FieldColumn>
         <BaseCard from={'100'} />
+        <FieldCards cards={fieldCards[0]} />
+      </_FieldColumn>
+      <_FieldColumn>
         <BaseCard from={'100'} />
-      </_BaseCardTop>
-      <_BaseCardBottom>
+        <FieldCards cards={fieldCards[1]} />
+      </_FieldColumn>
+      <_FieldColumn className="reverse">
         <BaseCard from={'1'} />
+        <FieldCards cards={fieldCards[2]} isReverse={true} />
+      </_FieldColumn>
+      <_FieldColumn className="reverse">
         <BaseCard from={'1'} />
-      </_BaseCardBottom>
+        <FieldCards cards={fieldCards[3]} isReverse={true} />
+      </_FieldColumn>
     </_Field>
   );
 });
 
 const _Field = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 600px;
-  height: 600px;
 `;
 
-const _BaseCardTop = styled.div`
+const _FieldColumn = styled.div`
   display: flex;
-  gap: 35px;
-`;
-
-const _BaseCardBottom = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 35px;
-  margin-left: 35px;
+  flex-direction: column;
+  &.reverse {
+    flex-direction: column-reverse;
+  }
 `;

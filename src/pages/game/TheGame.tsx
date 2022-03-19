@@ -1,5 +1,6 @@
 import { VFC, memo } from 'react';
 import styled from 'styled-components';
+import { User } from '../../../types/user';
 import { Field } from '../../components/game/theGame/Field';
 import { InfoArea } from '../../components/game/theGame/InfoArea';
 import { MyHand } from '../../components/game/theGame/MyHand';
@@ -10,17 +11,38 @@ import { socket } from '../../socket';
 
 const gameName = 'theGame';
 
+const gameData = {
+  userList: [
+    {
+      id: '1',
+      name: 'たなか',
+      icon: '1',
+      isAdmin: false,
+    },
+  ],
+  hands: [1, 2, 3, 4, 88, 99],
+  fieldCards: [
+    [99, 88, 3, 2, 1],
+    [99, 88, 3, 2, 1],
+    [10, 20, 30, 88, 99],
+    [10, 20, 30, 88, 99],
+  ],
+  deck: 98,
+  score: 0,
+  turn: 0,
+};
+
 export const TheGame: VFC = memo(() => {
   return (
     <>
-      <Toast turn={'たなか'} />
+      <Toast turn={gameData.userList[gameData.turn].name} />
       <_Container>
-        <Field />
+        <Field fieldCards={gameData.fieldCards} />
         <div style={{ width: '450px' }}>
-          <InfoArea />
-          <MyHand />
+          <InfoArea deck={gameData.deck} score={gameData.score} />
+          <MyHand hands={gameData.hands} />
         </div>
-        <PlayerInfo />
+        <PlayerInfo userList={gameData.userList} />
       </_Container>
     </>
   );
