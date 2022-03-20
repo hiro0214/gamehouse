@@ -1,4 +1,4 @@
-import { VFC, memo } from 'react';
+import { VFC, memo, useState } from 'react';
 import styled from 'styled-components';
 import { Card } from './Card';
 
@@ -8,13 +8,19 @@ type props = {
 
 export const MyHand: VFC<props> = memo((props) => {
   const { hands } = props;
+  const [selectedHand, setSelectedHand] = useState<number | null>(null);
 
   return (
     <_MyHand>
       <p style={{ fontWeight: 'bold' }}>あなたの手札</p>
       <_Hands>
-        {hands.map((hand) => (
-          <Card key={hand} num={hand} />
+        {hands.map((hand, i) => (
+          <Card
+            key={hand}
+            num={hand}
+            selected={selectedHand === i ? true : false}
+            onclick={() => setSelectedHand(i)}
+          />
         ))}
       </_Hands>
     </_MyHand>

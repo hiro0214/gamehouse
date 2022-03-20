@@ -1,20 +1,20 @@
 import { VFC, memo } from 'react';
 import styled from 'styled-components';
-import { User } from '../../../../types/user';
 import { Profile } from '../../molucules/Profile';
+import { playerHandType } from '../../../../types/game/theGame';
 
 type props = {
-  userList: User[];
+  playerList: playerHandType[];
 };
 
 export const PlayerInfo: VFC<props> = memo((props) => {
-  const { userList } = props;
+  const { playerList } = props;
 
   return (
     <_PlayerInfo>
       <_UserList>
-        {userList.map((user) => (
-          <Profile key={user.id} name={user.name} icon={user.icon} />
+        {playerList.map((player) => (
+          <Profile key={player.user.id} name={player.user.name} icon={player.user.icon} />
         ))}
       </_UserList>
     </_PlayerInfo>

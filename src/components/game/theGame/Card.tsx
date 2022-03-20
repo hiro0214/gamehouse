@@ -1,16 +1,19 @@
 import { VFC, memo } from 'react';
 import styled from 'styled-components';
 // import cardImg from '../../../images/img_skull_2.png';
+import { variable } from '../../../variable';
 
 type props = {
   num: number;
+  selected?: boolean;
+  onclick?: () => void;
 };
 
 export const Card: VFC<props> = memo((props) => {
-  const { num } = props;
+  const { num, selected, onclick } = props;
 
   return (
-    <_Card>
+    <_Card onClick={onclick} className={selected ? 'is-selected' : ''}>
       <span className="top left">{num}</span>
       <span className="top right">{num}</span>
       <span className="center">{num}</span>
@@ -30,7 +33,11 @@ const _Card = styled.div`
   background-image: url('/assets/images/img_skull_2.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
+  cursor: pointer;
   border-radius: 8px;
+  &.is-selected {
+    outline: 2px solid ${variable.green};
+  }
   > span {
     position: absolute;
     font-weight: bold;

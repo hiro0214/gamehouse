@@ -33,7 +33,7 @@ const _Card = styled.div`
   height: 188px;
   color: #fff;
   border: 1px solid #ccc;
-  background-image: url('/assets/images/img_skull_2.png');
+  background-image: url('/assets/images/img_skull_1.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
   border-radius: 8px;
