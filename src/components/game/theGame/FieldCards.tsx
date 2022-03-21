@@ -6,15 +6,16 @@ import { Card } from './Card';
 type props = {
   cards: number[];
   isReverse?: boolean;
+  onclick: () => void;
 };
 
 const cardPosDiff = 40;
 
 export const FieldCards: VFC<props> = memo((props) => {
-  const { cards, isReverse } = props;
+  const { cards, isReverse, onclick } = props;
 
   return (
-    <_FieldCards className={isReverse ? 'reverse' : ''}>
+    <_FieldCards className={isReverse ? 'reverse' : ''} onClick={onclick}>
       {cards.map((card) => (
         <Card key={card} num={card} />
       ))}

@@ -25,10 +25,7 @@ export const Hand: VFC<props> = memo((props) => {
   return (
     <>
       {isReverse ? (
-        <_Hand
-          className={`reverse hand ${(colorHint || numHint) && getHint()}`}
-          onClick={onclick}
-        />
+        <_Hand className={`reverse hand ${(colorHint || numHint) && getHint()}`} onClick={onclick} />
       ) : (
         <_Hand className={`${color} hand ${(colorHint || numHint) && getHint()}`} onClick={onclick}>
           {num !== 0 && num}

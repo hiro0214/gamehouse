@@ -21,3 +21,9 @@ export type playerHandType = {
 type fieldCardType = number[];
 
 export type messageStatusType = 'remaining' | 'continue';
+
+export type playCardType = {
+  userId: string,
+  selectIndex: number,
+  fieldIndex: number
+}

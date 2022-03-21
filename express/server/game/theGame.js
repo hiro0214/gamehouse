@@ -72,5 +72,29 @@ exports.theGame = {
         server_1.socket.on("".concat(eventName, ":getData"), function () {
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
+        server_1.socket.on("".concat(eventName, ":playCard"), function (data) {
+            var player = gameData.playerList.find(function (p) { return p.user.id === data.userId; });
+            // 選んだ手札をフィールドに移動
+            var selectHand = player.hand.splice(data.selectIndex, 1)[0];
+            var selectField = gameData.fieldCards[data.fieldIndex];
+            if (selectField.length === 5)
+                selectField.shift();
+            selectField.push(selectHand);
+            // scoreの更新
+            gameData.score += 1;
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+        });
+        server_1.socket.on("".concat(eventName, ":turnFinish"), function () {
+            // 手札の補充
+            var player = gameData.playerList[gameData.turn];
+            while (player.hand.length < 6 && gameData.deck.length) {
+                var newHand = gameData.deck.shift();
+                player.hand.push(newHand);
+            }
+            // turnの更新
+            var playerLength = gameData.playerList.length;
+            gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+        });
     }
 };

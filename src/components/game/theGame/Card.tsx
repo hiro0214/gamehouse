@@ -36,7 +36,7 @@ const _Card = styled.div`
   cursor: pointer;
   border-radius: 8px;
   &.is-selected {
-    outline: 2px solid ${variable.green};
+    outline: 3px solid ${variable.green};
   }
   > span {
     position: absolute;

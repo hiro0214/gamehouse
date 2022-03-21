@@ -22,11 +22,7 @@ export const Entrance = memo(() => {
     <_Wrapper>
       <_Container>
         <Heading text={'Games House'} />
-        <TextInput
-          value={userName}
-          placeholder={'ユーザー名を入力してください'}
-          onChange={onChangeUserName}
-        />
+        <TextInput value={userName} placeholder={'ユーザー名を入力してください'} onChange={onChangeUserName} />
         <Button label={'Join the game!'} isDisabled={isEnter} onclick={onclickEnter} />
       </_Container>
     </_Wrapper>

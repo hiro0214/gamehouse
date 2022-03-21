@@ -1,9 +1,8 @@
 import { serverSocket, socket } from '../server';
 import { setCurrentConfig, userList } from '../data';
-import { randomInt, shuffle } from '../utility';
+import { shuffle } from '../utility';
 import { theGameConfig } from '../../types/config';
-import { gameDataType } from '../../types/game/theGame';
-import { playerHandType } from '../../types/game/theGame';
+import { gameDataType, playerHandType, playCardType } from '../../types/game/theGame';
 
 /**
  * Variable
@@ -68,6 +67,36 @@ export const theGameDataInit = () => {
 export const theGame = {
   init: () => {
     socket.on(`${eventName}:getData`, () => {
+      serverSocket.emit(`${eventName}:getData`, gameData)
+    })
+
+    socket.on(`${eventName}:playCard`, (data: playCardType) => {
+      const player = gameData.playerList.find(p => p.user.id === data.userId) as playerHandType;
+
+      // 選んだ手札をフィールドに移動
+      const selectHand = player.hand.splice(data.selectIndex, 1)[0];
+      const selectField = gameData.fieldCards[data.fieldIndex];
+      if (selectField.length === 5) selectField.shift();
+      selectField.push(selectHand);
+
+      // scoreの更新
+      gameData.score += 1
+
+      serverSocket.emit(`${eventName}:getData`, gameData)
+    })
+
+    socket.on(`${eventName}:turnFinish`, () => {
+      // 手札の補充
+      const player = gameData.playerList[gameData.turn];
+      while (player.hand.length < 6 && gameData.deck.length) {
+        const newHand = gameData.deck.shift() as number;
+        player.hand.push(newHand);
+      }
+
+      // turnの更新
+      const playerLength = gameData.playerList.length
+      gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
+
       serverSocket.emit(`${eventName}:getData`, gameData)
     })
   }

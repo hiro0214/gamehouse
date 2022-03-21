@@ -6,17 +6,12 @@ import { messageStatusType } from '../../../../types/game/theGame';
 type props = {
   status: messageStatusType;
   remainingHand: number;
+  turnFinish: () => void;
+  turnContinue: () => void;
 };
 
 export const MessageArea: VFC<props> = memo((props) => {
-  const { status, remainingHand } = props;
-
-  const turnFinish = () => {
-    console.log('turn finish');
-  };
-  const turnContinue = () => {
-    console.log('turn continue');
-  };
+  const { status, remainingHand, turnFinish, turnContinue } = props;
 
   return (
     <_MessageArea>
@@ -32,9 +27,7 @@ export const MessageArea: VFC<props> = memo((props) => {
         </_BtnArea>
       ) : (
         <_Message>
-          {remainingHand <= 0
-            ? '手札からカードを出してください'
-            : `あと${remainingHand}枚のカードを出してください`}
+          {remainingHand <= 0 ? '手札からカードを出してください' : `あと${remainingHand}枚のカードを出してください`}
         </_Message>
       )}
     </_MessageArea>
