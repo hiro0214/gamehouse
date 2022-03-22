@@ -5,6 +5,7 @@ import { Card } from './Card';
 
 type props = {
   cards: number[];
+  isDisabled?: boolean;
   isReverse?: boolean;
   onclick: () => void;
 };
@@ -12,10 +13,18 @@ type props = {
 const cardPosDiff = 40;
 
 export const FieldCards: VFC<props> = memo((props) => {
-  const { cards, isReverse, onclick } = props;
+  const { cards, isDisabled, isReverse, onclick } = props;
+
+  const getClassName = (isDisabled?: boolean, isReverse?: boolean) => {
+    let name = '';
+    if (isDisabled) name += 'is-disabled';
+    if (isReverse) name += ' is-reverse';
+
+    return name;
+  };
 
   return (
-    <_FieldCards className={isReverse ? 'reverse' : ''} onClick={onclick}>
+    <_FieldCards className={getClassName(isDisabled, isReverse)} onClick={onclick}>
       {cards.map((card) => (
         <Card key={card} num={card} />
       ))}
@@ -30,10 +39,28 @@ const _FieldCards = styled.div`
   border-radius: 8px;
   background: #f0f8ff;
   cursor: pointer;
+  &::after {
+    content: '';
+    transition: background-color .1s;
+  }
   &:hover {
     outline: 2px solid ${variable.blue};
   }
-  &.reverse {
+  &.is-disabled {
+    pointer-events: none !important;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      background: #00000060;
+    }
+  }
+  &.is-reverse {
     margin-bottom: 30px;
     > div {
       &:nth-of-type(1) {
@@ -53,7 +80,7 @@ const _FieldCards = styled.div`
       }
     }
   }
-  &:not(.reverse) {
+  &:not(.is-reverse) {
     margin-top: 30px;
     > div {
       &:nth-of-type(1) {

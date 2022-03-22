@@ -38,6 +38,7 @@ const _MessageArea = styled.div`
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 9;
   top: 70px;
 `;
 

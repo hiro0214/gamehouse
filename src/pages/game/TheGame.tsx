@@ -70,7 +70,11 @@ export const TheGame: VFC = memo(() => {
         />
       )}
       <_Container className={checkDisabled()}>
-        <Field fieldCards={gameData.fieldCards} playCard={playCard} />
+        <Field
+          fieldCards={gameData.fieldCards}
+          selectedHand={selectedHand !== null && getMyHand(gameData.playerList)[selectedHand]}
+          playCard={playCard}
+        />
         <div style={{ width: '450px' }}>
           <InfoArea deck={gameData.deck.length} score={gameData.score} />
           <MyHand
