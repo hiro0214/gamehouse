@@ -127,6 +127,9 @@ exports.theGame = {
                 checkGameFinish();
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
+        server_1.socket.on("".concat(eventName, ":fieldAnimate"), function (fieldIndex) {
+            server_1.serverSocket.emit("".concat(eventName, ":fieldAnimate"), fieldIndex);
+        });
         server_1.socket.on("".concat(eventName, ":turnFinish"), function () {
             // 手札の補充
             var player = gameData.playerList[gameData.turn];

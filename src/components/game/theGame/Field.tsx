@@ -7,10 +7,11 @@ type props = {
   fieldCards: number[][];
   selectedHand: number | false;
   playCard: (index: number) => void;
+  isAnimate: number | null;
 };
 
 export const Field: VFC<props> = memo((props) => {
-  const { fieldCards, selectedHand, playCard } = props;
+  const { fieldCards, selectedHand, playCard, isAnimate } = props;
 
   const getLastItem = (arr: number[]) => arr.slice(-1)[0];
 
@@ -37,6 +38,7 @@ export const Field: VFC<props> = memo((props) => {
         <FieldCards
           cards={fieldCards[0]}
           isDisabled={checkDisable(getLastItem(fieldCards[0]), selectedHand)}
+          isAnimate={isAnimate === 0 && true}
           onclick={() => playCard(0)}
         />
       </_FieldColumn>
@@ -45,6 +47,7 @@ export const Field: VFC<props> = memo((props) => {
         <FieldCards
           cards={fieldCards[1]}
           isDisabled={checkDisable(getLastItem(fieldCards[1]), selectedHand)}
+          isAnimate={isAnimate === 1 && true}
           onclick={() => playCard(1)}
         />
       </_FieldColumn>
@@ -54,6 +57,7 @@ export const Field: VFC<props> = memo((props) => {
           cards={fieldCards[2]}
           isDisabled={checkDisable(getLastItem(fieldCards[2]), selectedHand, true)}
           isReverse={true}
+          isAnimate={isAnimate === 2 && true}
           onclick={() => playCard(2)}
         />
       </_FieldColumn>
@@ -63,6 +67,7 @@ export const Field: VFC<props> = memo((props) => {
           cards={fieldCards[3]}
           isDisabled={checkDisable(getLastItem(fieldCards[3]), selectedHand, true)}
           isReverse={true}
+          isAnimate={isAnimate === 3 && true}
           onclick={() => playCard(3)}
         />
       </_FieldColumn>

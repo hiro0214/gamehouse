@@ -7,24 +7,26 @@ type props = {
   cards: number[];
   isDisabled?: boolean;
   isReverse?: boolean;
+  isAnimate?: boolean;
   onclick: () => void;
 };
 
 const cardPosDiff = 40;
 
 export const FieldCards: VFC<props> = memo((props) => {
-  const { cards, isDisabled, isReverse, onclick } = props;
+  const { cards, isDisabled, isReverse, isAnimate, onclick } = props;
 
-  const getClassName = (isDisabled?: boolean, isReverse?: boolean) => {
+  const getClassName = (isDisabled?: boolean, isReverse?: boolean, isAnimate?: boolean) => {
     let name = '';
     if (isDisabled) name += 'is-disabled';
     if (isReverse) name += ' is-reverse';
+    if (isAnimate) name += ' is-animate';
 
     return name;
   };
 
   return (
-    <_FieldCards className={getClassName(isDisabled, isReverse)} onClick={onclick}>
+    <_FieldCards className={getClassName(isDisabled, isReverse, isAnimate)} onClick={onclick}>
       {cards.map((card) => (
         <Card key={card} num={card} />
       ))}
@@ -38,6 +40,7 @@ const _FieldCards = styled.div`
   outline: 1px dotted #000;
   border-radius: 8px;
   background: #f0f8ff;
+  overflow-y: hidden;
   cursor: pointer;
   &::after {
     content: '';
@@ -79,6 +82,12 @@ const _FieldCards = styled.div`
         bottom ${cardPosDiff * 4}px;
       }
     }
+    &.is-animate {
+      > div {
+        transition: transform .4s;
+        transform: translateY(40px);
+      }
+    }
   }
   &:not(.is-reverse) {
     margin-top: 30px;
@@ -97,6 +106,12 @@ const _FieldCards = styled.div`
       }
       &:nth-of-type(5) {
         top ${cardPosDiff * 4}px;
+      }
+    }
+    &.is-animate {
+      > div {
+        transition: transform .4s;
+        transform: translateY(-40px);
       }
     }
   }

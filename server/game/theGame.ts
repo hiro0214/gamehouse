@@ -128,6 +128,10 @@ export const theGame = {
       serverSocket.emit(`${eventName}:getData`, gameData)
     })
 
+    socket.on(`${eventName}:fieldAnimate`, (fieldIndex: number) => {
+      serverSocket.emit(`${eventName}:fieldAnimate`, fieldIndex)
+    })
+
     socket.on(`${eventName}:turnFinish`, () => {
       // 手札の補充
       const player = gameData.playerList[gameData.turn];

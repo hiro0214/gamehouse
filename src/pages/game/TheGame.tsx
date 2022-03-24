@@ -19,9 +19,15 @@ export const TheGame: VFC = memo(() => {
   const { toLobby } = useToLobby();
   const [gameData, setGameData] = useState<gameDataType>({} as gameDataType);
   const [selectedHand, setSelectedHand] = useState<number | null>(null);
+  const [isAnimate, setIsAnimate] = useState<number | null>(null);
 
   useEffect(() => {
     socket.on(`${gameName}:getData`, (gameData: gameDataType) => setGameData(gameData));
+    socket.on(`${gameName}:fieldAnimate`, (fieldIndex: number) => {
+      setIsAnimate(fieldIndex);
+      setTimeout(() => setIsAnimate(null), 500);
+    });
+
     socket.emit(`${gameName}:getData`);
   }, []);
 
@@ -35,9 +41,18 @@ export const TheGame: VFC = memo(() => {
       fieldIndex,
     };
 
-    gameData.playerList.find((p) => p.user.id === myInfo.id)?.hand.length === 1
-      ? turnFinish()
-      : socket.emit(`${gameName}:playCard`, post);
+    const handCheck = (): void => {
+      gameData.playerList.find((p) => p.user.id === myInfo.id)?.hand.length === 1
+        ? turnFinish()
+        : socket.emit(`${gameName}:playCard`, post);
+    };
+
+    if (gameData.fieldCards[fieldIndex].length === 5) {
+      socket.emit(`${gameName}:fieldAnimate`, fieldIndex);
+      setTimeout(() => handCheck(), 500);
+    } else {
+      handCheck();
+    }
   };
 
   const turnFinish = () => socket.emit(`${gameName}:turnFinish`);
@@ -72,6 +87,7 @@ export const TheGame: VFC = memo(() => {
           fieldCards={gameData.fieldCards}
           selectedHand={selectedHand !== null && getMyHand(gameData.playerList)[selectedHand]}
           playCard={playCard}
+          isAnimate={isAnimate}
         />
         <div style={{ width: '450px' }}>
           <InfoArea deck={gameData.deck.length} score={gameData.score} />
