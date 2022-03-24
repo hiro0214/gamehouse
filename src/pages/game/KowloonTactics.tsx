@@ -28,15 +28,9 @@ export const KowloonTactics: VFC = memo(() => {
   useEffect(() => {
     socket.on('common:getCurrentConfig', (gameConfig: kowloonTacticsConfig) => {
       setConfig(gameConfig);
-      if (
-        gameConfig.redPlayer.id === myInfo.id ||
-        gameConfig.redSupporter.some((v) => v.id === myInfo.id)
-      ) {
+      if (gameConfig.redPlayer.id === myInfo.id || gameConfig.redSupporter.some((v) => v.id === myInfo.id)) {
         setSide('red');
-      } else if (
-        gameConfig.bluePlayer.id === myInfo.id ||
-        gameConfig.blueSupporter.some((v) => v.id === myInfo.id)
-      ) {
+      } else if (gameConfig.bluePlayer.id === myInfo.id || gameConfig.blueSupporter.some((v) => v.id === myInfo.id)) {
         setSide('blue');
       }
     });
@@ -68,9 +62,7 @@ export const KowloonTactics: VFC = memo(() => {
 
   return Object.keys(data).length && Object.keys(config).length ? (
     <>
-      {judgeArray.length < 9 && (
-        <Toast turn={turn === 'red' ? config.redPlayer.name : config.bluePlayer.name} />
-      )}
+      {judgeArray.length < 9 && <Toast turn={turn === 'red' ? config.redPlayer.name : config.bluePlayer.name} />}
       <_Container>
         <PlayerArea player={config.redPlayer} supporter={config.redSupporter} area={'red'} />
         <PlayerArea player={config.bluePlayer} supporter={config.blueSupporter} area={'blue'} />
@@ -86,17 +78,9 @@ export const KowloonTactics: VFC = memo(() => {
           <GameResult result={checkResult('red')} />
         )}
         <_Field>
-          <FieldHand
-            hands={data.redPlayer.field}
-            isHide={side !== 'red' && true}
-            isFinish={isFinish}
-          />
+          <FieldHand hands={data.redPlayer.field} isHide={side !== 'red' && true} isFinish={isFinish} />
           <JudgeArea judgeArray={judgeArray} />
-          <FieldHand
-            hands={data.bluePlayer.field}
-            isHide={side !== 'blue' && true}
-            isFinish={isFinish}
-          />
+          <FieldHand hands={data.bluePlayer.field} isHide={side !== 'blue' && true} isFinish={isFinish} />
         </_Field>
         {judgeArray.length < 9 ? (
           <HandArea

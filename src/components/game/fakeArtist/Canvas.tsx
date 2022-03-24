@@ -85,12 +85,7 @@ export const Canvas: VFC<props> = memo((props) => {
 
   return (
     <_Container>
-      <_Canvas
-        id="canvas"
-        width={750}
-        height={500}
-        className={disable || status !== 'game' ? 'disable' : ''}
-      ></_Canvas>
+      <_Canvas id="canvas" width={750} height={500} className={disable || status !== 'game' ? 'disable' : ''}></_Canvas>
       <_ThemeModal className={status === 'theme' ? 'is-active' : ''}>
         <p>
           お題を確認して下さい
@@ -113,10 +108,7 @@ export const Canvas: VFC<props> = memo((props) => {
           </p>
         )}
       </_CenterModal>
-      <_CenterModal
-        style={{ animationDelay: '1s' }}
-        className={status === 'vote' ? 'is-active' : ''}
-      >
+      <_CenterModal style={{ animationDelay: '1s' }} className={status === 'vote' ? 'is-active' : ''}>
         <p>
           エセ芸術家だと思う人に
           <br />
@@ -125,19 +117,14 @@ export const Canvas: VFC<props> = memo((props) => {
       </_CenterModal>
       {status === 'voted' && (
         <>
-          <_CenterModal className={status === 'voted' ? 'is-active' : ''}>
-            投票結果発表
-          </_CenterModal>
+          <_CenterModal className={status === 'voted' ? 'is-active' : ''}>投票結果発表</_CenterModal>
           <_ResultModal>
             <p>最多投票者は...</p>
             <_UserName>{gameData.mostVote}</_UserName>
             <p style={{ marginTop: '50px' }}>エセ芸術家は...</p>
             <_UserName>{gameData.players[gameData.fakeMan].name}</_UserName>
           </_ResultModal>
-          <_CenterModal
-            className={status === 'voted' ? 'is-active' : ''}
-            style={{ animationDelay: '15s' }}
-          >
+          <_CenterModal className={status === 'voted' ? 'is-active' : ''} style={{ animationDelay: '15s' }}>
             {gameData.mostVote === gameData.players[gameData.fakeMan].name ? (
               <p>
                 エセ芸術家が
@@ -154,11 +141,7 @@ export const Canvas: VFC<props> = memo((props) => {
         <_AnswerListModal className={isFake ? '' : 'disable'}>
           <ul>
             {gameData.answerList.map((answer, i) => (
-              <li
-                key={answer}
-                style={{ animationDelay: `${i * 0.1}s` }}
-                onClick={() => onclickAnswer(i)}
-              >
+              <li key={answer} style={{ animationDelay: `${i * 0.1}s` }} onClick={() => onclickAnswer(i)}>
                 {answer}
               </li>
             ))}

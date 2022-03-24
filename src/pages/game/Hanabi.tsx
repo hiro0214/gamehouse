@@ -97,11 +97,7 @@ export const Hanabi: VFC = memo(() => {
 
   return Object.keys(gameData).length ? (
     <>
-      <_Container
-        className={
-          fin || gameData.players[gameData.turn].player.name !== myInfo.name ? 'is-disabled' : ''
-        }
-      >
+      <_Container className={fin || gameData.players[gameData.turn].player.name !== myInfo.name ? 'is-disabled' : ''}>
         {fin ? (
           <_Message>ゲームは終了しました</_Message>
         ) : gameData.deck.length === 0 ? (
@@ -121,13 +117,7 @@ export const Hanabi: VFC = memo(() => {
         </_InfoArea>
         <_PlayerArea className={'playerarea'}>
           {gameData.players.map((p) => (
-            <Player
-              key={p.player.name}
-              name={p.player.name}
-              hands={p.hands}
-              onclick={selectedHand}
-              isFinish={fin}
-            />
+            <Player key={p.player.name} name={p.player.name} hands={p.hands} onclick={selectedHand} isFinish={fin} />
           ))}
           {fin && myInfo.isAdmin && (
             <div style={{ marginTop: '30px' }}>

@@ -25,6 +25,9 @@ export const initConfig = (game: GameType) => {
     case 'エセ芸術家 ニューヨークへ行く':
       fakeArtistConfigInit()
       break;
+    case 'ザ・ゲーム':
+      fakeArtistConfigInit()
+      break;
   }
 }
 

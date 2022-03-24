@@ -49,21 +49,13 @@ export const KowloonTactics: VFC = memo(() => {
           {config.redPlayer.id ? (
             <Profile name={config.redPlayer.name} icon={config.redPlayer.icon} />
           ) : (
-            <Button
-              label={'プレイヤーとして参加'}
-              onclick={onclickJoinRedPlayer}
-              color={'yellow'}
-            />
+            <Button label={'プレイヤーとして参加'} onclick={onclickJoinRedPlayer} color={'yellow'} />
           )}
         </_Player>
         <_Supporter>
           <span>サポーター</span>
           {!config.redSupporter.some((user) => user.id === myInfo.id) && (
-            <Button
-              label={'サポーターとして参加'}
-              onclick={onclickJoinRedSupporter}
-              color={'yellow'}
-            />
+            <Button label={'サポーターとして参加'} onclick={onclickJoinRedSupporter} color={'yellow'} />
           )}
           <_SupporterList>
             {config.redSupporter.map((user) => (
@@ -79,21 +71,13 @@ export const KowloonTactics: VFC = memo(() => {
           {config.bluePlayer.id ? (
             <Profile name={config.bluePlayer.name} icon={config.bluePlayer.icon} />
           ) : (
-            <Button
-              label={'プレイヤーとして参加'}
-              onclick={onclickJoinBluePlayer}
-              color={'yellow'}
-            />
+            <Button label={'プレイヤーとして参加'} onclick={onclickJoinBluePlayer} color={'yellow'} />
           )}
         </_Player>
         <_Supporter>
           <span>サポーター</span>
           {!config.blueSupporter.some((user) => user.id === myInfo.id) && (
-            <Button
-              label={'サポーターとして参加'}
-              onclick={onclickJoinBlueSupporter}
-              color={'yellow'}
-            />
+            <Button label={'サポーターとして参加'} onclick={onclickJoinBlueSupporter} color={'yellow'} />
           )}
           <_SupporterList>
             {config.blueSupporter.map((user) => (

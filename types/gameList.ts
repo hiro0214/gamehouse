@@ -1,1 +1,1 @@
-export type GameType = 'クーロンタクティクス' | 'Hanabi' | 'エセ芸術家 ニューヨークへ行く';
+export type GameType = 'クーロンタクティクス' | 'Hanabi' | 'エセ芸術家 ニューヨークへ行く' | 'ザ・ゲーム';

@@ -97,11 +97,7 @@ export const FakeArtist: VFC = memo(() => {
       {status === 'reversal' && <_Mission>エセ芸術家が回答を選択する</_Mission>}
       {status === 'finish' && (
         <_Winner>
-          {gameData.answer
-            ? gameData.answer === gameData.theme
-              ? 'エセ芸術家'
-              : '芸術家'
-            : 'エセ芸術家'}
+          {gameData.answer ? (gameData.answer === gameData.theme ? 'エセ芸術家' : '芸術家') : 'エセ芸術家'}
           の勝利!!
         </_Winner>
       )}
@@ -122,9 +118,7 @@ export const FakeArtist: VFC = memo(() => {
           </_Card>
           <_Card style={{ marginTop: '10px' }}>
             <span>今回のお題</span>
-            <_Name>
-              {gameData.players[gameData.fakeMan].id !== myInfo.id ? gameData.theme : '?'}
-            </_Name>
+            <_Name>{gameData.players[gameData.fakeMan].id !== myInfo.id ? gameData.theme : '?'}</_Name>
           </_Card>
           <_UserList>
             {gameData.players.map((player, i) =>

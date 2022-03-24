@@ -36,18 +36,11 @@ export const HandArea: VFC<props> = memo((props) => {
           isHide ? (
             <Hand key={i} num={hand} isHide={true} />
           ) : (
-            <Hand
-              key={i}
-              num={hand}
-              onclick={() => selectHand(i)}
-              selected={isIndex === i && true}
-            />
+            <Hand key={i} num={hand} onclick={() => selectHand(i)} selected={isIndex === i && true} />
           )
         )}
       </_HandArea>
-      {isPlayer && turn && (
-        <Button label={'カードを出す'} onclick={playCard} color={'teal'} isDisabled={!isSelected} />
-      )}
+      {isPlayer && turn && <Button label={'カードを出す'} onclick={playCard} color={'teal'} isDisabled={!isSelected} />}
     </_Container>
   );
 });

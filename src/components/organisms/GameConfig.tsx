@@ -62,9 +62,7 @@ export const GameConfig: VFC = memo(() => {
         {currentGame && (
           <_ConfigWrapper>
             {currentConfig}
-            {myInfo.isAdmin && (
-              <Button label={'スタート'} onclick={onclickGameStart} color={'blue'} />
-            )}
+            {myInfo.isAdmin && <Button label={'スタート'} onclick={onclickGameStart} color={'blue'} />}
           </_ConfigWrapper>
         )}
       </_Contents>
