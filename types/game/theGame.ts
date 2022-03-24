@@ -10,7 +10,9 @@ export type gameDataType = {
   ],
   deck: number[],
   score: number,
-  turn: number
+  turn: number,
+  remainingHand: number,
+  status: messageStatusType
 }
 
 export type playerHandType = {
@@ -20,7 +22,7 @@ export type playerHandType = {
 
 type fieldCardType = number[];
 
-export type messageStatusType = 'remaining' | 'continue';
+export type messageStatusType = 'remaining' | 'continue' | 'finish';
 
 export type playCardType = {
   userId: string,

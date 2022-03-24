@@ -31,6 +31,8 @@ var gameData = {
     deck: [],
     score: 0,
     turn: 0,
+    remainingHand: 2,
+    status: 'remaining'
 };
 /**
  * Function
@@ -50,6 +52,8 @@ var theGameDataInit = function () {
     gameData.deck.length = 0;
     gameData.score = 0;
     gameData.turn = 0;
+    gameData.remainingHand = 2;
+    gameData.status = 'remaining';
     __spreadArray([], Array(deckLength), true).map(function (_, i) { return gameData.deck.push(i + 2); });
     (0, utility_1.shuffle)(gameData.deck);
     var copyUserList = __spreadArray([], data_1.userList, true);
@@ -67,6 +71,38 @@ var theGameDataInit = function () {
     (0, utility_1.shuffle)(gameData.playerList);
 };
 exports.theGameDataInit = theGameDataInit;
+var checkGameFinish = function () {
+    var player = gameData.playerList[gameData.turn];
+    var hands = player.hand;
+    var getLastItem = function (arr) { return arr.slice(-1)[0]; };
+    var checkField = function (field, hand, reverse) {
+        // カードを出すことができない時だけ true
+        var flag = false;
+        if (reverse) {
+            if (hand === field - 10)
+                flag = false;
+            else if (hand < field)
+                flag = true;
+        }
+        else {
+            if (hand === field + 10)
+                flag = false;
+            else if (hand > field)
+                flag = true;
+        }
+        return flag;
+    };
+    var checkHands = hands.map(function (hand) {
+        return [
+            checkField(getLastItem(gameData.fieldCards[0]), hand),
+            checkField(getLastItem(gameData.fieldCards[1]), hand),
+            checkField(getLastItem(gameData.fieldCards[2]), hand, true),
+            checkField(getLastItem(gameData.fieldCards[3]), hand, true),
+        ].every(function (v) { return v === true; });
+    });
+    if (checkHands.every(function (v) { return v === true; }))
+        gameData.status = 'finish';
+};
 exports.theGame = {
     init: function () {
         server_1.socket.on("".concat(eventName, ":getData"), function () {
@@ -82,6 +118,13 @@ exports.theGame = {
             selectField.push(selectHand);
             // scoreの更新
             gameData.score += 1;
+            // 残り枚数の更新
+            gameData.remainingHand -= 1;
+            if (gameData.remainingHand <= 0)
+                gameData.status = 'continue';
+            // ゲーム終了の判定
+            if (gameData.status === 'remaining')
+                checkGameFinish();
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
         server_1.socket.on("".concat(eventName, ":turnFinish"), function () {
@@ -94,6 +137,17 @@ exports.theGame = {
             // turnの更新
             var playerLength = gameData.playerList.length;
             gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
+            // 残り枚数の更新
+            gameData.remainingHand = 2;
+            gameData.status = 'remaining';
+            // ゲーム終了の判定
+            checkGameFinish();
+            server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
+        });
+        server_1.socket.on("".concat(eventName, ":turnContinue"), function () {
+            gameData.status = 'remaining';
+            // ゲーム終了の判定
+            checkGameFinish();
             server_1.serverSocket.emit("".concat(eventName, ":getData"), gameData);
         });
     }

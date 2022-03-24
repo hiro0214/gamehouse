@@ -26,6 +26,8 @@ const gameData: gameDataType = {
   deck: [],
   score: 0,
   turn: 0,
+  remainingHand: 2,
+  status: 'remaining'
 }
 
 /**
@@ -46,6 +48,8 @@ export const theGameDataInit = () => {
   gameData.deck.length = 0;
   gameData.score = 0;
   gameData.turn = 0;
+  gameData.remainingHand = 2;
+  gameData.status = 'remaining';
 
   [...Array(deckLength)].map((_, i) => gameData.deck.push(i + 2))
   shuffle(gameData.deck);
@@ -63,6 +67,38 @@ export const theGameDataInit = () => {
 
   shuffle(gameData.playerList);
 }
+
+const checkGameFinish = () => {
+  const player = gameData.playerList[gameData.turn];
+  const hands = player.hand;
+
+  const getLastItem = (arr: number[]) => arr.slice(-1)[0];
+  const checkField = (field: number, hand: number, reverse?: boolean) => {
+    // カードを出すことができない時だけ true
+    let flag = false;
+
+    if (reverse) {
+      if (hand === field - 10) flag = false;
+      else if (hand < field) flag = true;
+    } else {
+      if (hand === field + 10) flag = false;
+      else if (hand > field) flag = true;
+    }
+
+    return flag;
+  };
+
+  const checkHands = hands.map((hand) => {
+    return [
+      checkField(getLastItem(gameData.fieldCards[0]), hand),
+      checkField(getLastItem(gameData.fieldCards[1]), hand),
+      checkField(getLastItem(gameData.fieldCards[2]), hand, true),
+      checkField(getLastItem(gameData.fieldCards[3]), hand, true),
+    ].every((v) => v === true);
+  });
+
+  if (checkHands.every((v) => v === true)) gameData.status = 'finish';
+};
 
 export const theGame = {
   init: () => {
@@ -82,6 +118,13 @@ export const theGame = {
       // scoreの更新
       gameData.score += 1
 
+      // 残り枚数の更新
+      gameData.remainingHand -= 1
+      if (gameData.remainingHand <= 0) gameData.status = 'continue';
+
+      // ゲーム終了の判定
+      if (gameData.status === 'remaining') checkGameFinish();
+
       serverSocket.emit(`${eventName}:getData`, gameData)
     })
 
@@ -96,6 +139,22 @@ export const theGame = {
       // turnの更新
       const playerLength = gameData.playerList.length
       gameData.turn = gameData.turn === playerLength - 1 ? 0 : gameData.turn + 1;
+
+      // 残り枚数の更新
+      gameData.remainingHand = 2;
+      gameData.status = 'remaining';
+
+      // ゲーム終了の判定
+      checkGameFinish();
+
+      serverSocket.emit(`${eventName}:getData`, gameData)
+    })
+
+    socket.on(`${eventName}:turnContinue`, () => {
+      gameData.status = 'remaining'
+
+      // ゲーム終了の判定
+      checkGameFinish();
 
       serverSocket.emit(`${eventName}:getData`, gameData)
     })

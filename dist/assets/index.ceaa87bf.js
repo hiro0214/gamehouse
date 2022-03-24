@@ -1,14 +1,14 @@
-var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnPropertyDescriptors;var K=Object.getOwnPropertySymbols;var Ne=Object.prototype.hasOwnProperty,Se=Object.prototype.propertyIsEnumerable;var ee=(n,t,o)=>t in n?$e(n,t,{enumerable:!0,configurable:!0,writable:!0,value:o}):n[t]=o,U=(n,t)=>{for(var o in t||(t={}))Ne.call(t,o)&&ee(n,o,t[o]);if(K)for(var o of K(t))Se.call(t,o)&&ee(n,o,t[o]);return n},Y=(n,t)=>_e(n,Ie(t));import{j as W,r as s,s as i,l as Le,u as H,B as He,S as te,R as z,a as ze}from"./vendor.2d340bfb.js";const Pe=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))r(a);new MutationObserver(a=>{for(const l of a)if(l.type==="childList")for(const c of l.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&r(c)}).observe(document,{childList:!0,subtree:!0});function o(a){const l={};return a.integrity&&(l.integrity=a.integrity),a.referrerpolicy&&(l.referrerPolicy=a.referrerpolicy),a.crossorigin==="use-credentials"?l.credentials="include":a.crossorigin==="anonymous"?l.credentials="omit":l.credentials="same-origin",l}function r(a){if(a.ep)return;a.ep=!0;const l=o(a);fetch(a.href,l)}};Pe();const e=W.exports.jsx,d=W.exports.jsxs,E=W.exports.Fragment,ne=s.exports.createContext({}),Me=n=>{const{children:t}=n,[o,r]=s.exports.useState({});return e(ne.Provider,{value:{myInfo:o,setMyInfo:r},children:t})},B=()=>s.exports.useContext(ne),oe=s.exports.memo(n=>{const{children:t}=n;return e(je,{children:t})}),je=i.div`
+var _e=Object.defineProperty,Ie=Object.defineProperties;var Ne=Object.getOwnPropertyDescriptors;var ee=Object.getOwnPropertySymbols;var Se=Object.prototype.hasOwnProperty,Le=Object.prototype.propertyIsEnumerable;var te=(n,t,o)=>t in n?_e(n,t,{enumerable:!0,configurable:!0,writable:!0,value:o}):n[t]=o,Y=(n,t)=>{for(var o in t||(t={}))Se.call(t,o)&&te(n,o,t[o]);if(ee)for(var o of ee(t))Le.call(t,o)&&te(n,o,t[o]);return n},W=(n,t)=>Ie(n,Ne(t));import{j as J,r as s,s as i,l as He,u as z,B as ze,S as ne,R as P,a as Pe}from"./vendor.2d340bfb.js";const Me=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))r(a);new MutationObserver(a=>{for(const l of a)if(l.type==="childList")for(const c of l.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&r(c)}).observe(document,{childList:!0,subtree:!0});function o(a){const l={};return a.integrity&&(l.integrity=a.integrity),a.referrerpolicy&&(l.referrerPolicy=a.referrerpolicy),a.crossorigin==="use-credentials"?l.credentials="include":a.crossorigin==="anonymous"?l.credentials="omit":l.credentials="same-origin",l}function r(a){if(a.ep)return;a.ep=!0;const l=o(a);fetch(a.href,l)}};Me();const e=J.exports.jsx,d=J.exports.jsxs,E=J.exports.Fragment,oe=s.exports.createContext({}),je=n=>{const{children:t}=n,[o,r]=s.exports.useState({});return e(oe.Provider,{value:{myInfo:o,setMyInfo:r},children:t})},B=()=>s.exports.useContext(oe),re=s.exports.memo(n=>{const{children:t}=n;return e(Te,{children:t})}),Te=i.div`
   background-image: url('/assets/images/bg_common.jpg');
   background-size: 600px auto;
   background-repeat: repeat;
-`,re=s.exports.memo(n=>{const{children:t}=n;return e(Te,{children:t})}),Te=i.div`
+`,ie=s.exports.memo(n=>{const{children:t}=n;return e(Oe,{children:t})}),Oe=i.div`
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   min-height: 100vh;
-`,Oe=["\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9","Hanabi","\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F","\u30B6\u30FB\u30B2\u30FC\u30E0"],p={red:["#e53e3e"],orange:["#ed8936"],yellow:["#ecc94b"],green:["#38A169"],teal:["#38b2ac"],blue:["#3182ce"],cyan:["#0bc5ea"],purple:["#9f7aea"],pink:["#ed64a6"],black:["#171717"],gray:["#e2e8f0","#718096"],border:["#a0aec0"]},F=s.exports.memo(n=>{const{color:t,label:o,isDisabled:r,onclick:a}=n;return e(Re,{className:t?`btn btn--${t}`:"btn",disabled:r,onClick:a,children:o})});F.defaultProps={color:"green"};const Re=i.button`
+`,Re=["\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9","Hanabi","\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F","\u30B6\u30FB\u30B2\u30FC\u30E0"],p={red:["#e53e3e"],orange:["#ed8936"],yellow:["#ecc94b"],green:["#38A169"],teal:["#38b2ac"],blue:["#3182ce"],cyan:["#0bc5ea"],purple:["#9f7aea"],pink:["#ed64a6"],black:["#171717"],gray:["#e2e8f0","#718096"],border:["#a0aec0"]},F=s.exports.memo(n=>{const{color:t,label:o,isDisabled:r,onclick:a}=n;return e(Ge,{className:t?`btn btn--${t}`:"btn",disabled:r,onClick:a,children:o})});F.defaultProps={color:"green"};const Ge=i.button`
   width: 300px;
   padding: 12px 16px;
   font-size: 16px;
@@ -52,7 +52,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       background: ${p.gray[1]};
     }
   }
-`,P=s.exports.memo(n=>{const{text:t,size:o}=n;return e(Ge,{className:o&&`heading--${o}`,children:t})});P.defaultProps={size:"1"};const Ge=i.div`
+`,M=s.exports.memo(n=>{const{text:t,size:o}=n;return e(Ue,{className:o&&`heading--${o}`,children:t})});M.defaultProps={size:"1"};const Ue=i.div`
   margin-bottom: 25px;
   font-weight: bold;
   text-align: center;
@@ -68,12 +68,12 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.heading--4 {
     font-size: 18px;
   }
-`,Ue=s.exports.memo(n=>{const{value:t,placeholder:o,onChange:r}=n;return d(Ye,{className:"textContainer",children:[e(We,{value:t,placeholder:o,onChange:r}),e(Je,{})]})}),Ye=i.div`
+`,Ye=s.exports.memo(n=>{const{value:t,placeholder:o,onChange:r}=n;return d(We,{className:"textContainer",children:[e(Je,{value:t,placeholder:o,onChange:r}),e(Ze,{})]})}),We=i.div`
   position: relative;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-`,We=i.input`
+`,Je=i.input`
   width: 100%;
   padding: 12px 16px;
   border-bottom: 1px solid ${p.gray[1]};
@@ -81,7 +81,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &:focus + div {
     transform: scale(1);
   }
-`,Je=i.div`
+`,Ze=i.div`
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -89,14 +89,14 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   transform: scale(0);
   transform-origin: center;
   transition: transform 0.2s ease-out;
-`,m=Le(),ie=()=>{const{setMyInfo:n}=B(),t=()=>{const a=8,l="abcdefghijklmnopqrstuvwxyz0123456789";let c="";for(let u=0;u<a;u++)c+=l[Math.floor(Math.random()*l.length)];return c},o=()=>{const a=151,l=`${Math.floor(Math.random()*a)+1}`;let c;return l.length===1?c=`00${l}`:l.length===2?c=`0${l}`:c=l,c};return{setInfo:s.exports.useCallback((a,l)=>{const c={id:t(),name:a,icon:o(),isAdmin:l};n(c),m.emit("common:newUser",c)},[]),randomIcon:o}},Ze=()=>{const n=H(),{setInfo:t}=ie();return{enter:s.exports.useCallback(r=>{r==="$clear"?m.emit("common:clearUser"):(t(r==="admin"?"\u3044\u308F\u3082\u3068":r,r==="admin"),n.push("/lobby"))},[])}},Xe=s.exports.memo(()=>{const[n,t]=s.exports.useState(""),[o,r]=s.exports.useState(!0),{enter:a}=Ze();return e(Ve,{children:d(Qe,{children:[e(P,{text:"Games House"}),e(Ue,{value:n,placeholder:"\u30E6\u30FC\u30B6\u30FC\u540D\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",onChange:u=>{t(u.target.value),u.target.value?r(!1):r(!0)}}),e(F,{label:"Join the game!",isDisabled:o,onclick:()=>a(n)})]})})}),Ve=i.div`
+`,m=He(),ae=()=>{const{setMyInfo:n}=B(),t=()=>{const a=8,l="abcdefghijklmnopqrstuvwxyz0123456789";let c="";for(let u=0;u<a;u++)c+=l[Math.floor(Math.random()*l.length)];return c},o=()=>{const a=151,l=`${Math.floor(Math.random()*a)+1}`;let c;return l.length===1?c=`00${l}`:l.length===2?c=`0${l}`:c=l,c};return{setInfo:s.exports.useCallback((a,l)=>{const c={id:t(),name:a,icon:o(),isAdmin:l};n(c),m.emit("common:newUser",c)},[]),randomIcon:o}},Xe=()=>{const n=z(),{setInfo:t}=ae();return{enter:s.exports.useCallback(r=>{r==="$clear"?m.emit("common:clearUser"):(t(r==="admin"?"\u3044\u308F\u3082\u3068":r,r==="admin"),n.push("/lobby"))},[])}},Ve=s.exports.memo(()=>{const[n,t]=s.exports.useState(""),[o,r]=s.exports.useState(!0),{enter:a}=Xe();return e(Qe,{children:d(qe,{children:[e(M,{text:"Games House"}),e(Ye,{value:n,placeholder:"\u30E6\u30FC\u30B6\u30FC\u540D\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",onChange:u=>{t(u.target.value),u.target.value?r(!1):r(!0)}}),e(F,{label:"Join the game!",isDisabled:o,onclick:()=>a(n)})]})})}),Qe=i.div`
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding-top: 50px;
   padding-bottom: 50px;
-`,Qe=i.div`
+`,qe=i.div`
   width: 500px;
   padding: 20px 30px 30px;
   background: #fff;
@@ -107,12 +107,12 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   .textContainer {
     margin-bottom: 40px;
   }
-`,qe=s.exports.memo(()=>null),J=s.exports.memo(n=>{const{children:t,options:o,value:r,onChange:a,disabled:l,hdg:c}=n;return d(Ke,{children:[e(tt,{children:c}),d(et,{value:r,onChange:a,disabled:!l,children:[t,o.map(u=>e("option",{value:u.key,children:u.value},u.value))]})]})}),Ke=i.div`
+`,Ke=s.exports.memo(()=>null),Z=s.exports.memo(n=>{const{children:t,options:o,value:r,onChange:a,disabled:l,hdg:c}=n;return d(et,{children:[e(nt,{children:c}),d(tt,{value:r,onChange:a,disabled:!l,children:[t,o.map(u=>e("option",{value:u.key,children:u.value},u.value))]})]})}),et=i.div`
   display: grid;
   grid-template-columns: 80px 1fr;
   grid-gap: 10px;
   align-items: center;
-`,et=i.select`
+`,tt=i.select`
   display: block;
   width: 300px;
   padding: 16px;
@@ -120,16 +120,16 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   background: #fff;
   border: 1px solid ${p.gray[1]};
   border-radius: 4px;
-`,tt=i.div`
+`,nt=i.div`
   font-size: 14px;
   font-weight: bold;
-`,nt=[{key:4,value:"4\u8272"},{key:5,value:"5\u8272"},{key:6,value:"6\u8272"}],ot=[{key:3,value:"3\u679A"},{key:4,value:"4\u679A"},{key:5,value:"5\u679A"}],rt=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState(null),[r,a]=s.exports.useState(null);s.exports.useEffect(()=>{m.on("hanabi:updateConfig",u=>{o(u.colorNum),a(u.handNum)}),m.emit("hanabi:getConfig")},[]);const l=u=>{m.emit("hanabi:setColorNum",u.target.options[u.target.selectedIndex].value)},c=u=>{m.emit("hanabi:setHandNum",u.target.options[u.target.selectedIndex].value)};return d(it,{children:[e(ae,{children:e(J,{options:nt,hdg:"\u8272\u306E\u6570",value:t||"",onChange:l,disabled:n.isAdmin})}),e(ae,{style:{marginTop:"10px"},children:e(J,{options:ot,hdg:"\u624B\u672D\u306E\u679A\u6570",value:r||"",onChange:c,disabled:n.isAdmin})})]})}),it=i.div``,ae=i.div`
+`,ot=[{key:4,value:"4\u8272"},{key:5,value:"5\u8272"},{key:6,value:"6\u8272"}],rt=[{key:3,value:"3\u679A"},{key:4,value:"4\u679A"},{key:5,value:"5\u679A"}],it=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState(null),[r,a]=s.exports.useState(null);s.exports.useEffect(()=>{m.on("hanabi:updateConfig",u=>{o(u.colorNum),a(u.handNum)}),m.emit("hanabi:getConfig")},[]);const l=u=>{m.emit("hanabi:setColorNum",u.target.options[u.target.selectedIndex].value)},c=u=>{m.emit("hanabi:setHandNum",u.target.options[u.target.selectedIndex].value)};return d(at,{children:[e(se,{children:e(Z,{options:ot,hdg:"\u8272\u306E\u6570",value:t||"",onChange:l,disabled:n.isAdmin})}),e(se,{style:{marginTop:"10px"},children:e(Z,{options:rt,hdg:"\u624B\u672D\u306E\u679A\u6570",value:r||"",onChange:c,disabled:n.isAdmin})})]})}),at=i.div``,se=i.div`
   display: flex;
   justify-content: center;
   select {
     width: 150px;
   }
-`,$=s.exports.memo(n=>{const{name:t,icon:o,editIcon:r,editName:a}=n,{myInfo:l,setMyInfo:c}=B(),[u,h]=s.exports.useState(!1),[f,k]=s.exports.useState(l.name),{randomIcon:C}=ie(),A=()=>{c(Y(U({},l),{icon:C()}))},w=()=>{h(!u),u&&c(Y(U({},l),{name:f}))},x=g=>k(g.target.value);return s.exports.useEffect(()=>{m.emit("common:updateInfo",l)},[l]),d(at,{className:"profile",children:[d(st,{className:"profile__img",children:[e("img",{src:`/assets/images/pokemon/${o}.png`}),r&&e(lt,{onClick:A,children:r})]}),u?e(ct,{type:"text",value:f,onChange:x}):e(dt,{className:"profile__name",children:t}),a&&e(ut,{onClick:w,className:u?"isEdit":"",children:a})]})}),at=i.li`
+`,$=s.exports.memo(n=>{const{name:t,icon:o,editIcon:r,editName:a}=n,{myInfo:l,setMyInfo:c}=B(),[u,h]=s.exports.useState(!1),[x,k]=s.exports.useState(l.name),{randomIcon:y}=ae(),b=()=>{c(W(Y({},l),{icon:y()}))},w=()=>{h(!u),u&&c(W(Y({},l),{name:x}))},g=f=>k(f.target.value);return s.exports.useEffect(()=>{m.emit("common:updateInfo",l)},[l]),d(st,{className:"profile",children:[d(lt,{className:"profile__img",children:[e("img",{src:`/assets/images/pokemon/${o}.png`}),r&&e(dt,{onClick:b,children:r})]}),u?e(ut,{type:"text",value:x,onChange:g}):e(ct,{className:"profile__name",children:t}),a&&e(pt,{onClick:w,className:u?"isEdit":"",children:a})]})}),st=i.li`
   display: flex;
   align-items: center;
   padding: 5px 10px;
@@ -139,7 +139,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   + li {
     margin-top: 10px;
   }
-`,st=i.div`
+`,lt=i.div`
   position: relative;
   width: 60px;
   height: 60px;
@@ -150,7 +150,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   > img {
     width: 100%;
   }
-`,lt=i.button`
+`,dt=i.button`
   position: absolute;
   right: 0;
   bottom: -5px;
@@ -163,14 +163,14 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   background-position: center;
   border: 1px solid ${p.border};
   border-radius: 50%;
-`,dt=i.div`
+`,ct=i.div`
   width: calc(100% - 100px);
   margin-left: 10px;
   margin-right: 10px;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-`,ct=i.input`
+`,ut=i.input`
   display: block;
   width: calc(100% - 100px);
   margin-left: 10px;
@@ -178,7 +178,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   font-size: 16px;
   background: #fff;
   border-bottom: 1px solid ${p.gray[1]};
-`,ut=i.button`
+`,pt=i.button`
   width: 20px;
   height: 20px;
   background-color: #fff;
@@ -191,10 +191,10 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.isEdit {
     background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Ctitle%3E843_ch_f%3C%2Ftitle%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20fill%3D%22none%22%2F%3E%3Cpolyline%20points%3D%2212%2028%2020%2036%2038%2018%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-linecap%3D%22square%22%20stroke-miterlimit%3D%2210%22%20stroke-width%3D%224%22%2F%3E%3C%2Fsvg%3E');
   }
-`,I="kowloonTactics",pt=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({redPlayer:{id:"",name:"",icon:"",isAdmin:!1},bluePlayer:{id:"",name:"",icon:"",isAdmin:!1},redSupporter:[],blueSupporter:[]});s.exports.useEffect(()=>{m.on(`${I}:updateConfig`,u=>{o(u)}),m.emit(`${I}:updateConfig`)},[]);const r=()=>m.emit(`${I}:setRedPlayer`,n),a=()=>m.emit(`${I}:setBluePlayer`,n),l=()=>m.emit(`${I}:setRedSupporter`,n),c=()=>m.emit(`${I}:setBlueSupporter`,n);return d(mt,{children:[d(se,{className:"red",children:[d(le,{children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),t.redPlayer.id?e($,{name:t.redPlayer.name,icon:t.redPlayer.icon}):e(F,{label:"\u30D7\u30EC\u30A4\u30E4\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:r,color:"yellow"})]}),d(de,{children:[e("span",{children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),!t.redSupporter.some(u=>u.id===n.id)&&e(F,{label:"\u30B5\u30DD\u30FC\u30BF\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:l,color:"yellow"}),e(ce,{children:t.redSupporter.map(u=>e($,{name:u.name,icon:u.icon},u.id))})]})]}),d(se,{className:"blue",children:[d(le,{children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),t.bluePlayer.id?e($,{name:t.bluePlayer.name,icon:t.bluePlayer.icon}):e(F,{label:"\u30D7\u30EC\u30A4\u30E4\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:a,color:"yellow"})]}),d(de,{children:[e("span",{children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),!t.blueSupporter.some(u=>u.id===n.id)&&e(F,{label:"\u30B5\u30DD\u30FC\u30BF\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:c,color:"yellow"}),e(ce,{children:t.blueSupporter.map(u=>e($,{name:u.name,icon:u.icon},u.id))})]})]})]})}),mt=i.div`
+`,I="kowloonTactics",mt=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({redPlayer:{id:"",name:"",icon:"",isAdmin:!1},bluePlayer:{id:"",name:"",icon:"",isAdmin:!1},redSupporter:[],blueSupporter:[]});s.exports.useEffect(()=>{m.on(`${I}:updateConfig`,u=>{o(u)}),m.emit(`${I}:updateConfig`)},[]);const r=()=>m.emit(`${I}:setRedPlayer`,n),a=()=>m.emit(`${I}:setBluePlayer`,n),l=()=>m.emit(`${I}:setRedSupporter`,n),c=()=>m.emit(`${I}:setBlueSupporter`,n);return d(ht,{children:[d(le,{className:"red",children:[d(de,{children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),t.redPlayer.id?e($,{name:t.redPlayer.name,icon:t.redPlayer.icon}):e(F,{label:"\u30D7\u30EC\u30A4\u30E4\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:r,color:"yellow"})]}),d(ce,{children:[e("span",{children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),!t.redSupporter.some(u=>u.id===n.id)&&e(F,{label:"\u30B5\u30DD\u30FC\u30BF\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:l,color:"yellow"}),e(ue,{children:t.redSupporter.map(u=>e($,{name:u.name,icon:u.icon},u.id))})]})]}),d(le,{className:"blue",children:[d(de,{children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),t.bluePlayer.id?e($,{name:t.bluePlayer.name,icon:t.bluePlayer.icon}):e(F,{label:"\u30D7\u30EC\u30A4\u30E4\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:a,color:"yellow"})]}),d(ce,{children:[e("span",{children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),!t.blueSupporter.some(u=>u.id===n.id)&&e(F,{label:"\u30B5\u30DD\u30FC\u30BF\u30FC\u3068\u3057\u3066\u53C2\u52A0",onclick:c,color:"yellow"}),e(ue,{children:t.blueSupporter.map(u=>e($,{name:u.name,icon:u.icon},u.id))})]})]})]})}),ht=i.div`
   display: flex;
   justify-content: space-between;
-`,se=i.div`
+`,le=i.div`
   width: calc(100% / 2 - 10px);
   min-height: 350px;
   padding: 10px;
@@ -218,7 +218,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       text-overflow: clip;
     }
   }
-`,le=i.div`
+`,de=i.div`
   padding-bottom: 20px;
   border-bottom: 1px solid #666;
   > .btn {
@@ -232,7 +232,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     font-size: 14px;
     font-weight: bold;
   }
-`,de=i.div`
+`,ce=i.div`
   padding-top: 10px;
   > .btn {
     width: 100%;
@@ -246,20 +246,20 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     font-size: 14px;
     font-weight: bold;
   }
-`,ce=i.div``,ht=s.exports.memo(()=>null),gt=()=>{const[n,t]=s.exports.useState(null),o=s.exports.useCallback(r=>{switch(r){case"\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9":t(e(pt,{}));break;case"Hanabi":t(e(rt,{}));break;case"\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F":t(e(qe,{}));break;case"\u30B6\u30FB\u30B2\u30FC\u30E0":t(e(ht,{}));break}},[]);return{currentConfig:n,setConfig:o}},xt=()=>{const n=H();return{gameStart:s.exports.useCallback(o=>{switch(o){case"\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9":n.push("/game/kowloon_tactics");break;case"Hanabi":n.push("/game/hanabi");break;case"\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F":n.push("/game/fakeArtist");break;case"\u30B6\u30FB\u30B2\u30FC\u30E0":n.push("/game/THE-Game");break}},[])}},ue=[];Oe.map(n=>ue.push({key:n,value:n}));const ft=s.exports.memo(()=>{const[n,t]=s.exports.useState(null),{myInfo:o}=B(),{gameStart:r}=xt(),{currentConfig:a,setConfig:l}=gt(),c=h=>{const f=h.target.value;f.indexOf("--")===-1?m.emit("common:setCurrentGame",f):m.emit("common:setCurrentGame",null)},u=()=>m.emit("common:gameStart");return s.exports.useEffect(()=>{m.on("common:getCurrentGame",h=>{t(h),l(h)}),m.on("common:setCurrentGame",h=>{t(h),l(h)}),m.on("common:gameStart",h=>r(h)),m.emit("common:getCurrentGame")},[]),d(bt,{children:[e(P,{text:"Setting",size:"2"}),e(yt,{children:e(J,{options:ue,hdg:"\u30B2\u30FC\u30E0",value:n||"",onChange:c,disabled:o.isAdmin,children:e("option",{children:"-- \u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044 --"})})}),e(Ct,{children:n&&d(At,{children:[a,o.isAdmin&&e(F,{label:"\u30B9\u30BF\u30FC\u30C8",onclick:u,color:"blue"})]})})]})}),bt=i.div`
+`,ue=i.div``,gt=s.exports.memo(()=>null),xt=()=>{const[n,t]=s.exports.useState(null),o=s.exports.useCallback(r=>{switch(r){case"\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9":t(e(mt,{}));break;case"Hanabi":t(e(it,{}));break;case"\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F":t(e(Ke,{}));break;case"\u30B6\u30FB\u30B2\u30FC\u30E0":t(e(gt,{}));break}},[]);return{currentConfig:n,setConfig:o}},ft=()=>{const n=z();return{gameStart:s.exports.useCallback(o=>{switch(o){case"\u30AF\u30FC\u30ED\u30F3\u30BF\u30AF\u30C6\u30A3\u30AF\u30B9":n.push("/game/kowloon_tactics");break;case"Hanabi":n.push("/game/hanabi");break;case"\u30A8\u30BB\u82B8\u8853\u5BB6 \u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u3078\u884C\u304F":n.push("/game/fakeArtist");break;case"\u30B6\u30FB\u30B2\u30FC\u30E0":n.push("/game/THE-Game");break}},[])}},pe=[];Re.map(n=>pe.push({key:n,value:n}));const bt=s.exports.memo(()=>{const[n,t]=s.exports.useState(null),{myInfo:o}=B(),{gameStart:r}=ft(),{currentConfig:a,setConfig:l}=xt(),c=h=>{const x=h.target.value;x.indexOf("--")===-1?m.emit("common:setCurrentGame",x):m.emit("common:setCurrentGame",null)},u=()=>m.emit("common:gameStart");return s.exports.useEffect(()=>{m.on("common:getCurrentGame",h=>{t(h),l(h)}),m.on("common:setCurrentGame",h=>{t(h),l(h)}),m.on("common:gameStart",h=>r(h)),m.emit("common:getCurrentGame")},[]),d(yt,{children:[e(M,{text:"Setting",size:"2"}),e(Ct,{children:e(Z,{options:pe,hdg:"\u30B2\u30FC\u30E0",value:n||"",onChange:c,disabled:o.isAdmin,children:e("option",{children:"-- \u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044 --"})})}),e(At,{children:n&&d(wt,{children:[a,o.isAdmin&&e(F,{label:"\u30B9\u30BF\u30FC\u30C8",onclick:u,color:"blue"})]})})]})}),yt=i.div`
   width: 60%;
   padding: 10px 20px 20px;
   background: rgba(20, 20, 20, 0.2);
   border-radius: 6px;
-`,yt=i.div`
+`,Ct=i.div`
   display: flex;
   justify-content: center;
-`,Ct=i.div`
+`,At=i.div`
   height: calc(100% - 134px);
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #666;
-`,At=i.div`
+`,wt=i.div`
   height: 100%;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -274,12 +274,12 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     display: block;
     margin: 30px auto 0;
   }
-`,wt=s.exports.memo(n=>{const{userList:t}=n,{myInfo:o}=B();return d(kt,{children:[e(P,{text:"Player",size:"2"}),e(vt,{children:t.map(r=>e($,{name:r.name,icon:r.icon,editIcon:r.id===o.id&&!0,editName:r.id===o.id&&!0},r.id))})]})}),kt=i.div`
+`,kt=s.exports.memo(n=>{const{userList:t}=n,{myInfo:o}=B();return d(vt,{children:[e(M,{text:"Player",size:"2"}),e(Bt,{children:t.map(r=>e($,{name:r.name,icon:r.icon,editIcon:r.id===o.id&&!0,editName:r.id===o.id&&!0},r.id))})]})}),vt=i.div`
   width: 35%;
   padding: 10px 10px 20px 20px;
   background: rgba(20, 20, 20, 0.2);
   border-radius: 6px;
-`,vt=i.ul`
+`,Bt=i.ul`
   height: calc(100% - 71px);
   margin-right: -5px;
   padding-right: 5px;
@@ -292,7 +292,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     border: 1px solid #d86405;
     border-radius: 10px;
   }
-`,Bt=s.exports.memo(()=>{const[n,t]=s.exports.useState([]),o=H();return s.exports.useEffect(()=>{m.emit("common:getUser"),m.on("common:getUser",r=>t(r)),m.on("common:toTop",()=>o.push("/"))},[]),d(Ft,{children:[e(wt,{userList:n}),e(ft,{})]})}),Ft=i.div`
+`,Ft=s.exports.memo(()=>{const[n,t]=s.exports.useState([]),o=z();return s.exports.useEffect(()=>{m.emit("common:getUser"),m.on("common:getUser",r=>t(r)),m.on("common:toTop",()=>o.push("/"))},[]),d(Et,{children:[e(kt,{userList:n}),e(bt,{})]})}),Et=i.div`
   display: flex;
   justify-content: space-between;
   width: 1000px;
@@ -303,11 +303,11 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   border: 1px solid #666666;
   border-radius: 10px;
   box-shadow: 0 0 2px 2px rgba(34, 34, 34, 0.3) inset;
-`;let N=!1,Z=0,X=0;const Et=s.exports.memo(n=>{const{gameData:t,setCanvas:o,color:r,disable:a,status:l,isFake:c,onclickAnswer:u}=n;return s.exports.useEffect(()=>{const h=document.getElementById("canvas"),f=h.getContext("2d");f.lineCap="round",f.lineWidth=4,f.strokeStyle=r,h.addEventListener("mousedown",C=>{N=!0,Z=C.offsetX,X=C.offsetY}),h.addEventListener("mousemove",C=>{if(!N)return;const A=C.offsetX,w=C.offsetY;k(f,Z,X,A,w),Z=A,X=w}),h.addEventListener("mouseout",()=>{!N||(N=!1,o(h))}),h.addEventListener("mouseup",()=>{!N||(N=!1,o(h))});const k=(C,A,w,x,g)=>{C.beginPath(),C.moveTo(A,w),C.lineTo(x,g),C.stroke()}},[]),s.exports.useEffect(()=>{const f=document.getElementById("canvas").getContext("2d");if(t.context.length){const k=new Image;k.src=t.context,k.onload=()=>f.drawImage(k,0,0)}},[t.context]),d(Dt,{children:[e($t,{id:"canvas",width:750,height:500,className:a||l!=="game"?"disable":""}),e(_t,{className:l==="theme"?"is-active":"",children:d("p",{children:["\u304A\u984C\u3092\u78BA\u8A8D\u3057\u3066\u4E0B\u3055\u3044",e("br",{}),"10\u79D2\u5F8C\u306B\u30B2\u30FC\u30E0\u304C\u958B\u59CB\u3057\u307E\u3059"]})}),e(S,{className:l==="title"?"is-active":"",children:c?d("p",{children:["\u304A\u984C\u3092\u77E5\u3063\u3066\u3044\u308B\u30D5\u30EA\u3092\u3057\u3066",e("br",{}),"\u30D0\u30EC\u306A\u3044\u3088\u3046\u306B\u7D75\u3092\u63CF\u3053\u3046"]}):d("p",{children:["\u5354\u529B\u3057\u3066\u7D75\u3092\u63CF\u3053\u3046",e("br",{}),"\u305F\u3060\u3057\u30A8\u30BB\u82B8\u8853\u5BB6\u306B\u304A\u984C\u304C\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044"]})}),e(S,{style:{animationDelay:"1s"},className:l==="vote"?"is-active":"",children:d("p",{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u3060\u3068\u601D\u3046\u4EBA\u306B",e("br",{}),"\u6295\u7968\u3057\u3066\u304F\u3060\u3055\u3044"]})}),l==="voted"&&d(E,{children:[e(S,{className:l==="voted"?"is-active":"",children:"\u6295\u7968\u7D50\u679C\u767A\u8868"}),d(It,{children:[e("p",{children:"\u6700\u591A\u6295\u7968\u8005\u306F..."}),e(pe,{children:t.mostVote}),e("p",{style:{marginTop:"50px"},children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306F..."}),e(pe,{children:t.players[t.fakeMan].name})]}),e(S,{className:l==="voted"?"is-active":"",style:{animationDelay:"15s"},children:t.mostVote===t.players[t.fakeMan].name?d("p",{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u304C",e("br",{}),"\u304A\u984C\u3092\u5F53\u3066\u308B\u3053\u3068\u304C\u3067\u304D\u308C\u3070\u9006\u8EE2\u52DD\u5229"]}):e("p",{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"})})]}),l==="reversal"&&e(Nt,{className:c?"":"disable",children:e("ul",{children:t.answerList.map((h,f)=>e("li",{style:{animationDelay:`${f*.1}s`},onClick:()=>u(f),children:h},h))})}),l==="answer"&&d(E,{children:[d(St,{children:[d("div",{children:[e("p",{className:"hdg",children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u56DE\u7B54"}),e("p",{className:"card",children:t.answer})]}),d("div",{children:[e("p",{className:"hdg",style:{marginTop:"50px"},children:"\u6B63\u89E3"}),e("p",{className:"card",children:t.theme})]})]}),e(S,{className:"modal is-active",children:t.answer===t.theme?e("p",{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"}):e("p",{children:"\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"})})]})]})}),Dt=i.div`
+`;let N=!1,X=0,V=0;const Dt=s.exports.memo(n=>{const{gameData:t,setCanvas:o,color:r,disable:a,status:l,isFake:c,onclickAnswer:u}=n;return s.exports.useEffect(()=>{const h=document.getElementById("canvas"),x=h.getContext("2d");x.lineCap="round",x.lineWidth=4,x.strokeStyle=r,h.addEventListener("mousedown",y=>{N=!0,X=y.offsetX,V=y.offsetY}),h.addEventListener("mousemove",y=>{if(!N)return;const b=y.offsetX,w=y.offsetY;k(x,X,V,b,w),X=b,V=w}),h.addEventListener("mouseout",()=>{!N||(N=!1,o(h))}),h.addEventListener("mouseup",()=>{!N||(N=!1,o(h))});const k=(y,b,w,g,f)=>{y.beginPath(),y.moveTo(b,w),y.lineTo(g,f),y.stroke()}},[]),s.exports.useEffect(()=>{const x=document.getElementById("canvas").getContext("2d");if(t.context.length){const k=new Image;k.src=t.context,k.onload=()=>x.drawImage(k,0,0)}},[t.context]),d($t,{children:[e(_t,{id:"canvas",width:750,height:500,className:a||l!=="game"?"disable":""}),e(It,{className:l==="theme"?"is-active":"",children:d("p",{children:["\u304A\u984C\u3092\u78BA\u8A8D\u3057\u3066\u4E0B\u3055\u3044",e("br",{}),"10\u79D2\u5F8C\u306B\u30B2\u30FC\u30E0\u304C\u958B\u59CB\u3057\u307E\u3059"]})}),e(S,{className:l==="title"?"is-active":"",children:c?d("p",{children:["\u304A\u984C\u3092\u77E5\u3063\u3066\u3044\u308B\u30D5\u30EA\u3092\u3057\u3066",e("br",{}),"\u30D0\u30EC\u306A\u3044\u3088\u3046\u306B\u7D75\u3092\u63CF\u3053\u3046"]}):d("p",{children:["\u5354\u529B\u3057\u3066\u7D75\u3092\u63CF\u3053\u3046",e("br",{}),"\u305F\u3060\u3057\u30A8\u30BB\u82B8\u8853\u5BB6\u306B\u304A\u984C\u304C\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044"]})}),e(S,{style:{animationDelay:"1s"},className:l==="vote"?"is-active":"",children:d("p",{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u3060\u3068\u601D\u3046\u4EBA\u306B",e("br",{}),"\u6295\u7968\u3057\u3066\u304F\u3060\u3055\u3044"]})}),l==="voted"&&d(E,{children:[e(S,{className:l==="voted"?"is-active":"",children:"\u6295\u7968\u7D50\u679C\u767A\u8868"}),d(Nt,{children:[e("p",{children:"\u6700\u591A\u6295\u7968\u8005\u306F..."}),e(me,{children:t.mostVote}),e("p",{style:{marginTop:"50px"},children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306F..."}),e(me,{children:t.players[t.fakeMan].name})]}),e(S,{className:l==="voted"?"is-active":"",style:{animationDelay:"15s"},children:t.mostVote===t.players[t.fakeMan].name?d("p",{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u304C",e("br",{}),"\u304A\u984C\u3092\u5F53\u3066\u308B\u3053\u3068\u304C\u3067\u304D\u308C\u3070\u9006\u8EE2\u52DD\u5229"]}):e("p",{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"})})]}),l==="reversal"&&e(St,{className:c?"":"disable",children:e("ul",{children:t.answerList.map((h,x)=>e("li",{style:{animationDelay:`${x*.1}s`},onClick:()=>u(x),children:h},h))})}),l==="answer"&&d(E,{children:[d(Lt,{children:[d("div",{children:[e("p",{className:"hdg",children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u56DE\u7B54"}),e("p",{className:"card",children:t.answer})]}),d("div",{children:[e("p",{className:"hdg",style:{marginTop:"50px"},children:"\u6B63\u89E3"}),e("p",{className:"card",children:t.theme})]})]}),e(S,{className:"modal is-active",children:t.answer===t.theme?e("p",{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"}):e("p",{children:"\u82B8\u8853\u5BB6\u306E\u52DD\u5229!!"})})]})]})}),$t=i.div`
   position: relative;
   width: 750px;
   height: 100%;
-`,$t=i.canvas`
+`,_t=i.canvas`
   background: #fff;
   border: 3px solid #ccc;
   border-radius: 6px;
@@ -316,7 +316,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.disable {
     pointer-events: none;
   }
-`,_t=i.div`
+`,It=i.div`
   position: absolute;
   top: 50%;
   left: 3px;
@@ -393,7 +393,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: translateY(-50%) scale(0.8);
     }
   }
-`,It=i.div`
+`,Nt=i.div`
   position: absolute;
   top: calc(50% + 3px);
   left: 3px;
@@ -431,7 +431,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: translateX(0px);
     }
   }
-`,pe=i.p`
+`,me=i.p`
   display: inline-block;
   width: 250px;
   margin-top: 20px;
@@ -446,7 +446,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: scale(1);
     }
   }
-`,Nt=i.div`
+`,St=i.div`
   position: absolute;
   top: 3px;
   left: 3px;
@@ -484,7 +484,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       }
     }
   }
-`,St=i.div`
+`,Lt=i.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -534,7 +534,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   + .modal {
     animation-delay: 7s;
   }
-`,M=s.exports.memo(n=>{const{turn:t}=n,[o,r]=s.exports.useState(!1);return s.exports.useEffect(()=>{r(!0),setTimeout(()=>r(!1),1e3)},[t]),d(Lt,{className:o?"isAnimate":"",children:[t,"\u306E\u30BF\u30FC\u30F3\u3067\u3059\uFF01"]})}),Lt=i.div`
+`,j=s.exports.memo(n=>{const{turn:t}=n,[o,r]=s.exports.useState(!1);return s.exports.useEffect(()=>{r(!0),setTimeout(()=>r(!1),1e3)},[t]),d(Ht,{className:o?"isAnimate":"",children:[t,"\u306E\u30BF\u30FC\u30F3\u3067\u3059\uFF01"]})}),Ht=i.div`
   position: fixed;
   top: 10px;
   left: 0;
@@ -568,11 +568,11 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: scale(1);
     }
   }
-`,V=()=>{const n=H();return s.exports.useEffect(()=>{m.on("common:toLobby",()=>{n.push("/lobby")})},[]),{toLobby:s.exports.useCallback(()=>{m.emit("common:toLobby")},[])}},D="fakeArtist",Ht=s.exports.memo(()=>{const[n,t]=s.exports.useState({}),[o,r]=s.exports.useState(null),{myInfo:a}=B(),[l,c]=s.exports.useState(""),[u,h]=s.exports.useState(!1),{toLobby:f}=V();s.exports.useEffect(()=>{m.on(`${D}:getData`,x=>t(x)),m.on(`${D}:vote`,()=>c("vote")),m.on(`${D}:voted`,()=>c("voted")),m.on(`${D}:reversal`,x=>{t(x),c("reversal")}),m.on(`${D}:answer`,x=>{t(x),c("answer")}),m.on(`${D}:finish`,x=>{t(x),c("finish")}),m.emit(`${D}:getData`),setTimeout(()=>c("theme"),500),setTimeout(()=>c("title"),10500),setTimeout(()=>c("game"),16e3)},[]);const k=()=>{const x=o==null?void 0:o.toDataURL();m.emit(`${D}:draw`,x),r(null)},C=()=>{const x=o==null?void 0:o.getContext("2d");if(x.clearRect(0,0,750,500),n.context.length){const g=new Image;g.src=n.context,g.onload=()=>x.drawImage(g,0,0)}r(null)},A=x=>{h(!0),m.emit(`${D}:vote`,x)},w=x=>m.emit(`${D}:answer`,x);return Object.keys(n).length?d(zt,{children:[l==="game"&&e(M,{turn:n.players[n.turn].name}),l==="game"&&(o?d(Pt,{children:[e("p",{children:"\u3053\u308C\u3067\u3044\u3044?"}),e("button",{style:{backgroundColor:p.green[0]},onClick:k,children:"\u66F8\u3044\u305F\uFF01"}),e("button",{style:{backgroundColor:p.gray[1]},onClick:C,children:"\u66F8\u304D\u76F4\u3059\uFF01"})]}):n.players[n.fakeMan].id===a.id?d(j,{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u3060\u3068\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044",e("br",{}),"\u30D0\u30EC\u3066\u3082\u4F55\u3092\u63CF\u3044\u3066\u3044\u308B\u304B\u5F53\u3066\u308C\u3070\u52DD\u3061"]}):d(j,{children:["\u3053\u306E\u4E2D\u306B\u4E00\u4EBA\u304A\u984C\u3092\u77E5\u3089\u306A\u3044\u30A8\u30BB\u82B8\u8853\u5BB6\u304C\u3044\u308B",e("br",{}),"\u30A8\u30BB\u82B8\u8853\u5BB6\u306B\u304A\u984C\u304C\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044"]})),l==="vote"&&e(j,{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306F\u8AB0\u3060\uFF1F"}),l==="reversal"&&e(j,{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u304C\u56DE\u7B54\u3092\u9078\u629E\u3059\u308B"}),l==="finish"&&d(Mt,{children:[n.answer?n.answer===n.theme?"\u30A8\u30BB\u82B8\u8853\u5BB6":"\u82B8\u8853\u5BB6":"\u30A8\u30BB\u82B8\u8853\u5BB6","\u306E\u52DD\u5229!!"]}),d(jt,{children:[e(Et,{gameData:n,setCanvas:r,color:n.colors[n.players.findIndex(x=>x.id===a.id)],disable:!!(o||n.players[n.turn].id!==a.id),status:l,isFake:n.players[n.fakeMan].id===a.id,onclickAnswer:w}),d(Tt,{children:[d(me,{children:[e("span",{children:"\u4ECA\u56DE\u306E\u30C6\u30FC\u30DE"}),e(he,{children:n.category})]}),d(me,{style:{marginTop:"10px"},children:[e("span",{children:"\u4ECA\u56DE\u306E\u304A\u984C"}),e(he,{children:n.players[n.fakeMan].id!==a.id?n.theme:"?"})]}),e(Ot,{children:n.players.map((x,g)=>l==="vote"?d(ge,{style:{borderColor:n.colors[g]},children:[u?e(xe,{children:e("img",{src:`/assets/images/pokemon/${x.icon}.png`})}):e(Rt,{onClick:()=>A(g),children:"\u6295\u7968"}),e(fe,{children:x.name})]},x.id):d(ge,{style:{borderColor:n.colors[g]},children:[e(xe,{children:e("img",{src:`/assets/images/pokemon/${x.icon}.png`})}),e(fe,{children:x.name})]},x.id))})]})]}),l==="finish"&&a.isAdmin&&e("div",{style:{marginTop:"30px",textAlign:"center"},children:e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:f,color:"teal"})})]}):null}),zt=i.div`
+`,T=()=>{const n=z();return s.exports.useEffect(()=>{m.on("common:toLobby",()=>{n.push("/lobby")})},[]),{toLobby:s.exports.useCallback(()=>{m.emit("common:toLobby")},[])}},D="fakeArtist",zt=s.exports.memo(()=>{const[n,t]=s.exports.useState({}),[o,r]=s.exports.useState(null),{myInfo:a}=B(),[l,c]=s.exports.useState(""),[u,h]=s.exports.useState(!1),{toLobby:x}=T();s.exports.useEffect(()=>{m.on(`${D}:getData`,g=>t(g)),m.on(`${D}:vote`,()=>c("vote")),m.on(`${D}:voted`,()=>c("voted")),m.on(`${D}:reversal`,g=>{t(g),c("reversal")}),m.on(`${D}:answer`,g=>{t(g),c("answer")}),m.on(`${D}:finish`,g=>{t(g),c("finish")}),m.emit(`${D}:getData`),setTimeout(()=>c("theme"),500),setTimeout(()=>c("title"),10500),setTimeout(()=>c("game"),16e3)},[]);const k=()=>{const g=o==null?void 0:o.toDataURL();m.emit(`${D}:draw`,g),r(null)},y=()=>{const g=o==null?void 0:o.getContext("2d");if(g.clearRect(0,0,750,500),n.context.length){const f=new Image;f.src=n.context,f.onload=()=>g.drawImage(f,0,0)}r(null)},b=g=>{h(!0),m.emit(`${D}:vote`,g)},w=g=>m.emit(`${D}:answer`,g);return Object.keys(n).length?d(Pt,{children:[l==="game"&&e(j,{turn:n.players[n.turn].name}),l==="game"&&(o?d(Mt,{children:[e("p",{children:"\u3053\u308C\u3067\u3044\u3044?"}),e("button",{style:{backgroundColor:p.green[0]},onClick:k,children:"\u66F8\u3044\u305F\uFF01"}),e("button",{style:{backgroundColor:p.gray[1]},onClick:y,children:"\u66F8\u304D\u76F4\u3059\uFF01"})]}):n.players[n.fakeMan].id===a.id?d(O,{children:["\u30A8\u30BB\u82B8\u8853\u5BB6\u3060\u3068\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044",e("br",{}),"\u30D0\u30EC\u3066\u3082\u4F55\u3092\u63CF\u3044\u3066\u3044\u308B\u304B\u5F53\u3066\u308C\u3070\u52DD\u3061"]}):d(O,{children:["\u3053\u306E\u4E2D\u306B\u4E00\u4EBA\u304A\u984C\u3092\u77E5\u3089\u306A\u3044\u30A8\u30BB\u82B8\u8853\u5BB6\u304C\u3044\u308B",e("br",{}),"\u30A8\u30BB\u82B8\u8853\u5BB6\u306B\u304A\u984C\u304C\u30D0\u30EC\u3066\u306F\u3044\u3051\u306A\u3044"]})),l==="vote"&&e(O,{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u306F\u8AB0\u3060\uFF1F"}),l==="reversal"&&e(O,{children:"\u30A8\u30BB\u82B8\u8853\u5BB6\u304C\u56DE\u7B54\u3092\u9078\u629E\u3059\u308B"}),l==="finish"&&d(jt,{children:[n.answer?n.answer===n.theme?"\u30A8\u30BB\u82B8\u8853\u5BB6":"\u82B8\u8853\u5BB6":"\u30A8\u30BB\u82B8\u8853\u5BB6","\u306E\u52DD\u5229!!"]}),d(Tt,{children:[e(Dt,{gameData:n,setCanvas:r,color:n.colors[n.players.findIndex(g=>g.id===a.id)],disable:!!(o||n.players[n.turn].id!==a.id),status:l,isFake:n.players[n.fakeMan].id===a.id,onclickAnswer:w}),d(Ot,{children:[d(he,{children:[e("span",{children:"\u4ECA\u56DE\u306E\u30C6\u30FC\u30DE"}),e(ge,{children:n.category})]}),d(he,{style:{marginTop:"10px"},children:[e("span",{children:"\u4ECA\u56DE\u306E\u304A\u984C"}),e(ge,{children:n.players[n.fakeMan].id!==a.id?n.theme:"?"})]}),e(Rt,{children:n.players.map((g,f)=>l==="vote"?d(xe,{style:{borderColor:n.colors[f]},children:[u?e(fe,{children:e("img",{src:`/assets/images/pokemon/${g.icon}.png`})}):e(Gt,{onClick:()=>b(f),children:"\u6295\u7968"}),e(be,{children:g.name})]},g.id):d(xe,{style:{borderColor:n.colors[f]},children:[e(fe,{children:e("img",{src:`/assets/images/pokemon/${g.icon}.png`})}),e(be,{children:g.name})]},g.id))})]})]}),l==="finish"&&a.isAdmin&&e("div",{style:{marginTop:"30px",textAlign:"center"},children:e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:x,color:"teal"})})]}):null}),Pt=i.div`
   position: relative;
   margin-top: 150px;
   margin-bottom: 150px;
-`,Pt=i.div`
+`,Mt=i.div`
   position: absolute;
   top: -100px;
   width: 100%;
@@ -590,7 +590,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       margin-left: 40px;
     }
   }
-`,j=i.p`
+`,O=i.p`
   position: absolute;
   left: 0;
   right: 0;
@@ -610,7 +610,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: scale(1);
     }
   }
-`,Mt=i.p`
+`,jt=i.p`
   position: absolute;
   left: 0;
   right: 0;
@@ -634,16 +634,16 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: scale(1.1);
     }
   }
-`,jt=i.div`
+`,Tt=i.div`
   position: relative;
   display: flex;
   width: 1000px;
   height: 500px;
-`,Tt=i.div`
+`,Ot=i.div`
   width: calc(100% - 756px);
   padding-left: 20px;
   padding-right: 20px;
-`,me=i.div`
+`,he=i.div`
   padding-left: 10px;
   padding-right: 10px;
   background: #ffedab;
@@ -657,19 +657,19 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     font-size: 12px;
     border-bottom: 1px solid ${p.gray[1]};
   }
-`,he=i.p`
+`,ge=i.p`
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 14px;
   font-weight: bold;
-`,Ot=i.ul`
+`,Rt=i.ul`
   height: calc(100% - 188px);
   margin-top: 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
-`,ge=i.li`
+`,xe=i.li`
   display: flex;
   align-items: center;
   padding: 5px 10px;
@@ -680,7 +680,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   + li {
     margin-top: 10px;
   }
-`,xe=i.div`
+`,fe=i.div`
   width: 40px;
   height: 40px;
   padding: 6px;
@@ -690,7 +690,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   > img {
     width: 100%;
   }
-`,Rt=i.button`
+`,Gt=i.button`
   width: 40px;
   height: 40px;
   color: #000;
@@ -699,7 +699,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   font-weight: bold;
   border: 2px solid ${p.cyan};
   border-radius: 50%;
-`,fe=i.div`
+`,be=i.div`
   width: calc(100% - 60px);
   margin-left: 10px;
   margin-right: 10px;
@@ -707,14 +707,14 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-`,Gt=s.exports.memo(n=>{const{cemetery:t}=n;return e(Ut,{children:t.map(o=>e(Yt,{className:o.color,children:o.num.map((r,a)=>e(Wt,{children:r},a))},o.color))})}),Ut=i.div`
+`,Ut=s.exports.memo(n=>{const{cemetery:t}=n;return e(Yt,{children:t.map(o=>e(Wt,{className:o.color,children:o.num.map((r,a)=>e(Jt,{children:r},a))},o.color))})}),Yt=i.div`
   display: inline-block;
   min-width: 300px;
   margin-top: 30px;
   padding: 10px 24px;
   background: #202f55;
   border-radius: 8px;
-`,Yt=i.div`
+`,Wt=i.div`
   display: flex;
   min-height: 30px;
   font-size: 20px;
@@ -737,12 +737,12 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.purple {
     color: ${p.purple};
   }
-`,Wt=i.div`
+`,Jt=i.div`
   display: inline-block;
   &:not(:first-child) {
     margin-left: 12px;
   }
-`,be=s.exports.memo(n=>{const{color:t,num:o,colorHint:r,numHint:a,isReverse:l,onclick:c}=n,u=()=>{let h="";return r&&(h+=`hint_${t}`),a&&(h=h===""?`hint_${o}`:`${h} hint_${o}`),h};return e(E,{children:l?e(ye,{className:`reverse hand ${(r||a)&&u()}`,onClick:c}):e(ye,{className:`${t} hand ${(r||a)&&u()}`,onClick:c,children:o!==0&&o})})}),ye=i.div`
+`,ye=s.exports.memo(n=>{const{color:t,num:o,colorHint:r,numHint:a,isReverse:l,onclick:c}=n,u=()=>{let h="";return r&&(h+=`hint_${t}`),a&&(h=h===""?`hint_${o}`:`${h} hint_${o}`),h};return e(E,{children:l?e(Ce,{className:`reverse hand ${(r||a)&&u()}`,onClick:c}):e(Ce,{className:`${t} hand ${(r||a)&&u()}`,onClick:c,children:o!==0&&o})})}),Ce=i.div`
   width: 60px;
   height: 120px;
   padding-top: 5px;
@@ -840,7 +840,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.hint_5::before {
     content: '5';
   }
-`,Jt=s.exports.memo(n=>{const{deck:t,fields:o}=n;return d(Zt,{children:[e(Xt,{children:t}),e(Vt,{children:o.map((r,a)=>e(be,{color:r.color,num:r.num},a))})]})}),Zt=i.div`
+`,Zt=s.exports.memo(n=>{const{deck:t,fields:o}=n;return d(Xt,{children:[e(Vt,{children:t}),e(Qt,{children:o.map((r,a)=>e(ye,{color:r.color,num:r.num},a))})]})}),Xt=i.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
@@ -848,7 +848,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   background: #202f55;
   border-radius: 8px;
   pointer-events: none;
-`,Xt=i.div`
+`,Vt=i.div`
   width: 60px;
   height: 120px;
   margin-right: 30px;
@@ -859,7 +859,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   border: 3px solid ${p.gray[1]};
   border-radius: 8px;
   text-align: center;
-`,Vt=i.div`
+`,Qt=i.div`
   display: flex;
   .hand {
     &:not(:first-child) {
@@ -884,7 +884,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       border: 3px solid ${p.purple};
     }
   }
-`,Qt=s.exports.memo(n=>{const{hint:t}=n;return e(qt,{children:[...Array(t)].map(o=>e(Kt,{},o))})}),qt=i.div`
+`,qt=s.exports.memo(n=>{const{hint:t}=n;return e(Kt,{children:[...Array(t)].map(o=>e(en,{},o))})}),Kt=i.div`
   display: grid;
   grid-template-columns: repeat(4, 50px);
   grid-template-rows: repeat(2, 50px);
@@ -894,11 +894,11 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   padding: 10px;
   background: #fff;
   border-radius: 8px;
-`,Kt=i.div`
+`,en=i.div`
   background-image: url('/assets/images/img_hint.png');
   background-size: 100%;
   background-repeat: no-repeat;
-`,en=s.exports.memo(()=>e(tn,{children:d("div",{children:[e("span",{children:"M"}),e("span",{children:"i"}),e("span",{children:"s"}),e("span",{children:"s"}),e("span",{children:"!"})]})})),tn=i.div`
+`,tn=s.exports.memo(()=>e(nn,{children:d("div",{children:[e("span",{children:"M"}),e("span",{children:"i"}),e("span",{children:"s"}),e("span",{children:"s"}),e("span",{children:"!"})]})})),nn=i.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -955,22 +955,22 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: rotateY(-360deg);
     }
   }
-`,nn=s.exports.memo(n=>{const{name:t,hands:o,onclick:r,isFinish:a}=n,{myInfo:l}=B();return d(on,{className:"player",children:[e(rn,{children:o.map((c,u)=>e(be,{color:c.color,num:c.num,colorHint:c.colorHint,numHint:c.numHint,isReverse:a?!1:t===l.name,onclick:r},u))}),d(an,{children:["\u27A1\uFE0E ",t]})]})}),on=i.div`
+`,on=s.exports.memo(n=>{const{name:t,hands:o,onclick:r,isFinish:a}=n,{myInfo:l}=B();return d(rn,{className:"player",children:[e(an,{children:o.map((c,u)=>e(ye,{color:c.color,num:c.num,colorHint:c.colorHint,numHint:c.numHint,isReverse:a?!1:t===l.name,onclick:r},u))}),d(sn,{children:["\u27A1\uFE0E ",t]})]})}),rn=i.div`
   min-width: 310px;
-`,rn=i.div`
+`,an=i.div`
   display: flex;
   flex-direction: row-reverse;
   padding: 0 20px;
   .hand:not(:first-child) {
     margin-right: 10px;
   }
-`,an=i.div`
+`,sn=i.div`
   width: 100%;
   padding: 2px 8px;
   font-size: 14px;
   color: #fff;
   background: #000;
-`,sn=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({}),[r,a]=s.exports.useState(null),[l,c]=s.exports.useState(!1),[u,h]=s.exports.useState(!1),{toLobby:f}=V();s.exports.useEffect(()=>{m.on("hanabi:getData",(y,b)=>{b==="miss"||b==="gameover"?(c(!0),setTimeout(()=>{b==="gameover"&&h(!0),c(!1),o(y)},2400)):(b==="finish"&&h(!0),o(y))}),m.emit("hanabi:getData")},[]);const k=y=>{var L;const b=y.currentTarget;a(b),(L=document.querySelector(".hand.selected"))==null||L.classList.remove("selected"),b.classList.add("selected")},C=()=>`${(r==null?void 0:r.getBoundingClientRect().top)-100}px`,A=()=>{var q;if(!r)return;const y=[].slice.call((q=r.parentElement)==null?void 0:q.childNodes).indexOf(r),b=r.closest(".player"),L=document.querySelectorAll(".playerarea .player");return{player:[].slice.call(L).indexOf(b),index:y}},w=()=>{var b;const y=A();m.emit("hanabi:playHand",y),a(null),(b=document.querySelector(".hand.selected"))==null||b.classList.remove("selected")},x=()=>{var b;const y=A();m.emit("hanabi:discardHand",y),a(null),(b=document.querySelector(".hand.selected"))==null||b.classList.remove("selected")},g=()=>{var b;const y=A();m.emit("hanabi:colorHint",y),a(null),(b=document.querySelector(".hand.selected"))==null||b.classList.remove("selected")},v=()=>{var b;const y=A();m.emit("hanabi:numHint",y),a(null),(b=document.querySelector(".hand.selected"))==null||b.classList.remove("selected")};return Object.keys(t).length?d(E,{children:[d(ln,{className:u||t.players[t.turn].player.name!==n.name?"is-disabled":"",children:[u?e(Ce,{children:"\u30B2\u30FC\u30E0\u306F\u7D42\u4E86\u3057\u307E\u3057\u305F"}):t.deck.length===0?d(Ce,{children:["\u6B8B\u308A",t.extra,"\u30BF\u30FC\u30F3\u3067\u3059"]}):null,t.turn<999&&e(M,{turn:t.players[t.turn].player.name}),d(dn,{children:[e(Jt,{deck:t.deck.length,fields:t.fields}),d(cn,{children:[d(un,{children:[d("p",{children:["SCORE : ",t.score]}),d("p",{children:["MISS : ",t.miss,"/3"]})]}),e(Qt,{hint:t.hint})]}),e(Gt,{cemetery:t.cemetery})]}),d(pn,{className:"playerarea",children:[t.players.map(y=>e(nn,{name:y.player.name,hands:y.hands,onclick:k,isFinish:u},y.player.name)),u&&n.isAdmin&&e("div",{style:{marginTop:"30px"},children:e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:f,color:"teal"})}),!u&&r&&r.className.indexOf("reverse")!==-1&&d(Ae,{style:{top:C()},children:[e("p",{children:"\u3053\u306E\u30AB\u30FC\u30C9\u3092\u3069\u3046\u3059\u308B?"}),e("button",{onClick:w,children:"\u5834\u306B\u51FA\u3059"}),e("button",{onClick:x,children:"\u6368\u3066\u308B"})]}),!u&&r&&r.className.indexOf("reverse")===-1&&d(Ae,{style:{top:C()},children:[t.hint===0?e("p",{children:"\u30D2\u30F3\u30C8\u306F\u4F7F\u3048\u307E\u305B\u3093\u3002"}):e("p",{children:"\u30AB\u30FC\u30C9\u306B\u30D2\u30F3\u30C8\u3092\u51FA\u3059?"}),e("button",{onClick:g,disabled:t.hint===0,children:"\u8272\u306E\u30D2\u30F3\u30C8\u3092\u51FA\u3059"}),e("button",{onClick:v,disabled:t.hint===0,children:"\u6570\u5B57\u306E\u30D2\u30F3\u30C8\u3092\u51FA\u3059"})]})]})]}),l&&e(en,{})]}):null}),ln=i.div`
+`,ln=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({}),[r,a]=s.exports.useState(null),[l,c]=s.exports.useState(!1),[u,h]=s.exports.useState(!1),{toLobby:x}=T();s.exports.useEffect(()=>{m.on("hanabi:getData",(A,C)=>{C==="miss"||C==="gameover"?(c(!0),setTimeout(()=>{C==="gameover"&&h(!0),c(!1),o(A)},2400)):(C==="finish"&&h(!0),o(A))}),m.emit("hanabi:getData")},[]);const k=A=>{var H;const C=A.currentTarget;a(C),(H=document.querySelector(".hand.selected"))==null||H.classList.remove("selected"),C.classList.add("selected")},y=()=>`${(r==null?void 0:r.getBoundingClientRect().top)-100}px`,b=()=>{var K;if(!r)return;const A=[].slice.call((K=r.parentElement)==null?void 0:K.childNodes).indexOf(r),C=r.closest(".player"),H=document.querySelectorAll(".playerarea .player");return{player:[].slice.call(H).indexOf(C),index:A}},w=()=>{var C;const A=b();m.emit("hanabi:playHand",A),a(null),(C=document.querySelector(".hand.selected"))==null||C.classList.remove("selected")},g=()=>{var C;const A=b();m.emit("hanabi:discardHand",A),a(null),(C=document.querySelector(".hand.selected"))==null||C.classList.remove("selected")},f=()=>{var C;const A=b();m.emit("hanabi:colorHint",A),a(null),(C=document.querySelector(".hand.selected"))==null||C.classList.remove("selected")},v=()=>{var C;const A=b();m.emit("hanabi:numHint",A),a(null),(C=document.querySelector(".hand.selected"))==null||C.classList.remove("selected")};return Object.keys(t).length?d(E,{children:[d(dn,{className:u||t.players[t.turn].player.name!==n.name?"is-disabled":"",children:[u?e(Ae,{children:"\u30B2\u30FC\u30E0\u306F\u7D42\u4E86\u3057\u307E\u3057\u305F"}):t.deck.length===0?d(Ae,{children:["\u6B8B\u308A",t.extra,"\u30BF\u30FC\u30F3\u3067\u3059"]}):null,t.turn<999&&e(j,{turn:t.players[t.turn].player.name}),d(cn,{children:[e(Zt,{deck:t.deck.length,fields:t.fields}),d(un,{children:[d(pn,{children:[d("p",{children:["SCORE : ",t.score]}),d("p",{children:["MISS : ",t.miss,"/3"]})]}),e(qt,{hint:t.hint})]}),e(Ut,{cemetery:t.cemetery})]}),d(mn,{className:"playerarea",children:[t.players.map(A=>e(on,{name:A.player.name,hands:A.hands,onclick:k,isFinish:u},A.player.name)),u&&n.isAdmin&&e("div",{style:{marginTop:"30px"},children:e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:x,color:"teal"})}),!u&&r&&r.className.indexOf("reverse")!==-1&&d(we,{style:{top:y()},children:[e("p",{children:"\u3053\u306E\u30AB\u30FC\u30C9\u3092\u3069\u3046\u3059\u308B?"}),e("button",{onClick:w,children:"\u5834\u306B\u51FA\u3059"}),e("button",{onClick:g,children:"\u6368\u3066\u308B"})]}),!u&&r&&r.className.indexOf("reverse")===-1&&d(we,{style:{top:y()},children:[t.hint===0?e("p",{children:"\u30D2\u30F3\u30C8\u306F\u4F7F\u3048\u307E\u305B\u3093\u3002"}):e("p",{children:"\u30AB\u30FC\u30C9\u306B\u30D2\u30F3\u30C8\u3092\u51FA\u3059?"}),e("button",{onClick:f,disabled:t.hint===0,children:"\u8272\u306E\u30D2\u30F3\u30C8\u3092\u51FA\u3059"}),e("button",{onClick:v,disabled:t.hint===0,children:"\u6570\u5B57\u306E\u30D2\u30F3\u30C8\u3092\u51FA\u3059"})]})]})]}),l&&e(tn,{})]}):null}),dn=i.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -983,7 +983,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.is-disabled {
     pointer-events: none;
   }
-`,Ce=i.p`
+`,Ae=i.p`
   position: absolute;
   top: -40px;
   width: 100%;
@@ -991,18 +991,18 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-`,dn=i.div``,cn=i.div`
+`,cn=i.div``,un=i.div`
   display: flex;
-`,un=i.div`
+`,pn=i.div`
   min-width: 150px;
   font-size: 24px;
   font-weight: bold;
-`,pn=i.div`
+`,mn=i.div`
   position: relative;
   .player:not(:first-child) {
     margin-top: 40px;
   }
-`,Ae=i.div`
+`,we=i.div`
   position: absolute;
   right: calc(100% + 10px);
   z-index: 5;
@@ -1030,7 +1030,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       pointer-events: none;
     }
   }
-`,mn=s.exports.memo(()=>{const[n,t]=s.exports.useState(!1);return s.exports.useEffect(()=>{m.on("kowloonTactics:checkAnimate",()=>{t(!0),setTimeout(()=>t(!1),4e3)})},[]),e(E,{children:n&&d(hn,{children:[e("span",{children:"C"}),e("span",{children:"h"}),e("span",{children:"e"}),e("span",{children:"c"}),e("span",{children:"k"}),e("span",{children:"!"})]})})}),hn=i.div`
+`,hn=s.exports.memo(()=>{const[n,t]=s.exports.useState(!1);return s.exports.useEffect(()=>{m.on("kowloonTactics:checkAnimate",()=>{t(!0),setTimeout(()=>t(!1),4e3)})},[]),e(E,{children:n&&d(gn,{children:[e("span",{children:"C"}),e("span",{children:"h"}),e("span",{children:"e"}),e("span",{children:"c"}),e("span",{children:"k"}),e("span",{children:"!"})]})})}),gn=i.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1083,7 +1083,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       transform: translateY(0) scale(1.2, 0.8);
     }
   }
-`,Q=s.exports.memo(n=>{const{num:t,isHide:o,onclick:r,selected:a}=n,l=c=>c===0?"empty":c%2==0?"black":"white";return e(E,{children:o?e(we,{className:l(t)}):e(we,{onClick:r,className:`${a&&"isActive"} ${l(t)}`,children:t})})}),we=i.div`
+`,Q=s.exports.memo(n=>{const{num:t,isHide:o,onclick:r,selected:a}=n,l=c=>c===0?"empty":c%2==0?"black":"white";return e(E,{children:o?e(ke,{className:l(t)}):e(ke,{onClick:r,className:`${a&&"isActive"} ${l(t)}`,children:t})})}),ke=i.div`
   width: 100%;
   height: 100%;
   line-height: 50px;
@@ -1109,12 +1109,12 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     outline: solid 2px ${p.green};
     box-shadow: 0 0 4px 2px rgba(34, 34, 34, 0.3);
   }
-`,ke=s.exports.memo(n=>{const{hands:t,isHide:o,isFinish:r}=n,a=[...t];for(;a.length<9;)a.push(0);return e(gn,{children:a.map((l,c)=>e(Q,{num:l,isHide:r?!1:o},c))})}),gn=i.div`
+`,ve=s.exports.memo(n=>{const{hands:t,isHide:o,isFinish:r}=n,a=[...t];for(;a.length<9;)a.push(0);return e(xn,{children:a.map((l,c)=>e(Q,{num:l,isHide:r?!1:o},c))})}),xn=i.div`
   display: grid;
   grid-template-columns: repeat(1, 50px);
   grid-template-rows: repeat(9, 50px);
   gap: 10px;
-`,ve=s.exports.memo(n=>{const{result:t}=n,{toLobby:o}=V(),r=l=>l==="WIN"?"win":l==="LOSE"?"lose":"draw",a=()=>o();return d(xn,{children:[e(fn,{className:r(t),children:t}),e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:a,color:"teal"})]})}),xn=i.div`
+`,Be=s.exports.memo(n=>{const{result:t}=n,{toLobby:o}=T(),r=l=>l==="WIN"?"win":l==="LOSE"?"lose":"draw",a=()=>o();return d(fn,{children:[e(bn,{className:r(t),children:t}),e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:a,color:"teal"})]})}),fn=i.div`
   width: 332px;
   min-height: 244px;
   padding: 20px;
@@ -1127,7 +1127,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     width: 100%;
     margin-top: 90px;
   }
-`,fn=i.div`
+`,bn=i.div`
   font-size: 28px;
   font-weight: bold;
   text-align: center;
@@ -1140,7 +1140,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.draw {
     color: ${p.gray[1]};
   }
-`,Be=s.exports.memo(n=>{const{hands:t,turn:o,isPlayer:r,isHide:a}=n,{myInfo:l}=B(),[c,u]=s.exports.useState(!1),[h,f]=s.exports.useState(null);s.exports.useEffect(()=>{u(h!==null)},[h]);const k=A=>f(A),C=()=>{f(null),m.emit("kowloonTactics:selectHand",[l,h])};return d(bn,{children:[e(yn,{className:r?"":"disabed",children:t.map((A,w)=>a?e(Q,{num:A,isHide:!0},w):e(Q,{num:A,onclick:()=>k(w),selected:h===w&&!0},w))}),r&&o&&e(F,{label:"\u30AB\u30FC\u30C9\u3092\u51FA\u3059",onclick:C,color:"teal",isDisabled:!c})]})}),bn=i.div`
+`,Fe=s.exports.memo(n=>{const{hands:t,turn:o,isPlayer:r,isHide:a}=n,{myInfo:l}=B(),[c,u]=s.exports.useState(!1),[h,x]=s.exports.useState(null);s.exports.useEffect(()=>{u(h!==null)},[h]);const k=b=>x(b),y=()=>{x(null),m.emit("kowloonTactics:selectHand",[l,h])};return d(yn,{children:[e(Cn,{className:r?"":"disabed",children:t.map((b,w)=>a?e(Q,{num:b,isHide:!0},w):e(Q,{num:b,onclick:()=>k(w),selected:h===w&&!0},w))}),r&&o&&e(F,{label:"\u30AB\u30FC\u30C9\u3092\u51FA\u3059",onclick:y,color:"teal",isDisabled:!c})]})}),yn=i.div`
   width: 332px;
   min-height: 244px;
   padding: 20px;
@@ -1153,7 +1153,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
     width: 100%;
     margin-top: 50px;
   }
-`,yn=i.div`
+`,Cn=i.div`
   display: grid;
   grid-template-columns: repeat(5, 50px);
   grid-template-rows: repeat(2, 50px);
@@ -1162,11 +1162,11 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.disabed {
     pointer-events: none;
   }
-`,Cn=s.exports.memo(n=>{const{judgeArray:t}=n,o=[...t];for(;o.length<9;)o.push("empty");return d(An,{children:[e(Fe,{className:"red",children:o.map((r,a)=>e("div",{className:r},a))}),e(Fe,{className:"blue",children:o.map((r,a)=>e("div",{className:r},a))})]})}),An=i.div`
+`,An=s.exports.memo(n=>{const{judgeArray:t}=n,o=[...t];for(;o.length<9;)o.push("empty");return d(wn,{children:[e(Ee,{className:"red",children:o.map((r,a)=>e("div",{className:r},a))}),e(Ee,{className:"blue",children:o.map((r,a)=>e("div",{className:r},a))})]})}),wn=i.div`
   display: flex;
   width: 50px;
   pointer-events: none;
-`,Fe=i.div`
+`,Ee=i.div`
   width: 50%;
   display: grid;
   grid-template-columns: repeat(1, 25px);
@@ -1190,7 +1190,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       box-shadow: 0 0 6px 1px rgb(49 130 206 / 70%);
     }
   }
-`,Ee=s.exports.memo(n=>{const{player:t,supporter:o,area:r}=n;return d(wn,{className:r,children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),e($,{name:t.name,icon:t.icon}),o.length>0&&e("span",{style:{marginTop:"15px"},children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),e(kn,{children:o.map(a=>e($,{name:a.name,icon:a.icon},a.id))})]})}),wn=i.div`
+`,De=s.exports.memo(n=>{const{player:t,supporter:o,area:r}=n;return d(kn,{className:r,children:[e("span",{children:"\u30D7\u30EC\u30A4\u30E4\u30FC"}),e($,{name:t.name,icon:t.icon}),o.length>0&&e("span",{style:{marginTop:"15px"},children:"\u30B5\u30DD\u30FC\u30BF\u30FC"}),e(vn,{children:o.map(a=>e($,{name:a.name,icon:a.icon},a.id))})]})}),kn=i.div`
   position: absolute;
   top: 0;
   width: 200px;
@@ -1225,7 +1225,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       text-overflow: clip;
     }
   }
-`,kn=i.div``,vn=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({}),[r,a]=s.exports.useState({}),[l,c]=s.exports.useState([]),[u,h]=s.exports.useState(""),[f,k]=s.exports.useState("none"),[C,A]=s.exports.useState(!1);s.exports.useEffect(()=>{m.on("common:getCurrentConfig",g=>{a(g),g.redPlayer.id===n.id||g.redSupporter.some(v=>v.id===n.id)?k("red"):(g.bluePlayer.id===n.id||g.blueSupporter.some(v=>v.id===n.id))&&k("blue")}),m.on("kowloonTactics:getData",g=>o(g)),m.on("kowloonTactics:getTurn",g=>h(g)),m.on("kowloonTactics:getJudge",g=>{const v=g[0],y=g[1];c(v),y&&A(!0)}),m.emit("common:getCurrentConfig"),m.emit("kowloonTactics:getData"),m.emit("kowloonTactics:getTurn")},[]);const w=()=>{const g=l.filter(b=>b==="red").length,v=l.filter(b=>b==="blue").length;return g>v?"red":g<v?"blue":"draw"},x=g=>{const v=w();return v==="draw"?"DRAW":v===g?"WIN":"LOSE"};return Object.keys(t).length&&Object.keys(r).length?d(E,{children:[l.length<9&&e(M,{turn:u==="red"?r.redPlayer.name:r.bluePlayer.name}),d(Bn,{children:[e(Ee,{player:r.redPlayer,supporter:r.redSupporter,area:"red"}),e(Ee,{player:r.bluePlayer,supporter:r.blueSupporter,area:"blue"}),l.length<9?e(Be,{hands:t.redPlayer.hand,turn:u==="red"&&!0,isPlayer:r.redPlayer.id===n.id&&!0,isHide:f!=="red"&&!0}):e(ve,{result:x("red")}),d(Fn,{children:[e(ke,{hands:t.redPlayer.field,isHide:f!=="red"&&!0,isFinish:C}),e(Cn,{judgeArray:l}),e(ke,{hands:t.bluePlayer.field,isHide:f!=="blue"&&!0,isFinish:C})]}),l.length<9?e(Be,{hands:t.bluePlayer.hand,turn:u==="blue"&&!0,isPlayer:r.bluePlayer.id===n.id&&!0,isHide:f!=="blue"&&!0}):e(ve,{result:x("blue")})]}),e(mn,{})]}):null}),Bn=i.div`
+`,vn=i.div``,Bn=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({}),[r,a]=s.exports.useState({}),[l,c]=s.exports.useState([]),[u,h]=s.exports.useState(""),[x,k]=s.exports.useState("none"),[y,b]=s.exports.useState(!1);s.exports.useEffect(()=>{m.on("common:getCurrentConfig",f=>{a(f),f.redPlayer.id===n.id||f.redSupporter.some(v=>v.id===n.id)?k("red"):(f.bluePlayer.id===n.id||f.blueSupporter.some(v=>v.id===n.id))&&k("blue")}),m.on("kowloonTactics:getData",f=>o(f)),m.on("kowloonTactics:getTurn",f=>h(f)),m.on("kowloonTactics:getJudge",f=>{const v=f[0],A=f[1];c(v),A&&b(!0)}),m.emit("common:getCurrentConfig"),m.emit("kowloonTactics:getData"),m.emit("kowloonTactics:getTurn")},[]);const w=()=>{const f=l.filter(C=>C==="red").length,v=l.filter(C=>C==="blue").length;return f>v?"red":f<v?"blue":"draw"},g=f=>{const v=w();return v==="draw"?"DRAW":v===f?"WIN":"LOSE"};return Object.keys(t).length&&Object.keys(r).length?d(E,{children:[l.length<9&&e(j,{turn:u==="red"?r.redPlayer.name:r.bluePlayer.name}),d(Fn,{children:[e(De,{player:r.redPlayer,supporter:r.redSupporter,area:"red"}),e(De,{player:r.bluePlayer,supporter:r.blueSupporter,area:"blue"}),l.length<9?e(Fe,{hands:t.redPlayer.hand,turn:u==="red"&&!0,isPlayer:r.redPlayer.id===n.id&&!0,isHide:x!=="red"&&!0}):e(Be,{result:g("red")}),d(En,{children:[e(ve,{hands:t.redPlayer.field,isHide:x!=="red"&&!0,isFinish:y}),e(An,{judgeArray:l}),e(ve,{hands:t.bluePlayer.field,isHide:x!=="blue"&&!0,isFinish:y})]}),l.length<9?e(Fe,{hands:t.bluePlayer.hand,turn:u==="blue"&&!0,isPlayer:r.bluePlayer.id===n.id&&!0,isHide:x!=="blue"&&!0}):e(Be,{result:g("blue")})]}),e(hn,{})]}):null}),Fn=i.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1233,7 +1233,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   height: 720px;
   margin-left: auto;
   margin-right: auto;
-`,Fn=i.div`
+`,En=i.div`
   display: flex;
   justify-content: space-between;
   width: 180px;
@@ -1243,7 +1243,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   border: solid 1px #666;
   border-radius: 5px;
   box-shadow: 0 0 6px 4px #33333333;
-`,T=s.exports.memo(n=>{const{from:t}=n;return d(En,{className:t==="1"?"from1":"from100",children:[t==="1"&&d(E,{children:[e("span",{className:"numFrom",children:"1"}),e("span",{className:"numTo",children:"100"})]}),t==="100"&&d(E,{children:[e("span",{className:"numFrom",children:"100"}),e("span",{className:"numTo",children:"1"})]})]})}),En=i.div`
+`,R=s.exports.memo(n=>{const{from:t}=n;return d(Dn,{className:t==="1"?"from1":"from100",children:[t==="1"&&d(E,{children:[e("span",{className:"numFrom",children:"1"}),e("span",{className:"numTo",children:"100"})]}),t==="100"&&d(E,{children:[e("span",{className:"numFrom",children:"100"}),e("span",{className:"numTo",children:"1"})]})]})}),Dn=i.div`
   position: relative;
   width: 122px;
   height: 188px;
@@ -1287,7 +1287,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       }
     }
   }
-`,De=s.exports.memo(n=>{const{num:t,selected:o,onclick:r}=n;return d(Dn,{onClick:r,className:o?"is-selected":"",children:[e("span",{className:"top left",children:t}),e("span",{className:"top right",children:t}),e("span",{className:"center",children:t}),e("span",{className:"bottom left",children:t}),e("span",{className:"bottom right",children:t})]})}),Dn=i.div`
+`,$e=s.exports.memo(n=>{const{num:t,selected:o,onclick:r}=n;return d($n,{onClick:r,className:o?"is-selected":"",children:[e("span",{className:"top left",children:t}),e("span",{className:"top right",children:t}),e("span",{className:"center",children:t}),e("span",{className:"bottom left",children:t}),e("span",{className:"bottom right",children:t})]})}),$n=i.div`
   position: relative;
   width: calc(100% / 3 - 20px);
   height: 188px;
@@ -1327,7 +1327,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       bottom: 6px;
     }
   }
-`,_=40,O=s.exports.memo(n=>{const{cards:t,isDisabled:o,isReverse:r,onclick:a}=n;return e($n,{className:((c,u)=>{let h="";return c&&(h+="is-disabled"),u&&(h+=" is-reverse"),h})(o,r),onClick:a,children:t.map(c=>e(De,{num:c},c))})}),$n=i.div`
+`,_=40,G=s.exports.memo(n=>{const{cards:t,isDisabled:o,isReverse:r,onclick:a}=n;return e(_n,{className:((c,u)=>{let h="";return c&&(h+="is-disabled"),u&&(h+=" is-reverse"),h})(o,r),onClick:a,children:t.map(c=>e($e,{num:c},c))})}),_n=i.div`
   position: relative;
   height: 348px;
   outline: 1px dotted #000;
@@ -1414,25 +1414,25 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       z-index: 5;
     }
   }
-`,_n=s.exports.memo(n=>{const{fieldCards:t,selectedHand:o,playCard:r}=n,a=c=>c.slice(-1)[0],l=(c,u,h)=>{let f=!1;return u===!1?f=!1:h?u===c-10?f=!1:u<c&&(f=!0):u===c+10?f=!1:u>c&&(f=!0),f};return d(In,{children:[d(R,{children:[e(T,{from:"100"}),e(O,{cards:t[0],isDisabled:l(a(t[0]),o),onclick:()=>r(0)})]}),d(R,{children:[e(T,{from:"100"}),e(O,{cards:t[1],isDisabled:l(a(t[1]),o),onclick:()=>r(1)})]}),d(R,{className:"reverse",children:[e(T,{from:"1"}),e(O,{cards:t[2],isDisabled:l(a(t[2]),o,!0),isReverse:!0,onclick:()=>r(2)})]}),d(R,{className:"reverse",children:[e(T,{from:"1"}),e(O,{cards:t[3],isDisabled:l(a(t[3]),o,!0),isReverse:!0,onclick:()=>r(3)})]})]})}),In=i.div`
+`,In=s.exports.memo(n=>{const{fieldCards:t,selectedHand:o,playCard:r}=n,a=c=>c.slice(-1)[0],l=(c,u,h)=>{let x=!1;return u===!1?x=!1:h?u===c-10?x=!1:u<c&&(x=!0):u===c+10?x=!1:u>c&&(x=!0),x};return d(Nn,{children:[d(U,{children:[e(R,{from:"100"}),e(G,{cards:t[0],isDisabled:l(a(t[0]),o),onclick:()=>r(0)})]}),d(U,{children:[e(R,{from:"100"}),e(G,{cards:t[1],isDisabled:l(a(t[1]),o),onclick:()=>r(1)})]}),d(U,{className:"reverse",children:[e(R,{from:"1"}),e(G,{cards:t[2],isDisabled:l(a(t[2]),o,!0),isReverse:!0,onclick:()=>r(2)})]}),d(U,{className:"reverse",children:[e(R,{from:"1"}),e(G,{cards:t[3],isDisabled:l(a(t[3]),o,!0),isReverse:!0,onclick:()=>r(3)})]})]})}),Nn=i.div`
   display: flex;
   justify-content: space-between;
   width: 600px;
-`,R=i.div`
+`,U=i.div`
   display: flex;
   flex-direction: column;
   &.reverse {
     flex-direction: column-reverse;
   }
-`,Nn=s.exports.memo(n=>{const{deck:t,score:o}=n;return d(Sn,{children:[d("p",{children:["DECK\uFF1A",e("span",{children:t}),"\u679A"]}),d("p",{children:["SCORE\uFF1A",e("span",{children:o})]})]})}),Sn=i.div`
+`,Sn=s.exports.memo(n=>{const{deck:t,score:o}=n;return d(Ln,{children:[d("p",{children:["DECK\uFF1A",e("span",{children:t}),"\u679A"]}),d("p",{children:["SCORE\uFF1A",e("span",{children:o})]})]})}),Ln=i.div`
   > p {
     font-size: 20px;
     font-weight: bold;
   }
-`,Ln=s.exports.memo(n=>{const{hands:t,selectedHand:o,setSelectedHand:r}=n;return d(Hn,{children:[e("p",{style:{fontWeight:"bold"},children:"\u3042\u306A\u305F\u306E\u624B\u672D"}),e(zn,{children:t.map((a,l)=>e(De,{num:a,selected:o===l,onclick:()=>r(l)},a))})]})}),Hn=i.div`
+`,Hn=s.exports.memo(n=>{const{hands:t,selectedHand:o,setSelectedHand:r}=n;return d(zn,{children:[e("p",{style:{fontWeight:"bold"},children:"\u3042\u306A\u305F\u306E\u624B\u672D"}),e(Pn,{children:t.map((a,l)=>e($e,{num:a,selected:o===l,onclick:()=>r(l)},a))})]})}),zn=i.div`
   width: 100%;
   margin-top: 30px;
-`,zn=i.ul`
+`,Pn=i.ul`
   display: flex;
   flex-wrap: wrap;
   height: 444px;
@@ -1442,7 +1442,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   border: 2px solid #999;
   background: #fff8dccc;
   border-radius: 6px;
-`,Pn=s.exports.memo(n=>{const{playerList:t}=n;return e(Mn,{children:e(jn,{children:t.map(o=>e($,{name:o.user.name,icon:o.user.icon},o.user.id))})})}),Mn=i.div`
+`,Mn=s.exports.memo(n=>{const{playerList:t}=n;return e(jn,{children:e(Tn,{children:t.map(o=>e($,{name:o.user.name,icon:o.user.icon},o.user.id))})})}),jn=i.div`
   position: fixed;
   top: 0;
   right: 0;
@@ -1452,7 +1452,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   border-radius: 6px;
   background: #fff8dccc;
   border: 1px solid #deb887;
-`,jn=i.div`
+`,Tn=i.div`
   .profile {
     &__img {
       width: 40px;
@@ -1465,13 +1465,13 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       text-overflow: clip;
     }
   }
-`,Tn=s.exports.memo(n=>{const{status:t,remainingHand:o,turnFinish:r,turnContinue:a}=n;return e(On,{children:t==="continue"?d(Gn,{children:[e("p",{children:"\u307E\u3060\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u307E\u3059\u304B?"}),e("button",{style:{backgroundColor:p.gray[1]},onClick:r,children:"\u51FA\u3055\u306A\u3044"}),e("button",{style:{backgroundColor:p.green[0]},onClick:a,children:"\u51FA\u3059"})]}):e(Rn,{children:o<=0?"\u624B\u672D\u304B\u3089\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u3066\u304F\u3060\u3055\u3044":`\u3042\u3068${o}\u679A\u306E\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u3066\u304F\u3060\u3055\u3044`})})}),On=i.div`
+`,On=s.exports.memo(n=>{const{status:t,remainingHand:o,turnFinish:r,turnContinue:a}=n;return e(Rn,{children:t==="continue"?d(Gn,{children:[e("p",{children:"\u307E\u3060\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u307E\u3059\u304B?"}),e("button",{style:{backgroundColor:p.gray[1]},onClick:r,children:"\u51FA\u3055\u306A\u3044"}),e("button",{style:{backgroundColor:p.green[0]},onClick:a,children:"\u51FA\u3059"})]}):t==="finish"?d(q,{children:["\u624B\u672D\u304B\u3089\u51FA\u305B\u308B\u30AB\u30FC\u30C9\u304C\u306A\u304F\u306A\u308A\u307E\u3057\u305F\u3002",e("br",{}),"\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3057\u305F\u3002"]}):o<=0?e(q,{children:"\u624B\u672D\u304B\u3089\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u3066\u304F\u3060\u3055\u3044"}):d(q,{children:["\u3042\u3068",o,"\u679A\u306E\u30AB\u30FC\u30C9\u3092\u51FA\u3057\u3066\u304F\u3060\u3055\u3044"]})})}),Rn=i.div`
   position: fixed;
   left: 0;
   right: 0;
   z-index: 9;
   top: 70px;
-`,Rn=i.p`
+`,q=i.p`
   width: 400px;
   margin: 0 auto;
   padding: 10px 0;
@@ -1503,7 +1503,7 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
       margin-left: 40px;
     }
   }
-`,G="theGame",Un=s.exports.memo(()=>{const{myInfo:n}=B(),[t,o]=s.exports.useState({}),[r,a]=s.exports.useState("remaining"),[l,c]=s.exports.useState(null),[u,h]=s.exports.useState(2);s.exports.useEffect(()=>{m.on(`${G}:getData`,g=>o(g)),m.emit(`${G}:getData`)},[]);const f=g=>{var y;if(l===null)return;const v={userId:n.id,selectIndex:l,fieldIndex:g};m.emit(`${G}:playCard`,v),c(null),h(u-1),((y=t.playerList.find(b=>b.user.id===n.id))==null?void 0:y.hand.length)===1?k():u-1<=0&&a("continue")},k=()=>{m.emit(`${G}:turnFinish`),h(2),a("remaining")},C=()=>a("remaining"),A=()=>w(t).id!==n.id||r==="continue"?"is-disabled":"",w=g=>g.playerList[g.turn].user,x=g=>g.find(v=>v.user.id===n.id).hand;return Object.keys(t).length?d(E,{children:[e(M,{turn:w(t).name}),w(t).id===n.id&&e(Tn,{status:r,remainingHand:u,turnFinish:k,turnContinue:C}),d(Yn,{className:A(),children:[e(_n,{fieldCards:t.fieldCards,selectedHand:l!==null&&x(t.playerList)[l],playCard:f}),d("div",{style:{width:"450px"},children:[e(Nn,{deck:t.deck.length,score:t.score}),e(Ln,{hands:x(t.playerList),selectedHand:l,setSelectedHand:c})]}),e(Pn,{playerList:t.playerList})]})]}):null}),Yn=i.div`
+`,L="theGame",Un=s.exports.memo(()=>{const{myInfo:n}=B(),{toLobby:t}=T(),[o,r]=s.exports.useState({}),[a,l]=s.exports.useState(null);s.exports.useEffect(()=>{m.on(`${L}:getData`,b=>r(b)),m.emit(`${L}:getData`)},[]);const c=b=>{var g;if(a===null)return;l(null);const w={userId:n.id,selectIndex:a,fieldIndex:b};((g=o.playerList.find(f=>f.user.id===n.id))==null?void 0:g.hand.length)===1?u():m.emit(`${L}:playCard`,w)},u=()=>m.emit(`${L}:turnFinish`),h=()=>m.emit(`${L}:turnContinue`),x=()=>k(o).id!==n.id||o.status!=="remaining"?"is-disabled":"",k=b=>b.playerList[b.turn].user,y=b=>b.find(w=>w.user.id===n.id).hand;return Object.keys(o).length?d(E,{children:[o.status!=="finish"&&e(j,{turn:k(o).name}),(o.status==="finish"||k(o).id===n.id)&&e(On,{status:o.status,remainingHand:o.remainingHand,turnFinish:u,turnContinue:h}),d(Yn,{className:x(),children:[e(In,{fieldCards:o.fieldCards,selectedHand:a!==null&&y(o.playerList)[a],playCard:c}),d("div",{style:{width:"450px"},children:[e(Sn,{deck:o.deck.length,score:o.score}),e(Hn,{hands:y(o.playerList),selectedHand:a,setSelectedHand:l})]}),e(Mn,{playerList:o.playerList})]}),o.status==="finish"&&n.isAdmin&&e(Wn,{children:e(F,{label:"\u30ED\u30D3\u30FC\u306B\u623B\u308B",onclick:t,color:"teal"})})]}):null}),Yn=i.div`
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -1514,4 +1514,8 @@ var $e=Object.defineProperty,_e=Object.defineProperties;var Ie=Object.getOwnProp
   &.is-disabled {
     pointer-events: none;
   }
-`,Wn=[{path:"/kowloon_tactics",exact:!1,children:e(vn,{})},{path:"/hanabi",exact:!1,children:e(sn,{})},{path:"/fakeArtist",exact:!1,children:e(Ht,{})},{path:"/THE-Game",exact:!1,children:e(Un,{})}],Jn=s.exports.memo(()=>e(He,{children:d(te,{children:[e(z,{exact:!0,path:"/",children:e(Xe,{})}),e(z,{path:"/lobby",children:e(oe,{children:e(re,{children:e(Bt,{})})})}),e(z,{path:"/game",render:({match:{url:n}})=>e(te,{children:Wn.map(t=>e(z,{exact:t.exact,path:`${n}${t.path}`,children:e(oe,{children:e(re,{children:t.children})})},t.path))})})]})})),Zn=()=>e(Me,{children:e(Jn,{})});ze.render(e(Zn,{}),document.getElementById("root"));
+`,Wn=i.div`
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+`,Jn=[{path:"/kowloon_tactics",exact:!1,children:e(Bn,{})},{path:"/hanabi",exact:!1,children:e(ln,{})},{path:"/fakeArtist",exact:!1,children:e(zt,{})},{path:"/THE-Game",exact:!1,children:e(Un,{})}],Zn=s.exports.memo(()=>e(ze,{children:d(ne,{children:[e(P,{exact:!0,path:"/",children:e(Ve,{})}),e(P,{path:"/lobby",children:e(re,{children:e(ie,{children:e(Ft,{})})})}),e(P,{path:"/game",render:({match:{url:n}})=>e(ne,{children:Jn.map(t=>e(P,{exact:t.exact,path:`${n}${t.path}`,children:e(re,{children:e(ie,{children:t.children})})},t.path))})})]})})),Xn=()=>e(je,{children:e(Zn,{})});Pe.render(e(Xn,{}),document.getElementById("root"));

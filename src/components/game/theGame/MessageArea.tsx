@@ -25,10 +25,16 @@ export const MessageArea: VFC<props> = memo((props) => {
             出す
           </button>
         </_BtnArea>
-      ) : (
+      ) : status === 'finish' ? (
         <_Message>
-          {remainingHand <= 0 ? '手札からカードを出してください' : `あと${remainingHand}枚のカードを出してください`}
+          手札から出せるカードがなくなりました。
+          <br />
+          ゲームを終了しました。
         </_Message>
+      ) : remainingHand <= 0 ? (
+        <_Message>手札からカードを出してください</_Message>
+      ) : (
+        <_Message>あと{remainingHand}枚のカードを出してください</_Message>
       )}
     </_MessageArea>
   );
