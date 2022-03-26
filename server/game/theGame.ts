@@ -51,8 +51,7 @@ export const theGameDataInit = () => {
   gameData.remainingHand = 2;
   gameData.status = 'remaining';
 
-  [...Array(deckLength)].map((_, i) => gameData.deck.push(i + 2))
-  shuffle(gameData.deck);
+  generateDeck();
 
   const copyUserList = [...userList];
   for (let i = 0; i < copyUserList.length; i ++) {
@@ -67,6 +66,11 @@ export const theGameDataInit = () => {
 
   shuffle(gameData.playerList);
 }
+
+const generateDeck = () => {
+  [...Array(deckLength)].map((_, i) => gameData.deck.push(i + 2))
+  shuffle(gameData.deck);
+};
 
 const checkGameFinish = () => {
   const player = gameData.playerList[gameData.turn];
@@ -133,6 +137,9 @@ export const theGame = {
     })
 
     socket.on(`${eventName}:turnFinish`, () => {
+      // デッキがなくなった時にデッキの補充
+      if (gameData.deck.length === 0) generateDeck();
+
       // 手札の補充
       const player = gameData.playerList[gameData.turn];
       while (player.hand.length < 6 && gameData.deck.length) {

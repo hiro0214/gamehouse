@@ -42,7 +42,7 @@ export const TheGame: VFC = memo(() => {
     };
 
     const handCheck = (): void => {
-      gameData.playerList.find((p) => p.user.id === myInfo.id)?.hand.length === 1
+      gameData.playerList.find((p) => p.user.id === myInfo.id)?.hand.length === 0
         ? turnFinish()
         : socket.emit(`${gameName}:playCard`, post);
     };

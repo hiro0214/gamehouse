@@ -54,8 +54,7 @@ var theGameDataInit = function () {
     gameData.turn = 0;
     gameData.remainingHand = 2;
     gameData.status = 'remaining';
-    __spreadArray([], Array(deckLength), true).map(function (_, i) { return gameData.deck.push(i + 2); });
-    (0, utility_1.shuffle)(gameData.deck);
+    generateDeck();
     var copyUserList = __spreadArray([], data_1.userList, true);
     var _loop_1 = function (i) {
         var player = {
@@ -71,6 +70,10 @@ var theGameDataInit = function () {
     (0, utility_1.shuffle)(gameData.playerList);
 };
 exports.theGameDataInit = theGameDataInit;
+var generateDeck = function () {
+    __spreadArray([], Array(deckLength), true).map(function (_, i) { return gameData.deck.push(i + 2); });
+    (0, utility_1.shuffle)(gameData.deck);
+};
 var checkGameFinish = function () {
     var player = gameData.playerList[gameData.turn];
     var hands = player.hand;
@@ -131,6 +134,9 @@ exports.theGame = {
             server_1.serverSocket.emit("".concat(eventName, ":fieldAnimate"), fieldIndex);
         });
         server_1.socket.on("".concat(eventName, ":turnFinish"), function () {
+            // デッキがなくなった時にデッキの補充
+            if (gameData.deck.length === 0)
+                generateDeck();
             // 手札の補充
             var player = gameData.playerList[gameData.turn];
             while (player.hand.length < 6 && gameData.deck.length) {
